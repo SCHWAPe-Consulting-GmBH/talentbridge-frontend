@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import twColors from 'tailwindcss/colors';
 
 const config: Config = {
   content: [
@@ -7,10 +8,28 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    colors: {
+      ...twColors,
+      primary: "#5DE85B",
+      secondary: "#000000",
+      neutral1: "#1B1B1B",
+      neutral2: "#9F9F9F",
+      neutral3: "#F7F7F5",
+      success: "#34C759",
+      warning: "#E88F1B",
+      error: "#E21D1D",
+      info: "#007AFF",
+      "light-info": "D9EBFF",
+      white: "#FFFFFF"
+    },
+    fontFamily: {
+      main: ['Nunito Sans', 'sans-serif'],
+    },
     extend: {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+
       },
     },
   },
