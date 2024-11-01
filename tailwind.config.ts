@@ -25,7 +25,9 @@ const config: Config = {
       error: "#E21D1D",
       info: "#007AFF",
       "light-info": "#D9EBFF",
-      white: "#FFFFFF"
+      white: "#FFFFFF",
+      background: "var(--background)",
+      themetext: "var(--themetext)"
     },
     fontFamily: {
       main: ['Nunito Sans', 'sans-serif'],
@@ -36,8 +38,13 @@ const config: Config = {
         foreground: "var(--foreground)",
 
       },
+      textShadow: {
+        'custom': '0px 4px 4px rgba(0, 0, 0, 0.25)',
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    require('tailwindcss-textshadow'),
+  ],
 };
 export default config;
