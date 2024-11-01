@@ -10,6 +10,11 @@ const config: Config = {
   theme: {
     colors: {
       ...twColors,
+      sky: twColors.sky,
+      stone: twColors.stone,
+      neutral: twColors.neutral,
+      gray: twColors.gray,
+      slate: twColors.slate,
       primary: "#5DE85B",
       secondary: "#000000",
       neutral1: "#1B1B1B",
@@ -19,7 +24,7 @@ const config: Config = {
       warning: "#E88F1B",
       error: "#E21D1D",
       info: "#007AFF",
-      "light-info": "D9EBFF",
+      "light-info": "#D9EBFF",
       white: "#FFFFFF"
     },
     fontFamily: {
