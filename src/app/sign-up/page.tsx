@@ -5,7 +5,7 @@ import {
   useSignInWithGoogle,
 } from 'react-firebase-hooks/auth';
 import { auth } from '@/app/firebase/config';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 const SignUp = () => {
   const [email, setEmail] = useState('');

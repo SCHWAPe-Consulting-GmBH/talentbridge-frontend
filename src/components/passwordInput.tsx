@@ -1,7 +1,12 @@
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
-export const PasswordInput = () => {
+interface Props {
+  password: string;
+  onChangePassword: (value: string) => void;
+}
+
+export const PasswordInput: React.FC<Props> = ({ password, onChangePassword }) => {
   const [isVisible, setIsVisible] = useState(false)
 
 
@@ -11,6 +16,8 @@ export const PasswordInput = () => {
         className="input_text w-full mb-[13px] "
         placeholder="Password"
         type={isVisible ? 'text' : 'password'}
+        value={password}
+        onChange={(e) => onChangePassword(e.target.value)}
       />
       <button
         type="button"
