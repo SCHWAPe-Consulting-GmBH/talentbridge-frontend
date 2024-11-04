@@ -1,0 +1,31 @@
+.input_text {
+  box-sizing: border-box;
+  border: 1px solid transparent;
+  height: 53px;
+  line-height: 53px;
+  border-radius: 6px;
+  padding: 16px;
+  outline: none;
+}
+
+.input_text:hover {
+  border: 1px solid rgb(14, 101, 231);
+}
+
+.input_text:focus {
+  border: 1px solid rgb(14, 101, 231);
+}
+
+.btn_hover {
+  transition: background-color 0.3s ease-in-out, 
+  box-shadow 0.3s ease-in-out;
+}
+
+.btn_hover:hover {
+  background-color: #34C759;
+  box-shadow: var(--boxshadow);
+}
+
+.btn_hover:active {
+  background-color: #0df346;
+}

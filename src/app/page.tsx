@@ -16,6 +16,7 @@ export default function Home() {
     router.push('/sign-up');
   }
 
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <button
