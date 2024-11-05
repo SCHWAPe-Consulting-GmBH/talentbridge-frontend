@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   useCreateUserWithEmailAndPassword,
   useSignInWithGoogle,
@@ -39,6 +39,11 @@ console.log('hey')
       console.error(e);
     }
   };
+
+  // useEffect(() => {
+  //   const userSession = sessionStorage.getItem('user');
+  //   console.log('User session:', userSession);
+  // }, []);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-900">

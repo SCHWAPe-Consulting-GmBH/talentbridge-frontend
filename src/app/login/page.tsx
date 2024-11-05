@@ -2,10 +2,10 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import imgGirl from '../../assets/images/img.png';
-import apple from '../../assets/icons/apple.svg';
-import facebook from '../../assets/icons/facebook.svg';
-import google from '../../assets/icons/google.svg';
+import imgGirl from '@/assets/images/img.png';
+import apple from '@/assets/icons/apple.svg';
+import facebook from '@/assets/icons/facebook.svg';
+import google from '@/assets/icons/google.svg';
 import { PasswordInput } from '@/components/passwordInput';
 import {
   useSignInWithEmailAndPassword,
@@ -45,7 +45,7 @@ const Login = () => {
       console.error(e);
     }
   };
-
+  console.log('hello')
   return (
     <main className="flex max-w-[1440px] mx-auto justify-center">
       <div className="flex flex-col items-center max-w-[500px] mt-[220px]">
@@ -56,14 +56,14 @@ const Login = () => {
           Empowering You to Unlock the Full Potential of Learning and Coaching
         </p>
 
-        <input 
-          placeholder="Email" 
+        <input
+          placeholder="Email"
           className="input_text mb-[32px] w-full"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
 
-        <PasswordInput password={password} onChangePassword={setPassword}/>
+        <PasswordInput password={password} onChangePassword={setPassword} />
 
         <p className="self-end text-themetext mb-[25px]">
           Forgot your password?
