@@ -4,7 +4,7 @@ import {
   useCreateUserWithEmailAndPassword,
   useSignInWithGoogle,
 } from 'react-firebase-hooks/auth';
-import { auth } from '@/app/firebase/config';
+import { auth } from '@/firebase/config';
 import { useRouter } from 'next/navigation';
 
 const SignUp = () => {
@@ -13,7 +13,7 @@ const SignUp = () => {
   const [createUserWithEmailAndPassword] =
     useCreateUserWithEmailAndPassword(auth);
   const [signInWithGoogle, , , googleError] = useSignInWithGoogle(auth);
-
+console.log('hey')
   const router = useRouter();
 
   const handleSignUp = async () => {

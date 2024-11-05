@@ -1,18 +1,20 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  images: {
-    localPatterns: [
-      {
-        pathname: '/assets/images/**',
-        search: '',
-      },
-      {
-        pathname: '/assets/icons/**',
-        search: '',
-      },
-    ],
-  },
+  reactStrictMode: false,
+
+  // images: {
+  //   localPatterns: [
+  //     {
+  //       pathname: '/assets/images/',
+  //       search: '',
+  //     },
+  //     {
+  //       pathname: '/assets/icons/',
+  //       search: '',
+  //     },
+  //   ],
+  // },
 };
 
 export default nextConfig;
