@@ -1,10 +1,10 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   useCreateUserWithEmailAndPassword,
   useSignInWithGoogle,
 } from 'react-firebase-hooks/auth';
-import { auth } from '@/app/firebase/config';
+import { auth } from '@/firebase/config';
 import { useRouter } from 'next/navigation';
 
 const SignUp = () => {
@@ -13,14 +13,14 @@ const SignUp = () => {
   const [createUserWithEmailAndPassword] =
     useCreateUserWithEmailAndPassword(auth);
   const [signInWithGoogle, , , googleError] = useSignInWithGoogle(auth);
-
+console.log('hey')
   const router = useRouter();
 
   const handleSignUp = async () => {
     try {
       const res = await createUserWithEmailAndPassword(email, password);
       console.log({ res });
-      sessionStorage.setItem('user', true);
+      sessionStorage.setItem('user', 'yes');
       setEmail('');
       setPassword('');
       router.push('/');
@@ -33,12 +33,17 @@ const SignUp = () => {
     try {
       const res = await signInWithGoogle();
       console.log({ res });
-      sessionStorage.setItem('user', true);
+      sessionStorage.setItem('user', 'yes');
       router.push('/');
     } catch (e) {
       console.error(e);
     }
   };
+
+  // useEffect(() => {
+  //   const userSession = sessionStorage.getItem('user');
+  //   console.log('User session:', userSession);
+  // }, []);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-900">

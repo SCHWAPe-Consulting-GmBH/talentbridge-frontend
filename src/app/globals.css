@@ -2,20 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 @import '../styles/style.css';
-
-.ant-input::placeholder,
-.ant-input-password::placeholder,
-.ant-select-selector::placeholder {
-  color: #9F9F9F; 
-  opacity: 1; 
-}
-
-.ant-btn,
-.ant-input,
-.ant-input-password {
-  font-family: 'Nunito Sans', sans-serif;
-}
-
 @import '../styles/bgImges.css';
 
 .light {

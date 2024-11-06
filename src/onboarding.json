@@ -1,0 +1,126 @@
+[
+  {
+    "title": "Basic Demographic Information",
+    "question": "What is your age range?",
+    "options": null,
+    "image": "first_questions.png",
+    "answers": [
+      "Under 25",
+      "25-50",
+      "Over 50"
+    ]
+  },
+  {
+    "title": "Basic Demographic Information",
+    "question": "Do you have a migration or refugee background?",
+    "options": null,
+    "image": "first_questions.png",
+    "answers": [
+      "Yes",
+      "No"
+    ]
+  },
+  {
+    "title": "Basic Demographic Information",
+    "question": "What is your German proficiency level?",
+    "options": null,
+    "image": "first_questions.png",
+    "answers": [
+      "Beginner (A1)",
+      "Elementary (A2)",
+      "Intermediate (B1-B2)",
+      "Advanced (1+)"
+    ]
+  },
+  {
+    "title": "Basic Demographic Information",
+    "question": "Are you currently registered with a Job Center or Employment Agency?",
+    "options": null,
+    "image": "first_questions.png",
+    "answers": [
+      "Yes",
+      "No"
+    ]
+  },
+  {
+    "title": "Main Goals and Motivation",
+    "question": "What is your primary goal for seeking coaching?",
+    "options": {
+      "amount": 1,
+      "title": "(Choose one)"
+    },
+    "image": "second_questions.png",
+    "answers": [
+      "Developing a professional network",
+      "Finding a job",
+      "Improving specific skills",
+      "Boosting creativity",
+      "Building emotional resilience",
+      "Navigating German workplace culture"
+    ]
+  },
+  {
+    "title": "Main Goals and Motivation",
+    "question": "What type of support do you think will help you achieve this goal?",
+    "options": {
+      "amount": 10,
+      "title": "(Select all that apply)"
+    },
+    "image": "third_questions.png",
+    "answers": [
+      "Digital literacy enhancement",
+      "Cultural adaptation",
+      "Confidence building",
+      "Decision-making skills",
+      "Language improvement",
+      "Job application skills",
+      "Emotional support",
+      "Psychological support",
+      "Work-life balance strategies",
+      "Networking skills"
+    ]
+  },
+  {
+    "title": "Challenges and Barriers",
+    "question": "What are the main challenges you’re currently facing?",
+    "options": {
+      "amount": 3,
+      "title": "(Select up to 3)"
+    },
+    "image": "third_questions.png",
+    "answers": [
+      "Language barriers",
+      "Lack of job application skills",
+      "Recognition of foreign qualifications",
+      "Language improvement",
+      "Cultural adjustment",
+      "Emotional or psychological challenges",
+      "Limited digital literacy",
+      "Long-term unemployment",
+      "Disability-related support needs"
+    ]
+  },
+  {
+    "title": "Practical Considerations and Preferences",
+    "question": "Preferred Coaching Format",
+    "options": null,
+    "image": "fourth_questions.png",
+    "answers": [
+      "One-on-one sessions",
+      "Group sessions",
+      "Self-paced online modules"
+    ]
+  },
+  {
+    "title": "Practical Considerations and Preferences",
+    "question": "Availability for Sessions",
+    "options": null,
+    "image": "fourth_questions.png",
+    "answers": [
+      "Weekdays",
+      "Evenings",
+      "Weekends",
+      "Flexible"
+    ]
+  }
+]

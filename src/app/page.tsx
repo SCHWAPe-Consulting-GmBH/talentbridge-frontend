@@ -1,7 +1,7 @@
 'use client';
 import Image from 'next/image';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth } from '@/app/firebase/config';
+import { auth } from '@/firebase/config';
 import { useRouter } from 'next/navigation';
 import { signOut } from 'firebase/auth';
 
@@ -12,11 +12,7 @@ export default function Home() {
 
   console.log('-=-=-=-=USER: ', user);
 
-  if (!user && !userSession) {
-    router.push('/sign-up');
-  }
-
-
+  
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <button

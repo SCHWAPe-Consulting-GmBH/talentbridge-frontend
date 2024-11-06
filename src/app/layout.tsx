@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Nunito_Sans } from 'next/font/google'
 import "./globals.css";
 
-const nuntino = Nunito_Sans({ 
+const nunito = Nunito_Sans({ 
   subsets: ['latin'],
   weight: ['400', '500', '600', '700', '800'],
 })
@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${nuntino.className} antialiased light bg-background`}
+        className={`${nunito.className} antialiased light bg-background`}
       >
         {children}
       </body>
