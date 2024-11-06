@@ -6,8 +6,23 @@ const CourseMatching = () => {
   const courses = [
     {
       color: 'success',
-      level: 'Beginer',
+      level: 'Beginner',
       title: 'Graphic Design',
+      image: '',
+      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.'
+    },
+    {
+      color: 'warning',
+      level: 'Advanced',
+      title: 'Architect',
+      image: '',
+      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.'
+    },
+    {
+      color: 'info',
+      level: 'Expert',
+      title: 'Programmer',
+      image: '',
       text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna.'
     },
 ]
