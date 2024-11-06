@@ -6,17 +6,16 @@ import { useRouter } from 'next/navigation';
 import { signOut } from 'firebase/auth';
 
 export default function Home() {
-  // const [user] = useAuthState(auth);
-  // const router = useRouter();
-  // const userSession = sessionStorage.getItem('user');
+  const [user] = useAuthState(auth);
+  const router = useRouter();
+  const userSession = sessionStorage.getItem('user');
 
-  // console.log('-=-=-=-=USER: ', user);
+  console.log('-=-=-=-=USER: ', user);
 
   
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      {/* <p>fghjkl;</p> */}
-      {/* <button
+      <button
         onClick={() => {
           signOut(auth);
           sessionStorage.removeItem('user');
@@ -128,7 +127,7 @@ export default function Home() {
             Instantly deploy your Next.js site to a shareable URL with Vercel.
           </p>
         </a>
-      </div> */}
+      </div>
     </main>
   );
 }

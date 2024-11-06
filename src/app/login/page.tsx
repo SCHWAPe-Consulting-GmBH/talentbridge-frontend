@@ -26,7 +26,7 @@ const Login = () => {
     try {
       const res = await signInWithEmailAndPassword(email, password);
       console.log({ res });
-      sessionStorage.setItem('user', true);
+      sessionStorage.setItem('user', 'yes');
       setEmail('');
       setPassword('');
       router.push('/');
@@ -39,7 +39,7 @@ const Login = () => {
     try {
       const res = await signInWithGoogle();
       console.log({ res });
-      sessionStorage.setItem('user', true);
+      sessionStorage.setItem('user', 'yes');
       router.push('/');
     } catch (e) {
       console.error(e);

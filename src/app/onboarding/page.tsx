@@ -1,83 +1,96 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { v4 as uuidv4 } from 'uuid';
 import questions from '@/onboarding.json';
 import Image from 'next/image';
-import arrow from '@/assets/icons/question_arrow.svg';
+import arrowLeft from '@/assets/icons/arrow_left.svg';
+import { QuestionInput } from '@/components/questionInput';
 import cn from 'classnames';
+import { QuestionProgressBar } from '@/components/questionProgressBar';
 
 const Onboarding = () => {
-
   const [questionNumber, setQuestionNumber] = useState(0);
   const [answers, setAnswers] = useState<Answers>({});
   const router = useRouter();
+  const [imageSrc, setImageSrc] = useState('');
+  console.log(questionNumber);
 
   const currentQuestion = questions[questionNumber];
   const hasOptions = currentQuestion.options;
-
   const currentAnswers = answers[currentQuestion.question];
+  const isManyOptions =
+    currentQuestion.options && currentQuestion.options.amount > 1;
 
-  const addAnswer = (event, answer: string) => {
-    event.preventDefault(); 
-    event.stopPropagation();
+  useEffect(() => {
+    const loadImage = async () => {
+      const imageModule = await import(
+        '@/assets/images/' + currentQuestion.image
+      );
+      setImageSrc(imageModule.default);
+    };
+
+    loadImage();
+  }, [currentQuestion]);
+
+  const addAnswer = (answer: string) => {
     console.log('addAnswer called with:', answer);
     setAnswers((prev) => {
-      console.log('wtf??????');
       const question = currentQuestion.question;
       const options = currentQuestion.options;
       const currAnswers = prev[question];
 
       if (!options || options.amount === 1) {
-        console.log('fvrjtoivr egvtgt');
         return { ...prev, [question]: answer };
       }
 
       if (!currAnswers && options) {
-        console.log('djkfkfkf');
         return { ...prev, [question]: [answer] };
       }
 
-      console.log('answer');
       if (Array.isArray(currAnswers)) {
-        console.log('answer1', answer);
         if (currAnswers.includes(answer)) {
           const arrayAnswers = currAnswers.filter((item) => item !== answer);
-          console.log('answer2 remove', answer);
           return { ...prev, [question]: arrayAnswers };
-        } else {
+        } else if (currAnswers.length < options.amount) { 
           currAnswers.push(answer);
-          console.log('answer3 add', answer);
           return { ...prev, [question]: currAnswers };
         }
       }
-      console.log('nothing');
+
       return prev;
     });
-    changeQuestionNext();
+
+    if (!isManyOptions) {
+      changeQuestionNext();
+    }
+
   };
 
   const changeQuestionNext = () => {
-    if (currentQuestion.options) {
-      if (currentQuestion.options.amount === 1) {
-        setQuestionNumber((prev) => prev + 1);
-      }
-
-      if (
-        Array.isArray(currentAnswers) &&
-        currentQuestion.options.amount === currentAnswers.length
-      ) {
-        setQuestionNumber((prev) => prev + 1);
-        return;
-      }
-      console.log('hello');
+    if (questionNumber === questions.length - 1) {
+      router.push('/course-matching');
       return;
     }
 
-    if (questionNumber === questions.length - 1) {
-      // router.push('/course-matching');
+    if (currentQuestion.options && currentQuestion.options.amount === 1) {
+      setQuestionNumber((prev) => prev + 1);
+      return;
     }
+
     setQuestionNumber((prev) => prev + 1);
+  };
+
+  const changeQuestionNextArray = () => {
+    if (
+      currentQuestion.options &&
+      Array.isArray(currentAnswers) &&
+      (currentQuestion.options.amount <= currentAnswers.length ||
+        currentQuestion.options.amount > 1)
+    ) {
+      console.log('question number', questionNumber);
+      setQuestionNumber((prev) => prev + 1);
+    }
   };
 
   const changeQuestionBack = () => {
@@ -87,24 +100,21 @@ const Onboarding = () => {
     setQuestionNumber((prev) => prev - 1);
   };
 
+  console.log(questionNumber === 4);
   return (
-    <main className="px-[100px] pt-[100px] onboard1">
+    <main className="px-[100px] pt-[100px] onboard1 flex justify-center">
+      {imageSrc ? (
+        <>
+        <div className="max-w-[620px] justify-center">
+        <QuestionProgressBar questionNumber={questionNumber}/>
 
-      <div className="max-w-[620px] justify-center">
-        <div className="flex space-x-2 mb-[60px]">
-          <div className="h-2 w-[149px] bg-white rounded-lg"></div>
-          <div className="h-2 w-[149px] bg-white rounded-lg"></div>
-          <div className="h-2 w-[149px] bg-white rounded-lg"></div>
-          <div className="h-2 w-[149px] bg-white rounded-lg"></div>
-        </div>
-
-        <h1 className="font-extrabold text-[48px] leading-[65px] text-center mb-9">
+        <h1 className="font-extrabold text-[48px] leading-[65px] text-center mb-9 text-themetext">
           {currentQuestion.title}
         </h1>
 
         <div className="bg-white px-10 py-12 rounded-lg flex flex-col items-center">
           <div className="mb-6 flex flex-col items-center">
-            <h2 className="font-medium text-[24px]">
+            <h2 className="font-medium text-[24px] text-themetext">
               {currentQuestion.question}
             </h2>
 
@@ -127,37 +137,60 @@ const Onboarding = () => {
                 currentAnswers === answer ||
                 (Array.isArray(currentAnswers) &&
                   currentAnswers.includes(answer));
-              console.log(currentAnswers === answer);
-              return (
-                <p key={uuidv4()}>{answer}</p>
-                // <input
-                //   key={uuidv4()}
-                //   type="button"
-                //   value={answer}
-                //   onClick={changeQuestionBack}
-                //   className={cn(
-                //     'input_text border border-neutral2 items-center mb-4 ',
-                //     {
-                //       'bg-primary text-white': isChosen,
-                //       'bg-white text-neutral2': !isChosen,
-                //       'inline-flex mr-4': hasOptions,
-                //       'relative flex justify-start w-full': !hasOptions,
-                //     }
-                //   )}
-                // />
 
+              return (
+                <QuestionInput
+                  key={uuidv4()}
+                  isChosen={isChosen}
+                  hasOptions={!!currentQuestion.options}
+                  answer={answer}
+                  onChange={addAnswer}
+                />
               );
             })}
           </div>
-          {/* <button
-            type="button"
-            onClick={changeQuestionBack}
-            className="mt-6 btn_hover bg-primary w-full h-[56px]"
-          >
-            Back
-          </button> */}
+
+          <div className="w-full flex items-center justify-center mt-6">
+            {isManyOptions && (
+              <button
+                className="rounded-full border border-primary w-[66px] h-[56px] flex justify-center items-center"
+                onClick={changeQuestionBack}
+              >
+                <Image src={arrowLeft} alt="arrow back" width={14} />
+              </button>
+            )}
+            <button
+              type="button"
+              className={cn('btn_hover bg-primary w-full h-[56px]', {
+                'ml-4': isManyOptions,
+              })}
+              onClick={
+                isManyOptions ? changeQuestionNextArray : changeQuestionBack
+              }
+            >
+              {isManyOptions ? 'Next' : 'Back'}
+            </button>
+          </div>
         </div>
       </div>
+
+      <div className="ml-[50px]">
+        <Image
+          src={imageSrc}
+          alt="abstaction"
+          width={735}
+          className="object-cover"
+        />
+      </div>
+      </>
+      )
+      :
+      (
+        <div className="max-w-[620px] justify-center items-center my-auto">
+          <div className="w-[150px] h-[150px] mx-auto border-[20px] border-solid border-gray-300 border-l-primary rounded-full animate-spin"></div>
+        </div>
+      )
+    }
     </main>
   );
 };

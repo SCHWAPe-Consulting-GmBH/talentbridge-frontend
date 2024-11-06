@@ -3,6 +3,7 @@
     "title": "Basic Demographic Information",
     "question": "What is your age range?",
     "options": null,
+    "image": "first_questions.png",
     "answers": [
       "Under 25",
       "25-50",
@@ -13,6 +14,7 @@
     "title": "Basic Demographic Information",
     "question": "Do you have a migration or refugee background?",
     "options": null,
+    "image": "first_questions.png",
     "answers": [
       "Yes",
       "No"
@@ -22,6 +24,7 @@
     "title": "Basic Demographic Information",
     "question": "What is your German proficiency level?",
     "options": null,
+    "image": "first_questions.png",
     "answers": [
       "Beginner (A1)",
       "Elementary (A2)",
@@ -33,6 +36,7 @@
     "title": "Basic Demographic Information",
     "question": "Are you currently registered with a Job Center or Employment Agency?",
     "options": null,
+    "image": "first_questions.png",
     "answers": [
       "Yes",
       "No"
@@ -45,6 +49,7 @@
       "amount": 1,
       "title": "(Choose one)"
     },
+    "image": "second_questions.png",
     "answers": [
       "Developing a professional network",
       "Finding a job",
@@ -58,12 +63,12 @@
     "title": "Main Goals and Motivation",
     "question": "What type of support do you think will help you achieve this goal?",
     "options": {
-      "amount": 11,
+      "amount": 10,
       "title": "(Select all that apply)"
     },
+    "image": "third_questions.png",
     "answers": [
       "Digital literacy enhancement",
-      "Decision-making skills",
       "Cultural adaptation",
       "Confidence building",
       "Decision-making skills",
@@ -82,6 +87,7 @@
       "amount": 3,
       "title": "(Select up to 3)"
     },
+    "image": "third_questions.png",
     "answers": [
       "Language barriers",
       "Lack of job application skills",
@@ -98,6 +104,7 @@
     "title": "Practical Considerations and Preferences",
     "question": "Preferred Coaching Format",
     "options": null,
+    "image": "fourth_questions.png",
     "answers": [
       "One-on-one sessions",
       "Group sessions",
@@ -108,6 +115,7 @@
     "title": "Practical Considerations and Preferences",
     "question": "Availability for Sessions",
     "options": null,
+    "image": "fourth_questions.png",
     "answers": [
       "Weekdays",
       "Evenings",

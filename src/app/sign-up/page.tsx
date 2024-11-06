@@ -20,7 +20,7 @@ console.log('hey')
     try {
       const res = await createUserWithEmailAndPassword(email, password);
       console.log({ res });
-      sessionStorage.setItem('user', true);
+      sessionStorage.setItem('user', 'yes');
       setEmail('');
       setPassword('');
       router.push('/');
@@ -33,7 +33,7 @@ console.log('hey')
     try {
       const res = await signInWithGoogle();
       console.log({ res });
-      sessionStorage.setItem('user', true);
+      sessionStorage.setItem('user', 'yes');
       router.push('/');
     } catch (e) {
       console.error(e);
