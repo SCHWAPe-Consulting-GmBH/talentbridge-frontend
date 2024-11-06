@@ -47,7 +47,7 @@ const Login = () => {
   };
   console.log('hello')
   return (
-    <main className="flex max-w-[1440px] mx-auto justify-center">
+    <main className="flex max-w-[1440px] mx-auto justify-center bg-background-login">
       <div className="flex flex-col items-center max-w-[500px] mt-[220px]">
         <h1 className="font-extrabold text-[56px] leading-[76px] text-shadow-custom text-themetext">
           Welcome Back !

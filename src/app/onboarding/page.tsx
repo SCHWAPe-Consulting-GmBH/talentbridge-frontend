@@ -4,9 +4,9 @@ import { useRouter } from 'next/navigation';
 import { v4 as uuidv4 } from 'uuid';
 import questions from '@/onboarding.json';
 import Image from 'next/image';
+import cn from 'classnames';
 import arrowLeft from '@/assets/icons/arrow_left.svg';
 import { QuestionInput } from '@/components/questionInput';
-import cn from 'classnames';
 import { QuestionProgressBar } from '@/components/questionProgressBar';
 
 const Onboarding = () => {
@@ -102,7 +102,7 @@ const Onboarding = () => {
 
   console.log(questionNumber === 4);
   return (
-    <main className="px-[100px] pt-[100px] onboard1 flex justify-center">
+    <main className="px-[100px] pt-[100px] onboard1 flex justify-center bg-background">
       {imageSrc ? (
         <>
         <div className="max-w-[620px] justify-center">
@@ -112,7 +112,7 @@ const Onboarding = () => {
           {currentQuestion.title}
         </h1>
 
-        <div className="bg-white px-10 py-12 rounded-lg flex flex-col items-center">
+        <div className="bg-background-second px-10 py-12 rounded-lg flex flex-col items-center ">
           <div className="mb-6 flex flex-col items-center">
             <h2 className="font-medium text-[24px] text-themetext">
               {currentQuestion.question}
