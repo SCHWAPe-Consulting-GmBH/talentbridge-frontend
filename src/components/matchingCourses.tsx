@@ -4,6 +4,7 @@ import design from '@/assets/images/matching_graphic.png';
 import architect from '@/assets/images/matching_architect.png';
 import programmer from '@/assets/images/matching_programmer.png';
 import arrow from '@/assets/icons/arrow_diagonal.svg';
+import { v4 as uuidv4 } from 'uuid';
 
   const courses = [
     {
@@ -45,7 +46,7 @@ export const MatchingCourses: React.FC = () => {
         }
 
         return (
-          <div className="bg-background-second rounded-lg relative p-5 flex flex-col justify-between w-[400px] h-[308px]">
+          <div key={uuidv4()} className="bg-background-second rounded-lg relative p-5 flex flex-col justify-between w-[400px] h-[308px]">
             <div className='absolute top-2 right-2 w-[70%] h-[90%] p-4 flex justify-end'>
               <Image
                 src={course.image}

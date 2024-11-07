@@ -18,12 +18,13 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  
   return (
     <html lang="en">
       <body
         className={`${nunito.className} antialiased light`}
       >
-        {children}
+          {children}
       </body>
     </html>
   );
