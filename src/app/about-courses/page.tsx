@@ -11,7 +11,7 @@ import up from '@/assets/icons/up-arrow.svg';
 
 const AboutCourses = () => {
   return (
-    <main id='top' className="bg-background relative overflow-hidden">
+    <>
       <div className="absolute top-0 left-0 h-[747px] z-10 bg3 "></div>
       <div className="max-w-[1440px] mx-auto w-full z-20 relative p-[100px] ">
         <div className="w-[190px] h-[22px] bg-orange-300 mb-6 rounded-lg flex justify-center">
@@ -77,7 +77,7 @@ const AboutCourses = () => {
           </div>
         </div>
       </div>
-    </main>
+    </>
   );
 };
 

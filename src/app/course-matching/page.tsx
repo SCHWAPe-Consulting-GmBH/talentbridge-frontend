@@ -19,7 +19,7 @@ const CourseMatching = () => {
 
   return (
     <main className="bg2 px-[100px] bg-background">
-      <div className="max-w-[1239] mx-auto pt-[168px] flex flex-col items-center">
+      <div className="max-w-[1240px] mx-auto pt-[168px] flex flex-col items-center">
         <p className="text-primary border border-primary rounded-full font-bold text-[24px] px-4 py-2 mb-8">
           Welcome to us!
         </p>
