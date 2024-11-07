@@ -29,6 +29,8 @@ const config: Config = {
       "light-info": "#D9EBFF",
       white: "#FFFFFF",
       background: "var(--background)",
+      "background-second": "var(--background-second)",
+      "background-revert": "var(--background-revert)",
       themetext: "var(--themetext)"
     },
     fontFamily: {
@@ -42,6 +44,15 @@ const config: Config = {
       },
       textShadow: {
         'custom': '0px 4px 4px rgba(0, 0, 0, 0.25)',
+      },
+      animation: {
+        loading: 'loading 3s linear infinite',
+      },
+      keyframes: {
+        loading: {
+          '0%': { width: '0%' },
+          '100%': { width: '100%' },
+        },
       },
     },
   },

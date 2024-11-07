@@ -1,0 +1,21 @@
+.slick-dots li {
+  position: relative;
+  display: inline-block;
+  width: 138px !important;
+  height: 8px !important;
+  margin: 0 5px;
+  padding: 0;
+  bottom: -25px;
+  cursor: pointer;
+  background-color: #9F9F9F;
+  opacity: 45%;
+  border-radius: 1000px;
+}
+
+.slick-dots li.slick-active {
+  opacity: 1;
+}
+
+
+  .slick-list {margin: 0 -5px;}
+  .slick-slide>div {padding: 0 5px;}

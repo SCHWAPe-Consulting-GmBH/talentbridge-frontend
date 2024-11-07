@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "name": "Anna Torff",
+    "specialty": "UI/UX Designer",
+    "rating": "4.5 (1200)",
+    "img": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60"
+  },
+  {
+    "id": 2,
+    "name": "Erica Nevar",
+    "specialty": "Python Developer",
+    "rating": "4.8 (1300)",
+    "img": "https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60"
+  },
+  {
+    "id": 3,
+    "name": "Marvin McKinney",
+    "specialty": "Fullstack Developer",
+    "rating": "4.9 (1199)",
+    "img": "https://plus.unsplash.com/premium_photo-1671656349322-41de944d259b?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+  },
+  {
+    "id": 4,
+    "name": "Jacob Jones",
+    "specialty": "UI/UX Designer",
+    "rating": "4.6 (1200)",
+    "img": "https://plus.unsplash.com/premium_photo-1664536392896-cd1743f9c02c?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+  },
+  {
+    "id": 5,
+    "name": "Anna Torff",
+    "specialty": "UI/UX Designer",
+    "rating": "4.5 (1200)",
+    "img": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60"
+  },
+  {
+    "id": 6,
+    "name": "Marvin McKinney",
+    "specialty": "Fullstack Developer",
+    "rating": "4.9 (1199)",
+    "img": "https://plus.unsplash.com/premium_photo-1671656349322-41de944d259b?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+  }
+]

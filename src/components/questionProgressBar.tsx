@@ -5,7 +5,9 @@ interface Props {
   questionNumber: number;
 }
 
-export const QuestionProgressBar: React.FC<Props> = ({ questionNumber }) => (
+export const QuestionProgressBar: React.FC<Props> = ({ questionNumber }) => {
+  console.log(questionNumber > 4)
+  return (
   <div className="flex space-x-2 mb-[60px]">
     <div className="h-2 w-[149px] bg-white rounded-lg p-[2px]">
       <div
@@ -20,28 +22,28 @@ export const QuestionProgressBar: React.FC<Props> = ({ questionNumber }) => (
     <div className="h-2 w-[149px] bg-white rounded-lg p-[2px]">
       <div
         className={cn('h-1 bg-primary rounded-lg', {
-          'w-[0px]': questionNumber <= 3,
+          'w-0': questionNumber < 4,
           'w-[72px]': questionNumber === 4,
-          'w-full': questionNumber < 4,
+          'w-full': questionNumber > 4,
         })}
       ></div>
     </div>
     <div className="h-2 w-[149px] bg-white rounded-lg p-[2px]">
       <div
         className={cn('h-1 bg-primary rounded-lg', {
-          'w-[0px]': questionNumber <= 5,
-          'w-full': questionNumber < 6,
+          'w-0': questionNumber < 6,
+          'w-full': questionNumber >= 6,
         })}
       ></div>
     </div>
     <div className="h-2 w-[149px] bg-white rounded-lg p-[2px]">
       <div
         className={cn('h-1 bg-primary rounded-lg', {
-          'w-[0px]': questionNumber <= 6,
+          'w-0': questionNumber < 7,
           'w-[72px]': questionNumber === 7,
-          'w-full': questionNumber < 7,
+          'w-full': questionNumber > 7,
         })}
       ></div>
     </div>
   </div>
-);
+)};

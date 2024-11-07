@@ -3,15 +3,24 @@
 @tailwind utilities;
 @import '../styles/style.css';
 @import '../styles/bgImges.css';
+@import '../styles/slider.css';
+
+html {
+  scroll-behavior: smooth;
+}
 
 .light {
+  --background-second: #ffffff;
   --background: #F7F7F5;
+  --background-revert: #0F0F0F;
   --themetext: #1B1B1B;
   --boxshadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .dark {
-  --background: #1B1B1B;
+  --background-second: #1B1B1B;
+  --background: #0F0F0F;
+  --background-revert: #F7F7F5;
   --themetext: #F7F7F5;
   --boxshadow: 0px 4px 4px rgba(233, 227, 227, 0.25);
   
