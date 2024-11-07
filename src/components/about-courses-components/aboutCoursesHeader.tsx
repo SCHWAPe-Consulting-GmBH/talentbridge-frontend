@@ -1,4 +1,4 @@
-import { RegisterForCourseButton } from "./registerForCourseButton";
+import { RegisterForCourseButton } from "../registerForCourseButton";
 
 export const AboutCoursesHeader = () => {
 

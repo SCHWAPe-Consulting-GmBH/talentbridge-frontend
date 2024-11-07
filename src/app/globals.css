@@ -3,9 +3,14 @@
 @tailwind utilities;
 @import '../styles/style.css';
 @import '../styles/bgImges.css';
+@import '../styles/slider.css';
+
+html {
+  scroll-behavior: smooth;
+}
 
 .light {
-  --background-second: #F7F7F5;
+  --background-second: #ffffff;
   --background: #F7F7F5;
   --background-revert: #0F0F0F;
   --themetext: #1B1B1B;
