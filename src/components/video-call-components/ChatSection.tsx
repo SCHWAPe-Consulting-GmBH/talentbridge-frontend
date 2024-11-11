@@ -1,18 +1,81 @@
 import Image from 'next/image';
 import addFile from '@/assets/icons/add_file.svg';
 import sendMessage from '@/assets/icons/send_message.svg';
+import { useState, useRef } from 'react';
 
 const ChatSection = () => {
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [fileInfo, setFileInfo] = useState('');
+  const [message, setMessage] = useState('');
+  const fileInputRef = useRef(null);
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setSelectedFile(file);
+      setFileInfo(
+        `File name: ${file.name}, type: ${file.type}, size: ${file.size} bytes`
+      );
+    }
+  };
+
+  const handleFileClick = () => {
+    fileInputRef.current.click();
+  };
+
+  const handleMessageChange = (event) => {
+    setMessage(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const formData = new FormData();
+    if (selectedFile) {
+      formData.append('file', selectedFile);
+    }
+    formData.append('message', message);
+
+    fetch('https://your-server.com/upload', {
+      method: 'POST',
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('Success:', data);
+        alert('Message and file sent successfully!');
+        setMessage('');
+        setSelectedFile(null);
+        setFileInfo('');
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+        alert('Error sending message and file!');
+      });
+  };
+
   return (
     <div className="flex flex-col justify-end bg-slate-700 p-2 rounded-lg shadow-lg">
       <div className="flex items-center space-x-2">
-        <Image src={addFile} alt="add" className="w-8 h-8" />
+        <button onClick={handleFileClick} className="w-8 h-8">
+          <Image src={addFile} alt="Add File" width={32} height={32} />
+        </button>
+        <input
+          type="file"
+          onChange={handleFileChange}
+          ref={fileInputRef}
+          style={{ display: 'none' }}
+        />
         <input
           className="flex-grow p-1 rounded"
           placeholder="Type Something..."
+          value={message}
+          onChange={handleMessageChange}
         />
-        <Image src={sendMessage} alt="send" className="w-8 h-8" />
+        <button onClick={handleSubmit} className="w-8 h-8">
+          <Image src={sendMessage} alt="Send Message" width={32} height={32} />
+        </button>
       </div>
+      {fileInfo && <p className="text-white text-sm">{fileInfo}</p>}
     </div>
   );
 };
