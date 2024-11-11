@@ -52,7 +52,7 @@ const Onboarding = () => {
         if (currAnswers.includes(answer)) {
           const arrayAnswers = currAnswers.filter((item) => item !== answer);
           return { ...prev, [question]: arrayAnswers };
-        } else if (currAnswers.length < options.amount) { 
+        } else if (currAnswers.length < options.amount) {
           currAnswers.push(answer);
           return { ...prev, [question]: currAnswers };
         }
@@ -64,7 +64,6 @@ const Onboarding = () => {
     if (!isManyOptions) {
       changeQuestionNext();
     }
-
   };
 
   const changeQuestionNext = () => {
@@ -102,95 +101,92 @@ const Onboarding = () => {
 
   console.log(questionNumber === 4);
   return (
-    <main className="px-[100px] pt-[100px] onboard1 flex justify-center bg-background">
+    <main className="px-[100px] pt-[100px] onboard1 background-style flex justify-center bg-background">
       {imageSrc ? (
         <>
-        <div className="max-w-[620px] justify-center">
-        <QuestionProgressBar questionNumber={questionNumber}/>
+          <div className="max-w-[620px] justify-center">
+            <QuestionProgressBar questionNumber={questionNumber} />
 
-        <h1 className="font-extrabold text-[48px] leading-[65px] text-center mb-9 text-themetext">
-          {currentQuestion.title}
-        </h1>
+            <h1 className="font-extrabold text-[48px] leading-[65px] text-center mb-9 text-themetext">
+              {currentQuestion.title}
+            </h1>
 
-        <div className="bg-background-second px-10 py-12 rounded-lg flex flex-col items-center ">
-          <div className="mb-6 flex flex-col items-center">
-            <h2 className="font-medium text-[24px] text-themetext">
-              {currentQuestion.question}
-            </h2>
+            <div className="bg-background-second px-10 py-12 rounded-lg flex flex-col items-center ">
+              <div className="mb-6 flex flex-col items-center">
+                <h2 className="font-medium text-[24px] text-themetext">
+                  {currentQuestion.question}
+                </h2>
 
-            {currentQuestion.options && (
-              <p className="text-neutral2 mt-4">
-                {currentQuestion.options.title}
-              </p>
-            )}
-          </div>
+                {currentQuestion.options && (
+                  <p className="text-neutral2 mt-4">
+                    {currentQuestion.options.title}
+                  </p>
+                )}
+              </div>
 
-          <div
-            className={
-              currentQuestion.options
-                ? 'flex flex-wrap justify-center'
-                : 'flex flex-col w-full'
-            }
-          >
-            {currentQuestion.answers.map((answer: string) => {
-              const isChosen =
-                currentAnswers === answer ||
-                (Array.isArray(currentAnswers) &&
-                  currentAnswers.includes(answer));
-
-              return (
-                <QuestionInput
-                  key={uuidv4()}
-                  isChosen={isChosen}
-                  hasOptions={!!currentQuestion.options}
-                  answer={answer}
-                  onChange={addAnswer}
-                />
-              );
-            })}
-          </div>
-
-          <div className="w-full flex items-center justify-center mt-6">
-            {isManyOptions && (
-              <button
-                className="rounded-full border border-primary w-[66px] h-[56px] flex justify-center items-center"
-                onClick={changeQuestionBack}
+              <div
+                className={
+                  currentQuestion.options
+                    ? 'flex flex-wrap justify-center'
+                    : 'flex flex-col w-full'
+                }
               >
-                <Image src={arrowLeft} alt="arrow back" width={14} />
-              </button>
-            )}
-            <button
-              type="button"
-              className={cn('btn_hover bg-primary w-full h-[56px]', {
-                'ml-4': isManyOptions,
-              })}
-              onClick={
-                isManyOptions ? changeQuestionNextArray : changeQuestionBack
-              }
-            >
-              {isManyOptions ? 'Next' : 'Back'}
-            </button>
-          </div>
-        </div>
-      </div>
+                {currentQuestion.answers.map((answer: string) => {
+                  const isChosen =
+                    currentAnswers === answer ||
+                    (Array.isArray(currentAnswers) &&
+                      currentAnswers.includes(answer));
 
-      <div className="ml-[50px]">
-        <Image
-          src={imageSrc}
-          alt="abstaction"
-          width={735}
-          className="object-cover"
-        />
-      </div>
-      </>
-      )
-      :
-      (
+                  return (
+                    <QuestionInput
+                      key={uuidv4()}
+                      isChosen={isChosen}
+                      hasOptions={!!currentQuestion.options}
+                      answer={answer}
+                      onChange={addAnswer}
+                    />
+                  );
+                })}
+              </div>
+
+              <div className="w-full flex items-center justify-center mt-6">
+                {isManyOptions && (
+                  <button
+                    className="rounded-full border border-primary w-[66px] h-[56px] flex justify-center items-center"
+                    onClick={changeQuestionBack}
+                  >
+                    <Image src={arrowLeft} alt="arrow back" width={14} />
+                  </button>
+                )}
+                <button
+                  type="button"
+                  className={cn('btn_hover bg-primary w-full h-[56px]', {
+                    'ml-4': isManyOptions,
+                  })}
+                  onClick={
+                    isManyOptions ? changeQuestionNextArray : changeQuestionBack
+                  }
+                >
+                  {isManyOptions ? 'Next' : 'Back'}
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div className="ml-[50px]">
+            <Image
+              src={imageSrc}
+              alt="abstaction"
+              width={735}
+              className="object-cover"
+            />
+          </div>
+        </>
+      ) : (
         <div className="max-w-[620px] justify-center items-center my-auto">
           <div className="w-[150px] h-[150px] mx-auto border-[20px] border-solid border-gray-300 border-l-primary rounded-full animate-spin"></div>
         </div>
-      )
-    }
+      )}
     </main>
   );
 };

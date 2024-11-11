@@ -8,11 +8,13 @@ import { signOut } from 'firebase/auth';
 export default function Home() {
   const [user] = useAuthState(auth);
   const router = useRouter();
-  const userSession = sessionStorage.getItem('user');
+  let userSession;
+  if (typeof window !== 'undefined') {
+    userSession = sessionStorage.getItem('user');
+  }
 
   console.log('-=-=-=-=USER: ', user);
 
-  
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <button
