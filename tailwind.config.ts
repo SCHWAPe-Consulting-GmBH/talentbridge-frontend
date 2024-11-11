@@ -20,6 +20,7 @@ const config: Config = {
       neutral1: "#1B1B1B",
       neutral2: "#9F9F9F",
       neutral3: "#F7F7F5",
+      "light-gray": "#E4E4E4",
       success: "#34C759",
       "light-success": "#E0F7E6",
       warning: "#E88F1B",
@@ -47,6 +48,7 @@ const config: Config = {
       },
       animation: {
         loading: 'loading 3s linear infinite',
+        'loading-thirty-second': 'loading 30s ease-in-out infinite',
       },
       keyframes: {
         loading: {
