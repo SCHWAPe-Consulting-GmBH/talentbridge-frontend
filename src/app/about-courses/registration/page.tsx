@@ -4,7 +4,7 @@ import { useState } from 'react';
 import cn from 'classnames';
 // import { v4 as uuidv4 } from 'uuid';
 import { Select } from 'antd';
-import { ReactComponent as ArrowIcon } from '@/assets/icons/arrow_select.svg';
+// import { ReactComponent as ArrowIcon } from '@/assets/icons/arrow_select.svg';
 import { RegistrationNotification } from '@/components/registrationNotification';
 
 const months = [
@@ -86,7 +86,7 @@ const Registration = () => {
             </h2>
 
             <div className="flex ">
-              <ArrowIcon height={25} width={25} fill="pink" stroke="#0066ff"/>
+              {/* <ArrowIcon height={25} width={25} fill="pink" stroke="#0066ff"/> */}
               {/* <Select
                 defaultValue="lucy"
                 style={{ width: 120 }}
