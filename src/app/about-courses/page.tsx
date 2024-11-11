@@ -12,7 +12,7 @@ import up from '@/assets/icons/up-arrow.svg';
 const AboutCourses = () => {
   return (
     <>
-      <div className="absolute top-0 left-0 h-[747px] z-10 bg3 "></div>
+      <div className="absolute top-0 left-0 h-[747px] z-10 bg3 background-style "></div>
       <div className="max-w-[1440px] mx-auto w-full z-20 relative p-[100px] ">
         <div className="w-[190px] h-[22px] bg-orange-300 mb-6 rounded-lg flex justify-center">
           breadcrumbs
@@ -54,7 +54,7 @@ const AboutCourses = () => {
         <Mentors />
         <CourseProgram />
         <div>
-          <div className='max-w-[794px]'>
+          <div className="max-w-[794px]">
             <p className="text-primary font-extrabold text-[96px] mb-[35px]">
               decided? <br />
               <span className="text-themetext">
@@ -62,17 +62,13 @@ const AboutCourses = () => {
               </span>
             </p>
           </div>
-          <div className='flex justify-between items-center'>
-            <RegisterForCourseButton paddingY={19} paddingX={74}/>
+          <div className="flex justify-between items-center">
+            <RegisterForCourseButton paddingY={19} paddingX={74} />
             <a
-              href='#top'
-              className='rounded-full bg-primary w-16 h-16 flex justify-center items-center btn_hover cursor-pointer'
+              href="#top"
+              className="rounded-full bg-primary w-16 h-16 flex justify-center items-center btn_hover cursor-pointer"
             >
-              <Image
-                src={up}
-                alt="move to top"
-                width={8}
-              />
+              <Image src={up} alt="move to top" width={8} />
             </a>
           </div>
         </div>

@@ -45,7 +45,6 @@ const Login = () => {
       console.error(e);
     }
   };
-  console.log('hello')
   return (
     <main className="flex max-w-[1440px] mx-auto justify-center bg-background-second">
       <div className="flex flex-col items-center max-w-[500px] mt-[220px]">
@@ -114,11 +113,7 @@ const Login = () => {
       </div>
 
       <div>
-        <Image
-          src={imgGirl}
-          alt="Picture of the author"
-          width={1024}
-        />
+        <Image src={imgGirl} alt="Picture of the author" width={1024} />
       </div>
     </main>
   );

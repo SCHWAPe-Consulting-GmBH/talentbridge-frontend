@@ -1,9 +1,9 @@
-'use client'
+'use client';
 
 import people from '@/assets/images/Avatars5.png';
 import { MatchingCourses } from '@/components/matchingCourses';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
 const CourseMatching = () => {
@@ -11,14 +11,14 @@ const CourseMatching = () => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      router.push('/about-courses'); 
-    }, 1500); 
+      router.push('/about-courses');
+    }, 1500);
 
-    return () => clearTimeout(timer); 
+    return () => clearTimeout(timer);
   }, [router]);
 
   return (
-    <main className="bg2 px-[100px] bg-background">
+    <main className="bg2 background-style px-[100px] bg-background">
       <div className="max-w-[1240px] mx-auto pt-[168px] flex flex-col items-center">
         <p className="text-primary border border-primary rounded-full font-bold text-[24px] px-4 py-2 mb-8">
           Welcome to us!
