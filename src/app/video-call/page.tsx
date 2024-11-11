@@ -6,6 +6,9 @@ import CallButton from '@/components/video-call-components/CallButton';
 import Controls from '@/components/video-call-components/Controls';
 import { setupPeerConnection } from '@/utils/peer';
 
+import Header from '@/components/video-call-components/Header';
+import ChatSection from '@/components/video-call-components/ChatSection';
+
 export default function Home() {
   const [localStream, setLocalStream] = useState(null);
   const [remoteStream, setRemoteStream] = useState(null);
@@ -72,14 +75,25 @@ export default function Home() {
   };
 
   return (
-    <main className="px-[100px] pt-[100px] bg4 background-style flex justify-center bg-background">
-      <div className="p-4 space-y-4">
-        <VideoDisplay localStream={localStream} remoteStream={remoteStream} />
-        <CallButton
-          isCalling={isCalling}
-          handleCall={isCalling ? handleEndCall : handleStartCall}
-        />
-        <Controls isMuted={isMuted} handleMute={handleMute} />
+    <main className="px-24 pt-24 bg4 background-style flex flex-col min-h-screen">
+      <div>
+        <Header />
+        <div className="flex row-auto">
+          <div className="relative w-full max-w-4xl">
+            <VideoDisplay
+              localStream={localStream}
+              remoteStream={remoteStream}
+            />
+            <div className="flex flex-row items-center justify-between bg-background-second">
+              <Controls isMuted={isMuted} handleMute={handleMute} />
+              <CallButton
+                isCalling={isCalling}
+                handleCall={isCalling ? handleEndCall : handleStartCall}
+              />
+            </div>
+          </div>
+          <ChatSection />
+        </div>
       </div>
     </main>
   );
