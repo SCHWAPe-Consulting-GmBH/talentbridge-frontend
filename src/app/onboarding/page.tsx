@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import { v4 as uuidv4 } from 'uuid';
 import Image from 'next/image';
 import cn from 'classnames';
-import questions from '@/onboarding.json';
+import questions from '@/dataJson/onboarding.json';
 import arrowLeft from '@/assets/icons/arrow_left.svg';
 import { QuestionInput } from '@/components/questionInput';
 import { QuestionProgressBar } from '@/components/questionProgressBar';

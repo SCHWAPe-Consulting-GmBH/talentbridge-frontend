@@ -1,10 +1,10 @@
 'use client';
 
-import people from '@/assets/images/Avatars5.png';
-import { MatchingCourses } from '@/components/matchingCourses';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
+import people from '@/assets/images/Avatars5.png';
+import { MatchingCourses } from '@/components/matchingCourses';
 
 const CourseMatching = () => {
   const router = useRouter();

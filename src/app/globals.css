@@ -25,9 +25,3 @@ html {
   --boxshadow: 0px 4px 4px rgba(233, 227, 227, 0.25);
   
 }
-
-.ant-select-arrow {
-  /* font-size: 16px; */
-  color: red;
-  
-}

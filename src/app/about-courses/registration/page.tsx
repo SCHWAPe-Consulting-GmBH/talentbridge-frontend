@@ -2,25 +2,14 @@
 
 import { useState } from 'react';
 import cn from 'classnames';
-// import { v4 as uuidv4 } from 'uuid';
 import { Select } from 'antd';
-// import { ReactComponent as ArrowIcon } from '@/assets/icons/arrow_select.svg';
+import { useRouter } from 'next/navigation'
+import months from '@/dataJson/months.json';
+import { IconArrowForSelect } from '@/components/iconArrowForSelect';
 import { RegistrationNotification } from '@/components/registrationNotification';
+import { getVisibleDays } from '@/utils/getDays';
+import { getVisibleHours } from '@/utils/getHours';
 
-const months = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
-];
 
 const Registration = () => {
   const [isModalShown, setIsModalShown] = useState(false);
@@ -29,6 +18,11 @@ const Registration = () => {
     day: 0,
     hours: ''
   })
+
+  const router = useRouter();
+
+  const visibleDays = getVisibleDays(scheduledDate.month);
+  const visibleHours = getVisibleHours(scheduledDate.month, scheduledDate.day);
 
   const handleOpenModal = () => {
     setIsModalShown(true);
@@ -55,7 +49,10 @@ const Registration = () => {
           upcoming meeting!
         </p>
         <div className="flex justify-center space-x-[32px]">
-          <button className="font-semibold p-[10px] bg-primary border border-primary rounded-lg btn_hover">
+          <button
+            onClick={() => {router.push('/about-courses/registration/call-waiting')}}
+            className="font-semibold p-[10px] bg-primary border border-primary rounded-lg btn_hover"
+          >
             Contact the coach now
           </button>
           <button
@@ -74,7 +71,7 @@ const Registration = () => {
             }
           )}
         >
-          <div className="bg-background-second rounded-lg shadow-xl max-w-md w-full relative p-[48px] flex flex-col items-center">
+          <div className="bg-background-second rounded-lg shadow-xl relative p-[48px] flex flex-col items-center">
             <button
               onClick={() => setIsModalShown(false)}
               className="absolute top-4 right-4 text-xl text-gray-500 hover:text-gray-800"
@@ -85,23 +82,37 @@ const Registration = () => {
               Choose a date
             </h2>
 
-            <div className="flex ">
-              {/* <ArrowIcon height={25} width={25} fill="pink" stroke="#0066ff"/> */}
-              {/* <Select
-                defaultValue="lucy"
-                style={{ width: 120 }}
-                placeholder='month'
-                suffixIcon={<ArrowIcon height={25} width={25} fill="pink" stroke="#0066ff"/>}
+            <div className="flex items-center mb-8">
+              <Select
+                style={{ width: 228, height: 56 }}
+                placeholder='Month'
+                suffixIcon={<IconArrowForSelect/>}
                 onChange={e => handleChangeDate(e, 'month')}
-                options={[
-                  { value: 'jack', label: 'Jack' },
-                  { value: 'lucy', label: 'Lucy' },
-                  { value: 'Yiminghe', label: 'yiminghe' },
-                  { value: 'disabled', label: 'Disabled', disabled: true },
-                ]}
-              /> */}
-              {/* <p>тут має бути select </p> */}
+                options={months}
+              />
+
+              <div className='w-3 h-1 bg-neutral2 mx-2'></div>
+
+              <Select
+                style={{ width: 228, height: 56 }}
+                placeholder='Day'
+                suffixIcon={<IconArrowForSelect/>}
+                onChange={e => handleChangeDate(e, 'day')}
+                options={visibleDays}
+              />
+
+              <div className='w-3 h-1 bg-neutral2 mx-2'></div>
+
+              <Select
+                style={{ width: 228, height: 56 }}
+                placeholder='Hours'
+                suffixIcon={<IconArrowForSelect/>}
+                onChange={e => handleChangeDate(e, 'hours')}
+                options={visibleHours}
+              />
             </div>
+
+            <button className='btn_hover bg-primary p-[10px]'>Schedule a meeting</button>
           </div>
         </div>
       </div>
