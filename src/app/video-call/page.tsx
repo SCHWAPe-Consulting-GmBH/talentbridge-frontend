@@ -75,16 +75,16 @@ export default function Home() {
   };
 
   return (
-    <main className="px-24 pt-24 bg4 background-style flex flex-col min-h-screen">
-      <div>
+    <main className="px-[100px] pt-[100px] bg4 background-style bg-background">
+      <div className='max-w-[1240px] mx-auto'>
         <Header />
-        <div className="flex row-auto">
-          <div className="relative w-full max-w-4xl">
+        <div className="flex justify-between space-x-[24px] max-h-[761px]">
+          <div className="relative w-full max-w-[904px] h-full ">
             <VideoDisplay
               localStream={localStream}
               remoteStream={remoteStream}
             />
-            <div className="flex flex-row items-center justify-between bg-background-second">
+            <div className="flex justify-center items-center bg-background-second relative rounded-b-2xl">
               <Controls isMuted={isMuted} handleMute={handleMute} />
               <CallButton
                 isCalling={isCalling}

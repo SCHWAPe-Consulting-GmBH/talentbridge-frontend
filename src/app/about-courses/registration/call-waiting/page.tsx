@@ -2,10 +2,21 @@
 
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import coach from '@/assets/images/calling-coach.jpg';
 
 const CallWaiting = () => {
   const [counter, setCounter] = useState(30);
+
+  const router = useRouter();
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      router.push('/video-call');
+    }, 30000);
+
+    return () => clearTimeout(timer);
+  }, [router]);
 
   useEffect(() => {
     const interval = setInterval(() => {
