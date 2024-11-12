@@ -45,37 +45,42 @@ const VideoDisplay: React.FC<VideoDisplayProps> = ({
   };
 
   return (
-    <div className="relative bg-black" id="video-container">
-      <div className="absolute top-0 left-0 p-2 flex items-center justify-between w-full">
-        <div className="flex items-center space-x-2">
+    <div className="relative rounded-t-2xl h-[643px]" id="video-container">
+        <div className="flex items-center space-x-2 py-2 px-6 absolute top-6 left-6 bg-neutral2 bg-opacity-50  rounded-full">
           <Image src={record} alt="Record" width={32} height={32} />
           <span className="text-white font-medium">{recordTimer}</span>
         </div>
-        <button onClick={handleFullScreen} className="z-[1]">
+
+        <button onClick={handleFullScreen} className="z-[1] absolute top-6 right-6 w-[60px] h-[60px] bg-neutral2 rounded-full flex bg-opacity-50  justify-center items-center">
           <Image src={maximize} alt="Maximize" width={32} height={32} />
         </button>
-      </div>
+
       <video
         ref={remoteVideoRef}
         controls={false}
         autoPlay
         playsInline
-        className="w-full h-full rounded-lg shadow-lg"
-        style={{ objectFit: 'cover' }}
+        className="w-full h-full rounded-t-2xl bg-black"
+       // style={{ objectFit: 'cover' }}
       />
-      <div className="absolute bottom-5 right-5 flex flex-col items-center bg-gray-800 p-1 rounded-lg shadow-lg">
+
+      <p className="absolute bottom-6 left-6 py-2 px-6 text-center text-white text-[20px] font-semibold bg-neutral2 bg-opacity-50 rounded-full">
+        Cameron Williamson
+      </p>
+
+      <div className="absolute bottom-5 right-5 items-center bg-gray-800 p-1 rounded-2xl ">
         <video
           ref={localVideoRef}
           controls={false}
           autoPlay
           muted
           playsInline
-          className="w-[18vw] h-full rounded-lg"
-          style={{ objectFit: 'cover' }}
+          className="lg:w-[300px] lg:h-[180px] rounded-2xl"
+         // style={{ objectFit: 'cover' }}
         />
-        <span className="absolute bottom-0 left-0 w-full text-center text-white text-xs font-medium bg-gray-500 bg-opacity-75 py-1 rounded-b-lg">
+        <p className="absolute bottom-4 left-4 py-2 px-6 text-center text-white text-[20px] font-semibold bg-neutral2 bg-opacity-50 rounded-full">
           Cassie Jung
-        </span>
+        </p>
       </div>
     </div>
   );

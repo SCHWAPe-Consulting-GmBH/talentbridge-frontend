@@ -23,22 +23,22 @@ const Controls: React.FC<ControlsProps> = ({
   handleVideoToggle,
 }) => {
   return (
-    <div className="flex space-x-2">
+    <div className="flex space-x-4 py-6">
       <button onClick={handleMute}>
-        <Image src={micro} alt="maximize" className="w-7 h-7 ml-4" />
+        <Image src={micro} alt="maximize" width={60} />
       </button>
       <button onClick={handleVideoToggle}>
-        <Image src={camera} alt="camera" className="w-7 h-7 ml-4" />
+        <Image src={camera} alt="camera" width={60} />
       </button>
       <button>
-        <Image src={send} alt="send" className="w-7 h-7 ml-4" />
+        <Image src={send} alt="send" width={60} />
       </button>
       {isCalling ? (
         <button onClick={handleRecord}>
           <Image
             src={startRecord}
             alt="start record"
-            className="w-8 h-8 ml-4"
+            width={60}
           />
         </button>
       ) : (
@@ -46,15 +46,15 @@ const Controls: React.FC<ControlsProps> = ({
           <Image
             src={startRecord}
             alt="start record"
-            className="w-8 h-8 ml-4"
+            width={60}
           />
         </button>
       )}
       <button>
-        <Image src={sendMessage} alt="send message" className="w-7 h-7 ml-4" />
+        <Image src={sendMessage} alt="send message" width={60} />
       </button>
       <button>
-        <Image src={more} alt="more" className="w-7 h-7 ml-4" />
+        <Image src={more} alt="more" width={60} />
       </button>
     </div>
   );

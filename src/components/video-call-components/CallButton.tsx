@@ -8,7 +8,7 @@ interface CallButtonProps {
 const CallButton: React.FC<CallButtonProps> = ({ isCalling, handleCall }) => {
   return (
     <button
-      className={`font-bold text-white rounded shadow ${isCalling ? 'bg-red-500 hover:bg-red-700' : 'bg-green-500 hover:bg-green-700'}`}
+      className={`font-bold text-white rounded-lg shadow absolute py-[14px] px-[26px] right-4 ${isCalling ? 'bg-red-500 hover:bg-red-700' : 'bg-primary btn_hover'}`}
       onClick={handleCall}
     >
       {isCalling ? 'End Call' : 'Start Call'}
