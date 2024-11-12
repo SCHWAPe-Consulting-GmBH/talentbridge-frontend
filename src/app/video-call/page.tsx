@@ -8,6 +8,7 @@ import { setupPeerConnection } from '@/utils/peer';
 
 import Header from '@/components/video-call-components/Header';
 import ChatSection from '@/components/video-call-components/ChatSection';
+import useRecordTimer from '@/hooks/useRecordTimer';
 
 export default function Home() {
   const [localStream, setLocalStream] = useState(null);
@@ -15,7 +16,18 @@ export default function Home() {
   const [peer, setPeer] = useState(null);
   const [isCalling, setIsCalling] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
+
+  const [record, setRecord] = useState(false);
+  const { recordTimer, startTimer, stopTimer, formattedTimer } =
+    useRecordTimer();
+
   const callId = 'callId123';
+
+  useEffect(() => {
+    if (!isCalling) {
+      stopTimer();
+    }
+  }, [isCalling]);
 
   useEffect(() => {
     return () => {
@@ -68,6 +80,43 @@ export default function Home() {
     }
   };
 
+  const handleRecord = () => {
+    setRecord(!record);
+    if (!record) {
+      startTimer();
+    } else {
+      stopTimer();
+    }
+  };
+
+  const handleVideoToggle = () => {
+    if (localStream) {
+      const videoTracks = localStream.getVideoTracks();
+      if (videoTracks.length > 0 && videoTracks[0].enabled) {
+        videoTracks.forEach((track) => track.stop());
+        localStream.removeTrack(videoTracks[0]);
+      } else {
+        navigator.mediaDevices
+          .getUserMedia({ video: true })
+          .then((newStream) => {
+            const newVideoTrack = newStream.getVideoTracks()[0];
+            localStream.addTrack(newVideoTrack);
+            updateVideoSources(localStream);
+          })
+          .catch((error) => {
+            console.error('Failed to restart video', error);
+          });
+      }
+    }
+  };
+
+  function updateVideoSources(stream) {
+    const videoElements = document.querySelectorAll('video[local]');
+    videoElements.forEach((video) => {
+      video.srcObject = stream;
+    });
+  }
+
   const stopMediaStream = (stream) => {
     if (stream) {
       stream.getTracks().forEach((track) => track.stop());
@@ -83,9 +132,18 @@ export default function Home() {
             <VideoDisplay
               localStream={localStream}
               remoteStream={remoteStream}
+              recordTimer={formattedTimer}
             />
+
             <div className="flex justify-center items-center bg-background-second relative rounded-b-2xl">
-              <Controls isMuted={isMuted} handleMute={handleMute} />
+              <Controls
+                isCalling={isCalling}
+                isMuted={isMuted}
+                handleMute={handleMute}
+                record={record}
+                handleRecord={handleRecord}
+                handleVideoToggle={handleVideoToggle}
+              />
               <CallButton
                 isCalling={isCalling}
                 handleCall={isCalling ? handleEndCall : handleStartCall}
