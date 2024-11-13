@@ -56,8 +56,8 @@ const ChatSection = () => {
   return (
     <div className="flex flex-col justify-end bg-background-second p-3 rounded-2xl">
       <div className="flex items-center space-x-2 relative w-full">
-        <button onClick={handleFileClick} className='absolute left-5'>
-          <Image src={addFile} alt="Add File" width={24}  />
+        <button onClick={handleFileClick} className="absolute left-5">
+          <Image src={addFile} alt="Add File" width={24} />
         </button>
         <input
           type="file"
@@ -72,8 +72,8 @@ const ChatSection = () => {
           onChange={handleMessageChange}
         />
 
-        <button onClick={handleSubmit} className='absolute right-2'>
-          <Image src={sendMessage} alt="Send Message" width={40}  />
+        <button onClick={handleSubmit} className="absolute right-2">
+          <Image src={sendMessage} alt="Send Message" width={40} />
         </button>
       </div>
       {fileInfo && <p className="text-white text-sm">{fileInfo}</p>}
