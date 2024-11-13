@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "title": "AVGS Preparation Course",
+    "status": "Top Recommendation",
+    "description": "Get ready for your AVGS application with our expert-led course",
+    "color": "green"
+  },
+  {
+    "id": 2,
+    "title": "Skills Enhancement Workshop",
+    "status": "Top Recommendation",
+    "description": "Upskill with practical workshops tailored to your career goals.",
+    "color": "green"
+  },
+  {
+    "id": 3,
+    "title": "CV Coaching Program",
+    "status": "Best Seller",
+    "description": "Learn how to create a standout CV with personalized coaching",
+    "color": "orange"
+  },
+  {
+    "id": 4,
+    "title": "Job Application Mastery",
+    "status": "Best Seller",
+    "description": "Navigate the job application process with our comprehensive guide.",
+    "color": "orange"
+  },
+  {
+    "id": 5,
+    "title": "CV Coaching Program",
+    "status": "Best seller",
+    "description": "Learn how to create a standout CV with personalized coaching",
+    "color": "orange"
+  },
+  {
+    "id": 6,
+    "title": "CV Coaching Program",
+    "status": "Last Chance",
+    "description": "Learn how to create a standout CV with personalized coaching",
+    "color": "blue"
+  }
+]

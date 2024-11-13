@@ -60,7 +60,7 @@ const VideoDisplay: React.FC<VideoDisplayProps> = ({
         controls={false}
         autoPlay
         playsInline
-        className="w-full h-full rounded-t-2xl bg-black"
+        className="w-full h-full rounded-t-2xl bg-black object-cover"
        // style={{ objectFit: 'cover' }}
       />
 
@@ -75,7 +75,7 @@ const VideoDisplay: React.FC<VideoDisplayProps> = ({
           autoPlay
           muted
           playsInline
-          className="lg:w-[300px] lg:h-[180px] rounded-2xl"
+          className="lg:w-[300px] lg:h-[180px] rounded-2xl object-cover"
          // style={{ objectFit: 'cover' }}
         />
         <p className="absolute bottom-4 left-4 py-2 px-6 text-center text-white text-[20px] font-semibold bg-neutral2 bg-opacity-50 rounded-full">

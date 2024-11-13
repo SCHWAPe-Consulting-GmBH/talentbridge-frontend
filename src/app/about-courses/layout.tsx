@@ -1,4 +1,4 @@
-export default function AbboutCoursesLayout({
+export default function AboutCoursesLayout({
   children,
 }: {
   children: React.ReactNode;
