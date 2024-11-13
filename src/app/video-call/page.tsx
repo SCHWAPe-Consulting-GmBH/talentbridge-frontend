@@ -9,6 +9,8 @@ import { setupPeerConnection } from '@/utils/peer';
 import Header from '@/components/video-call-components/Header';
 import ChatSection from '@/components/video-call-components/ChatSection';
 import useRecordTimer from '@/hooks/useRecordTimer';
+import { collection, doc } from 'firebase/firestore';
+import { firestore } from '@/firebase/config';
 
 export default function Home() {
   const [localStream, setLocalStream] = useState(null);
@@ -21,7 +23,7 @@ export default function Home() {
   const { recordTimer, startTimer, stopTimer, formattedTimer } =
     useRecordTimer();
 
-  const callId = 'callId123';
+  const callId = doc(collection(firestore, 'calls')).id;
 
   useEffect(() => {
     if (!isCalling) {
@@ -125,7 +127,7 @@ export default function Home() {
 
   return (
     <main className="px-[100px] pt-[100px] bg4 background-style bg-background">
-      <div className='max-w-[1240px] mx-auto'>
+      <div className="max-w-[1240px] mx-auto">
         <Header />
         <div className="flex justify-between space-x-[24px] max-h-[761px]">
           <div className="relative w-full max-w-[904px] h-full ">
