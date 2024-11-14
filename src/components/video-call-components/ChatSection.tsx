@@ -7,7 +7,7 @@ const ChatSection = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [fileInfo, setFileInfo] = useState('');
   const [message, setMessage] = useState('');
-  const fileInputRef = useRef(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -20,7 +20,7 @@ const ChatSection = () => {
   };
 
   const handleFileClick = () => {
-    fileInputRef.current.click();
+    fileInputRef.current!.click();
   };
 
   const handleMessageChange = (event) => {

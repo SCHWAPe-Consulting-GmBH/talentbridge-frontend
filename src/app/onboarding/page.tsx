@@ -8,6 +8,7 @@ import questions from '@/dataJson/onboarding.json';
 import arrowLeft from '@/assets/icons/arrow_left.svg';
 import { QuestionInput } from '@/components/questionInput';
 import { QuestionProgressBar } from '@/components/questionProgressBar';
+import { Loader } from '@/components/loader';
 
 const Onboarding = () => {
   const [questionNumber, setQuestionNumber] = useState(0);
@@ -183,9 +184,7 @@ const Onboarding = () => {
           </div>
         </>
       ) : (
-        <div className="max-w-[620px] justify-center items-center my-auto">
-          <div className="w-[150px] h-[150px] mx-auto border-[20px] border-solid border-gray-300 border-l-primary rounded-full animate-spin"></div>
-        </div>
+        <Loader width={150} height={150} />
       )}
     </main>
   );
