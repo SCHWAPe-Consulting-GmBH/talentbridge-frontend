@@ -27,29 +27,22 @@ const Controls: React.FC<ControlsProps> = ({
       <button onClick={handleMute}>
         <Image src={micro} alt="maximize" width={60} />
       </button>
-      <button onClick={handleVideoToggle}>
+      <button
+        onClick={isCalling ? handleVideoToggle : undefined}
+        disabled={!isCalling}
+      >
         <Image src={camera} alt="camera" width={60} />
       </button>
       <button>
         <Image src={send} alt="send" width={60} />
       </button>
-      {isCalling ? (
-        <button onClick={handleRecord}>
-          <Image
-            src={startRecord}
-            alt="start record"
-            width={60}
-          />
-        </button>
-      ) : (
-        <button disabled>
-          <Image
-            src={startRecord}
-            alt="start record"
-            width={60}
-          />
-        </button>
-      )}
+      <button
+        onClick={isCalling ? handleRecord : undefined}
+        disabled={!isCalling}
+      >
+        <Image src={startRecord} alt="start record" width={60} />
+      </button>
+
       <button>
         <Image src={sendMessage} alt="send message" width={60} />
       </button>

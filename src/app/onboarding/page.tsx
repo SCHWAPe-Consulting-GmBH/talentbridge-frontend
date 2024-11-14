@@ -184,7 +184,7 @@ const Onboarding = () => {
           </div>
         </>
       ) : (
-        <Loader width={150} height={150} />
+        <Loader width={150} height={150} border={20}/>
       )}
     </main>
   );

@@ -108,7 +108,7 @@ const GetFreeProgram = () => {
           })}>
             {selectedFile ? (
               <>
-                <p className="text-themetext text-sm mr-12 ml-10">{fileInfo}</p>
+                <p className="text-themetext text-sm mr-14 ml-10">{fileInfo}</p>
                 <button onClick={() => setSelectedFile(null)} className='absolute rounded-full bg-red-600 p-2 right-6'>
                   <Image
                     src={close}
@@ -158,13 +158,13 @@ const GetFreeProgram = () => {
             >
               &times;
             </button>
-            <p className="text-[36px] font-semibold text-themetext mb-6">
+            <p className="text-[24px] font-bold text-themetext mb-8">
             Thank you for submitting your document!
             </p>
-            <Loader width={150} height={150} />
+            <Loader width={72} height={72} border={8}/>
 
 
-            <button className='btn_hover bg-primary p-[10px]'>Schedule a meeting</button>
+            <p className='text-neutral2 text-[20px] text-center mt-6 max-w-[475px]'>Our Talent Bridge team is now reviewing it to confirm your eligibility for free program access. This may take a short while. You’ll receive a notification once verification is complete, and then you’ll be able to start your course.</p>
           </div>
         </div>
     </div>

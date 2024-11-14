@@ -4,7 +4,6 @@
 @import '../styles/style.css';
 @import '../styles/bgImges.css';
 @import '../styles/slider.css';
-@import '../styles/spinner.css';
 
 html {
   scroll-behavior: smooth;
