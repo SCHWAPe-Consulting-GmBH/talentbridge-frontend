@@ -12,7 +12,7 @@ type ControlsProps = {
   isMuted: boolean;
   handleMute: () => void;
   handleRecord: () => void;
-  handleVideoToggle: () => void;
+  startWebcam: () => void;
 };
 
 const Controls: React.FC<ControlsProps> = ({
@@ -20,14 +20,14 @@ const Controls: React.FC<ControlsProps> = ({
   isMuted,
   handleMute,
   handleRecord,
-  handleVideoToggle,
+  startWebcam,
 }) => {
   return (
     <div className="flex space-x-4 py-6">
       <button onClick={handleMute}>
         <Image src={micro} alt="maximize" width={60} />
       </button>
-      <button onClick={handleVideoToggle}>
+      <button onClick={startWebcam}>
         <Image src={camera} alt="camera" width={60} />
       </button>
       <button>
@@ -35,19 +35,11 @@ const Controls: React.FC<ControlsProps> = ({
       </button>
       {isCalling ? (
         <button onClick={handleRecord}>
-          <Image
-            src={startRecord}
-            alt="start record"
-            width={60}
-          />
+          <Image src={startRecord} alt="start record" width={60} />
         </button>
       ) : (
         <button disabled>
-          <Image
-            src={startRecord}
-            alt="start record"
-            width={60}
-          />
+          <Image src={startRecord} alt="start record" width={60} />
         </button>
       )}
       <button>
