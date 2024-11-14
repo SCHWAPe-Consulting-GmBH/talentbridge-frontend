@@ -1,20 +1,15 @@
 import Image from 'next/image';
-import lightTheme from '@/assets/icons/light_theme.svg';
+
 import notification from '@/assets/icons/notification.svg';
 import documents from '@/assets/icons/documents.svg';
 import settings from '@/assets/icons/settings.svg';
 import avatar from '@/assets/images/avatar_dashboard.jpg';
+import ThemeSwitch from '../themeSwitcher';
 
 export const HeaderMenu = () => {
   return (
     <>
-      <button className='rounded-full w-[38px] h-[38px] flex justify-center items-center bg-dark mr-4'>
-        <Image
-          src={lightTheme}
-          alt=''
-          width={20}
-        />
-      </button>
+      <ThemeSwitch/>
       <button className='rounded-full w-[38px] h-[38px] flex justify-center items-center bg-dark mr-4'>
         <Image
           src={documents}

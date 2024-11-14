@@ -76,5 +76,6 @@ const config: Config = {
   plugins: [
     require('tailwindcss-textshadow')
   ],
+  darkMode: 'class',
 };
 export default config;

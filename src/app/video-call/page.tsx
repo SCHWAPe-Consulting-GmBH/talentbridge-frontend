@@ -26,25 +26,6 @@ import maximize from '@/assets/icons/maximize.svg';
 const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
 const firestore = getFirestore(app);
 
-const servers = {
-  iceServers: [
-    {
-      url: 'stun:stun.l.google.com:19302',
-    },
-    {
-      url: 'turn:192.158.29.39:3478?transport=udp',
-      credential: 'JZEOEt2V3Qb0y27GRntt2u2PAYA=',
-      username: '28224511:1379330808',
-    },
-    {
-      url: 'turn:192.158.29.39:3478?transport=tcp',
-      credential: 'JZEOEt2V3Qb0y27GRntt2u2PAYA=',
-      username: '28224511:1379330808',
-    },
-  ],
-  iceCandidatePoolSize: 10,
-};
-
 const VideoCall = () => {
   const [localStream, setLocalStream] = useState<MediaStream | null>(null);
   const [remoteStream, setRemoteStream] = useState<MediaStream | null>(null);
