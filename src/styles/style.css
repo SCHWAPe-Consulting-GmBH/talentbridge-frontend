@@ -37,3 +37,11 @@
   background-color: #0df346;
   color: #ffff;
 }
+
+.homework:hover {
+  border: 1px solid #0df346;
+}
+
+.homework_active {
+  border: 1px solid #0df346;
+}

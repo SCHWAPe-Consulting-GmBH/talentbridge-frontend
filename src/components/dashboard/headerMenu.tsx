@@ -13,28 +13,28 @@ export const HeaderMenu = () => {
       <button className='rounded-full w-[38px] h-[38px] flex justify-center items-center bg-dark mr-4'>
         <Image
           src={documents}
-          alt=''
+          alt='documents icon'
           width={20}
         />
       </button>
       <button className='rounded-full w-[38px] h-[38px] flex justify-center items-center bg-dark mr-4'>
         <Image
           src={notification}
-          alt=''
+          alt='notification icon'
           width={20}
         />
       </button>
       <button className='rounded-full w-[38px] h-[38px] flex justify-center items-center bg-dark mr-4'>
         <Image
           src={settings}
-          alt=''
+          alt='settings icon'
           width={20}
         />
       </button>
       <Image
         src={avatar}
         width={42}
-        alt='avatar'
+        alt='avatar icon'
         className='rounded-full w-[42px] h-[42px] mr-2'
       />
       <div>

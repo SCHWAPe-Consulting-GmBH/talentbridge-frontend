@@ -1,7 +1,6 @@
 'use client'
 
 import Image from 'next/image';
-import { v4 as uuidv4 } from 'uuid';
 import cn from 'classnames';
 import homeworkData from '@/dataJson/dataHomework.json';
 import time from '@/assets/icons/time-homework.svg';
@@ -11,8 +10,13 @@ import pic2 from '@/assets/images/picture2_homework.png';
 import pic3 from '@/assets/images/picture3_homework.png';
 import pic4 from '@/assets/images/picture4_homework.png';
 import pic5 from '@/assets/images/picture5_homework.png';
+import { useState } from 'react';
+import { HomeworkModal } from './homeworkModal';
 
 export const HomeworkDashboard = () => {
+  const [activeHomeworkId, setActiveHomeworkId] = useState(0);
+  const [isHomeworkModalShown, setIsHomeworkModalShown] = useState(false);
+
   function getRandomNumber() {
     return Math.floor(Math.random() * 5);
   }
@@ -24,6 +28,11 @@ export const HomeworkDashboard = () => {
     { src: pic4, style: 'rgba(255, 6, 0, 0.2)' },
     { src: pic5, style: 'rgb(0, 214, 118, 0.2)' },
   ];
+
+  const handleHomeworkClick = (homeworkId: number) => {
+    setActiveHomeworkId(homeworkId);
+    setIsHomeworkModalShown(true);
+  }
 
   return (
     <div className="mt-[30px]">
@@ -39,8 +48,11 @@ export const HomeworkDashboard = () => {
 
           return (
             <div
-              key={uuidv4()}
-              className="bg-background-second rounded-2xl p-[15px] flex space-x-[10px] "
+              key={homework.id}
+              onClick={() => handleHomeworkClick(homework.id)}
+              className={cn("bg-background-second rounded-2xl p-[15px] flex space-x-[10px] homework border-box border border-transparent cursor-pointer", 
+                {'homework_active': activeHomeworkId === homework.id}
+              )}
             >
               <div
                 className="rounded-2xl p-[7px] w-[66px]"
@@ -92,6 +104,8 @@ export const HomeworkDashboard = () => {
           );
         })}
       </div>
+
+      <HomeworkModal isHomeworkShown={isHomeworkModalShown} onChangeHomeworkShown={setIsHomeworkModalShown}/>
     </div>
   );
 };
