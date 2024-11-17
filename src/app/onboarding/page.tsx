@@ -102,7 +102,7 @@ const Onboarding = () => {
 
   console.log(questionNumber === 4);
   return (
-    <main className="px-[100px] pt-[100px] onboard1 background-style flex justify-center bg-background">
+    <main className="px-[100px] pt-[100px] onboard1 background-style flex justify-start bg-background">
       {imageSrc ? (
         <>
           <div className="max-w-[620px] justify-center">
@@ -153,7 +153,7 @@ const Onboarding = () => {
               <div className="w-full flex items-center justify-center mt-6">
                 {isManyOptions && (
                   <button
-                    className="rounded-full border border-primary w-[66px] h-[56px] flex justify-center items-center"
+                    className="rounded-full btn_green_hover border border-primary w-[66px] h-[56px] flex justify-center items-center"
                     onClick={changeQuestionBack}
                   >
                     <Image src={arrowLeft} alt="arrow back" width={14} />
@@ -161,7 +161,7 @@ const Onboarding = () => {
                 )}
                 <button
                   type="button"
-                  className={cn('btn_hover bg-primary w-full h-[56px]', {
+                  className={cn('btn_green_hover bg-primary w-full h-[56px]', {
                     'ml-4': isManyOptions,
                   })}
                   onClick={
@@ -179,7 +179,7 @@ const Onboarding = () => {
               src={imageSrc}
               alt="abstaction"
               width={735}
-              className="object-cover"
+              className="absolute object-cover"
             />
           </div>
         </>

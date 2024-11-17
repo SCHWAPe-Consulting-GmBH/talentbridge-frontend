@@ -18,7 +18,7 @@ export const Meetings = () => {
         {[1, 2, 3, 4].map((value) => {
           return (
             <div
-              className="bg-background-second rounded-2xl px-[18px] py-[21px]"
+              className="bg-background-second rounded-2xl px-[18px] py-[21px] homework border-box border border-transparent"
               key={uuidv4()}
             >
               <p className="text-themetext text-[16px] leading-[20px] font-bold mb-1">

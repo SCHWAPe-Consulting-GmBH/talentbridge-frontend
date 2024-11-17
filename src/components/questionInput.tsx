@@ -22,7 +22,7 @@ export const QuestionInput: React.FC<Props> = ({
 
   return (
     <button
-      className={cn('input_text border border-neutral2 items-center mb-4 ', {
+      className={cn('input_choose border border-neutral2 items-center mb-4 ', {
         'bg-primary text-white': isChosen,
         'bg-white text-neutral2': !isChosen,
         'inline-flex mr-4': hasOptions,

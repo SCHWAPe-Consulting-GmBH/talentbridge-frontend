@@ -1,5 +1,5 @@
 'use client';
-import { ChartDashboard } from '@/components/dashboard/chart';
+import { ChartDashboard } from '@/components/dashboard/chartDashboard';
 import { HeaderDashboard } from '@/components/dashboard/headerDashboard';
 import { CoachingProgress } from '@/components/dashboard/coachingProgress';
 
@@ -10,9 +10,9 @@ export default function DashboardLayout({
 }) {
   return (
     <main className="bg5 background-style bg-background h-full w-full pt-[10px] px-10 pb-[100px]">
-      <div className='max-w-[1350px] mx-auto'>
+      <div className='max-w-[1350px] mx-auto '>
         <HeaderDashboard />
-        <div className='flex px-20 justify-between mt-[105px]'>
+        <div className='flex px-20 justify-between mt-[105px] relative z-10'>
           <div>
             <h1 className="font-extrabold text-[60px] text-white">
               Welcome,

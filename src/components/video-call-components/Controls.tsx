@@ -23,31 +23,31 @@ const Controls: React.FC<ControlsProps> = ({
   handleVideoToggle,
 }) => {
   return (
-    <div className="flex space-x-4 py-6">
+    <div className="flex space-x-4 py-6 justify-center">
       <button onClick={handleMute}>
-        <Image src={micro} alt="maximize" width={60} />
+        <Image src={micro} alt="maximize" width={50} />
       </button>
       <button
         onClick={isCalling ? handleVideoToggle : undefined}
         disabled={!isCalling}
       >
-        <Image src={camera} alt="camera" width={60} />
+        <Image src={camera} alt="camera" width={50} />
       </button>
       <button>
-        <Image src={send} alt="send" width={60} />
+        <Image src={send} alt="send" width={50} />
       </button>
       <button
         onClick={isCalling ? handleRecord : undefined}
         disabled={!isCalling}
       >
-        <Image src={startRecord} alt="start record" width={60} />
+        <Image src={startRecord} alt="start record" width={50} />
       </button>
 
       <button>
-        <Image src={sendMessage} alt="send message" width={60} />
+        <Image src={sendMessage} alt="send message" width={50} />
       </button>
       <button>
-        <Image src={more} alt="more" width={60} />
+        <Image src={more} alt="more" width={50} />
       </button>
     </div>
   );

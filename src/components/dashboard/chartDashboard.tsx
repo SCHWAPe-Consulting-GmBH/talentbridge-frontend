@@ -49,7 +49,7 @@ export const ChartDashboard = () => {
   };
 
   return (
-    <div className="w-[450px] h-[455px] bg-background-second rounded-2xl p-6 relative 
+    <div className="w-[450px] h-[455px] bg-background-second rounded-2xl p-6 relative
     before:content-[''] before:absolute before:top-[66px] before:w-[400px] before:h-[1px] before:bg-gray-300 before:rounded-full
     after:content-[''] after:absolute after:top-[65px] after:w-[64px] after:h-[3px] after:bg-primary after:rounded-full">
       <h3 className='text-[24px] font-bold absolute text-themetext'>Chart</h3>

@@ -6,6 +6,7 @@
   border-radius: 6px;
   padding: 16px;
   outline: none;
+  transition: border 0.3s ease-in-out;
 }
 
 .input_text:hover {
@@ -16,22 +17,65 @@
   border: 1px solid rgb(14, 101, 231);
 }
 
-.btn_hover {
-  color: #00000;
-  font-weight: 600;
-  border-radius: 0.5rem;
-  transition: background-color 0.3s ease-in-out, 
-  box-shadow 0.3s ease-in-out;
+.input_choose {
+  box-sizing: border-box;
+  border: 1px solid transparent;
+  height: 53px;
+  line-height: 53px;
+  border-radius: 6px;
+  padding: 16px;
+  outline: none;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
-.btn_hover:hover {
-  background-color: #34C759;
+.input_choose:hover {
+  background-color: #5DE85B;
+  color: white;
+}
+
+.btn_shadow {
+  transition: box-shadow 0.3s ease-in-out;
+}
+.btn_shadow:hover {
+  box-shadow: var(--boxshadow-round);
+}
+
+.btn_green_hover {
+  color: #000000;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  transition: transform 0.3s ease-in-out, color 0.3s ease-in-out,
+  box-shadow 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+.btn_green_hover:hover {
+  transform: scale(0.95);
+  color: white;
   box-shadow: var(--boxshadow);
 }
 
-.btn_hover:active {
-  background-color: #0df346;
+.btn_green_hover:active {
+  background-color: #238a3d;
 }
+
+.btn_white_hover {
+  font-weight: 600;
+  border-radius: 0.5rem;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out,
+  box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.btn_white_hover:hover {
+  transform: scale(0.95);
+  background-color: #5DE85B;
+  color: white;
+  box-shadow: var(--boxshadow);
+}
+
+.btn_white_hover:active {
+  background-color: #238a3d;
+}
+
 
 .selected_btn {
   background-color: #0df346;
@@ -45,3 +89,4 @@
 .homework_active {
   border: 1px solid #0df346;
 }
+
