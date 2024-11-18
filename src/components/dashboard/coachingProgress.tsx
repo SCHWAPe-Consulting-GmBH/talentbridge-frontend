@@ -20,12 +20,12 @@ export const CoachingProgress = () => {
         <p className="text-themetext font-bold text-[16px] mb-[17px]">
           Job Matching Process
         </p>
-        <div className="h-5 rounded-full bg-background-third flex items-center px-[2px] mb-1 space-x-[1px]">
-          <div className="h-4 bg-progress-green1 rounded-l-full w-full"></div>
-          <div className="h-4 bg-progress-green2 w-full"></div>
-          <div className="h-4 bg-progress-green3 w-full"></div>
-          <div className="h-4 bg-progress-green4 w-full"></div>
-          <div className="h-4 bg-progress-green5 w-full"></div>
+        <div className="h-5 rounded-full bg-background-third flex items-center px-[2px] mb-1">
+          <div className="h-4 bg-progress-green1 rounded-l-full w-full mr-[1px]"></div>
+          <div className="h-4 bg-progress-green2 w-full mr-[1px]"></div>
+          <div className="h-4 bg-progress-green3 w-full mr-[1px]"></div>
+          <div className="h-4 bg-progress-green4 w-full mr-[1px]"></div>
+          <div className="h-4 bg-progress-green5 w-full mr-[1px]"></div>
           <div className="h-4 rounded-r-full w-full"></div>
         </div>
         <div className="flex justify-between mb-[46px]">

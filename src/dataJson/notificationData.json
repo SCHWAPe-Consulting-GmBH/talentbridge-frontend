@@ -1,0 +1,98 @@
+[
+  {
+    "id": 1,
+    "status": "success",
+    "title": "Lorem ipsum dolor!",
+    "text": "Lorem ipsum dolor sit amet consectetur. Lectus gravida praesent pretium varius nulla arcu nunc elementum. "
+  },
+  {
+    "id": 2,
+    "status": "warning",
+    "title": "Lorem ipsum dolor!",
+    "text": "Lorem ipsum dolor sit amet consectetur. Lectus gravida praesent pretium varius nulla arcu nunc elementum. "
+  },
+  {
+    "id": 3,
+    "status": "info",
+    "title": "Lorem ipsum dolor!",
+    "text": "Lorem ipsum dolor sit amet consectetur. Lectus gravida praesent pretium varius nulla arcu nunc elementum. "
+  },
+  {
+    "id": 4,
+    "status": "error",
+    "title": "Lorem ipsum dolor!",
+    "text": "Lorem ipsum dolor sit amet consectetur. Lectus gravida praesent pretium varius nulla arcu nunc elementum. "
+  },
+  {
+    "id": 5,
+    "status": "success",
+    "title": "Lorem ipsum dolor!",
+    "text": "Lorem ipsum dolor sit amet consectetur. Lectus gravida praesent pretium varius nulla arcu nunc elementum. "
+  },
+  {
+    "id": 6,
+    "status": "warning",
+    "title": "Lorem ipsum dolor!",
+    "text": "Lorem ipsum dolor sit amet consectetur. Lectus gravida praesent pretium varius nulla arcu nunc elementum. "
+  },
+  {
+    "id": 7,
+    "status": "info",
+    "title": "Lorem ipsum dolor!",
+    "text": "Lorem ipsum dolor sit amet consectetur. Lectus gravida praesent pretium varius nulla arcu nunc elementum. "
+  },
+  {
+    "id": 8,
+    "status": "error",
+    "title": "Lorem ipsum dolor!",
+    "text": "Lorem ipsum dolor sit amet consectetur. Lectus gravida praesent pretium varius nulla arcu nunc elementum. "
+  },
+  {
+    "id": 9,
+    "status": "success",
+    "title": "Lorem ipsum dolor!",
+    "text": "Lorem ipsum dolor sit amet consectetur. Lectus gravida praesent pretium varius nulla arcu nunc elementum. "
+  },
+  {
+    "id": 10,
+    "status": "warning",
+    "title": "Lorem ipsum dolor!",
+    "text": "Lorem ipsum dolor sit amet consectetur. Lectus gravida praesent pretium varius nulla arcu nunc elementum. "
+  },
+  {
+    "id": 11,
+    "status": "info",
+    "title": "Lorem ipsum dolor!",
+    "text": "Lorem ipsum dolor sit amet consectetur. Lectus gravida praesent pretium varius nulla arcu nunc elementum. "
+  },
+  {
+    "id": 12,
+    "status": "error",
+    "title": "Lorem ipsum dolor!",
+    "text": "Lorem ipsum dolor sit amet consectetur. Lectus gravida praesent pretium varius nulla arcu nunc elementum. "
+  },
+  {
+    "id": 13,
+    "status": "success",
+    "title": "Lorem ipsum dolor!",
+    "text": "Lorem ipsum dolor sit amet consectetur. Lectus gravida praesent pretium varius nulla arcu nunc elementum. "
+  },
+  {
+    "id": 14,
+    "status": "warning",
+    "title": "Lorem ipsum dolor!",
+    "text": "Lorem ipsum dolor sit amet consectetur. Lectus gravida praesent pretium varius nulla arcu nunc elementum. "
+  },
+  {
+    "id": 15,
+    "status": "info",
+    "title": "Lorem ipsum dolor!",
+    "text": "Lorem ipsum dolor sit amet consectetur. Lectus gravida praesent pretium varius nulla arcu nunc elementum. "
+  },
+  {
+    "id": 16,
+    "status": "error",
+    "title": "Lorem ipsum dolor!",
+    "text": "Lorem ipsum dolor sit amet consectetur. Lectus gravida praesent pretium varius nulla arcu nunc elementum. "
+  }
+]

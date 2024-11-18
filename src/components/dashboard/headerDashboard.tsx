@@ -7,10 +7,10 @@ export const HeaderDashboard = () => {
   const [query, setQuery] = useState('');
 
   return (
-    <div className="flex items-center justify-between">
+    <div className="flex items-center justify-between relative z-20">
       <p className="font-extrabold text-[30px] text-white">Logo</p>
 
-      <div className='flex items-center'>
+      <div className='flex items-center relative'>
         <div className="relative max-w-[405px] mr-4">
           <input
             placeholder="Search"

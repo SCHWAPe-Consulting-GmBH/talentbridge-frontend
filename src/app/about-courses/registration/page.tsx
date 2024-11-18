@@ -51,13 +51,13 @@ const Registration = () => {
         <div className="flex justify-center space-x-[32px]">
           <button
             onClick={() => {router.push('/about-courses/registration/call-waiting')}}
-            className="font-semibold p-[10px] bg-primary border border-primary rounded-lg btn_hover"
+            className="text-neutral1 font-semibold p-[10px] bg-primary border border-primary rounded-lg btn_green_hover"
           >
             Contact the coach now
           </button>
           <button
             onClick={handleOpenModal}
-            className="font-semibold p-[10px] border border-primary rounded-lg btn_hover bg-background"
+            className="text-btn-text font-semibold p-[10px] border border-primary rounded-lg btn_white_hover bg-background"
           >
             Schedule a Meeting
           </button>
@@ -112,7 +112,7 @@ const Registration = () => {
               />
             </div>
 
-            <button className='btn_hover bg-primary p-[10px]'>Schedule a meeting</button>
+            <button className='btn_green_hover bg-primary p-[10px]'>Schedule a meeting</button>
           </div>
         </div>
       </div>

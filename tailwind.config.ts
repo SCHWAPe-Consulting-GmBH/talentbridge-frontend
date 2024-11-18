@@ -46,8 +46,11 @@ const config: Config = {
       background: "var(--background)",
       "background-second": "var(--background-second)",
       "background-third": "var(--background-third)",
+      "background-fourth": "var(--background-fourth)",
       "background-revert": "var(--background-revert)",
-      themetext: "var(--themetext)"
+      "shadow-revert": "var(--shadow-revert)",
+      themetext: "var(--themetext)",
+      "btn-text": "var(--button-text)"
     },
     fontFamily: {
       main: ['Nunito Sans', 'sans-serif'],
@@ -76,5 +79,6 @@ const config: Config = {
   plugins: [
     require('tailwindcss-textshadow')
   ],
+  darkMode: 'class',
 };
 export default config;

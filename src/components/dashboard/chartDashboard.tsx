@@ -49,10 +49,10 @@ export const ChartDashboard = () => {
   };
 
   return (
-    <div className="w-[450px] h-[455px] bg-white rounded-2xl p-6 relative 
+    <div className="w-[450px] h-[455px] bg-background-second rounded-2xl p-6 relative
     before:content-[''] before:absolute before:top-[66px] before:w-[400px] before:h-[1px] before:bg-gray-300 before:rounded-full
     after:content-[''] after:absolute after:top-[65px] after:w-[64px] after:h-[3px] after:bg-primary after:rounded-full">
-      <h3 className='text-[24px] font-bold absolute'>Chart</h3>
+      <h3 className='text-[24px] font-bold absolute text-themetext'>Chart</h3>
       <Radar
         plugins={[legendMargin]}
         data={data}
@@ -68,6 +68,18 @@ export const ChartDashboard = () => {
               },
               ticks: {
                 stepSize: 20,
+                color: 'rgba(128, 128, 128, 1)',
+                backdropColor: 'transparent',
+                backdropPadding: 0,
+              },
+              grid: {
+                color: 'rgba(200, 200, 200, 0.2)',
+                lineWidth: 1,
+              },
+              angleLines: {
+                color: 'rgba(200, 200, 200, 0.2)',
+                lineWidth: 1,
+                borderDash: [5, 5],
               },
             },
           },

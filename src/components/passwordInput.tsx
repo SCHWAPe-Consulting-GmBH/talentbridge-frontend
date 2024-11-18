@@ -15,7 +15,7 @@ export const PasswordInput: React.FC<Props> = ({ password, onChangePassword }) =
   return (
     <div className='relative w-full'>
       <input
-        className="input_text w-full mb-[13px] "
+        className="input_text w-full mb-[13px] text-secondary bg-white border border-light-gray"
         placeholder="Password"
         type={isVisible ? 'text' : 'password'}
         value={password}
