@@ -12,7 +12,7 @@ import up from '@/assets/icons/up-arrow.svg';
 const AboutCourses = () => {
   return (
     <>
-      <div className="absolute top-0 left-0 h-[747px] z-10 bg3 background-style "></div>
+      <div className="absolute top-0 left-0 h-[747px] z-10 bg3 w-full bg-cover"></div>
       <div className="max-w-[1440px] mx-auto w-full z-20 relative p-[100px] ">
         <div className="w-[190px] h-[22px] bg-orange-300 mb-6 rounded-lg flex justify-center">
           breadcrumbs
@@ -66,7 +66,7 @@ const AboutCourses = () => {
             <RegisterForCourseButton paddingY={19} paddingX={74} />
             <a
               href="#top"
-              className="rounded-full bg-primary w-16 h-16 flex justify-center items-center btn_hover cursor-pointer"
+              className="rounded-full bg-primary w-16 h-16 flex justify-center items-center btn_green_hover cursor-pointer"
             >
               <Image src={up} alt="move to top" width={8} />
             </a>

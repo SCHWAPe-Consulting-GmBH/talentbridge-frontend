@@ -40,6 +40,20 @@
   box-shadow: var(--boxshadow-round);
 }
 
+.btn_light_shadow {
+  transition: box-shadow 0.3s ease-in-out;
+}
+.btn_light_shadow:hover {
+  box-shadow: var(--boxshadow-course);
+}
+
+.course_shadow {
+  transition: box-shadow 0.3s ease-in-out;
+}
+.course_shadow:hover {
+  box-shadow: var(--boxshadow-course);
+}
+
 .btn_green_hover {
   color: #000000;
   font-weight: 600;
@@ -82,7 +96,13 @@
   color: #ffff;
 }
 
-.homework:hover {
+
+
+.green_border_hover {
+  transition: border 0.3s ease-in-out;
+}
+
+.green_border_hover:hover {
   border: 1px solid #0df346;
 }
 
@@ -90,3 +110,29 @@
   border: 1px solid #0df346;
 }
 
+.upper_first_letter {
+  text-transform: capitalize;
+}
+
+.aside_menu {
+  transition: background-color 0.3s ease-in-out;
+}
+
+.aside_menu:hover {
+  background-color: #5DE85B;
+}
+
+.aside_menu_active {
+  background-color: #5DE85B;
+  position: relative;
+}
+
+.aside_menu_active::after {
+  content: '';
+  width: 10px;
+  border-radius: 50px;
+  height: 100%;
+  position: absolute;
+  left: -30px;
+  background-color: #5DE85B;
+}

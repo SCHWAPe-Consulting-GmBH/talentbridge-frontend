@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 import square from "@/assets/images/matching_graphic.png";
-import courses from '@/dataJson/courses_recomendations.json';
+import courses from '@/dataJson/courses_recommendations.json';
 
 
 const AboutCourses = ({}) => {
@@ -25,7 +25,7 @@ const AboutCourses = ({}) => {
       </p>
       <button 
       onClick={() => router.push(`/dashboard/payment-options`)}
-        className="px-[46px] py-[11px] bg-primary rounded-lg btn_hover font-semibold text-[16px] mb-8"
+        className="px-[46px] py-[11px] bg-primary rounded-lg btn_green_hover font-semibold text-[16px] mb-8"
       >
         Book a place
       </button>

@@ -24,29 +24,31 @@ const Controls: React.FC<ControlsProps> = ({
 }) => {
   return (
     <div className="flex space-x-4 py-6 justify-center">
-      <button onClick={handleMute}>
+      <button onClick={handleMute} className='rounded-full btn_light_shadow'>
         <Image src={micro} alt="maximize" width={50} />
       </button>
       <button
+        className='rounded-full btn_light_shadow'
         onClick={isCalling ? handleVideoToggle : undefined}
         disabled={!isCalling}
       >
         <Image src={camera} alt="camera" width={50} />
       </button>
-      <button>
+      <button className='rounded-full btn_light_shadow'>
         <Image src={send} alt="send" width={50} />
       </button>
       <button
+      className='rounded-full btn_light_shadow'
         onClick={isCalling ? handleRecord : undefined}
         disabled={!isCalling}
       >
         <Image src={startRecord} alt="start record" width={50} />
       </button>
 
-      <button>
+      <button className='rounded-full btn_light_shadow'>
         <Image src={sendMessage} alt="send message" width={50} />
       </button>
-      <button>
+      <button className='rounded-full btn_light_shadow'>
         <Image src={more} alt="more" width={50} />
       </button>
     </div>

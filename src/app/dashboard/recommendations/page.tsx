@@ -5,24 +5,44 @@ import cn from 'classnames';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import fire from '@/assets/icons/top_recommendations.svg';
-import courses from '@/dataJson/courses_recomendations.json';
+import courses from '@/dataJson/courses_recommendations.json';
+import rec_img_1 from '@/assets/images/recommendations_image1.jpg';
+import rec_img_2 from '@/assets/images/recommendations_image2.jpg';
+import rec_img_3 from '@/assets/images/recommendations_image3.jpg';
+import rec_img_4 from '@/assets/images/recommendations_image4.jpg';
+import rec_img_5 from '@/assets/images/recommendations_image5.jpg';
+import rec_img_6 from '@/assets/images/recommendations_image6.jpg';
 
 const Recommendations = () => {
   const router = useRouter();
+  const picturesForCourse = [
+    rec_img_1,
+    rec_img_2,
+    rec_img_3,
+    rec_img_4,
+    rec_img_5,
+    rec_img_6,
+  ];
 
   return (
     <div className="mt-[56px] grid grid-cols-3 gap-6">
-      {courses.map((course) => (
-        <div key={uuidv4()} className="bg-background-second rounded-2xl p-6">
+      {courses.map((course, index) => (
+        <div key={uuidv4()} className="bg-background-second rounded-2xl p-6 relative green_border_hover border-box border border-transparent">
+          <Image
+            src={picturesForCourse[index]}
+            alt="pictures for course"
+            width={353}
+            className='mb-4 w-full rounded-3xl'
+          />
           <div
             className={cn(
-              'rounded-full py-2 px-4 inline-flex items-center mb-4',
+              'rounded-full py-[6px] px-4 inline-flex items-center absolute top-[40px] right-[35px]',
               {
-                'border border-primary bg-opacity-primary':
+                'border border-primary bg-light-green':
                   course.color === 'green',
-                'border border-warning bg-opacity-warning':
+                'border border-warning bg-light-orange':
                   course.color === 'orange',
-                'border border-info bg-opacity-info': course.color === 'blue',
+                'border border-info bg-light-blue': course.color === 'blue',
               }
             )}
           >
@@ -43,11 +63,11 @@ const Recommendations = () => {
             {course.title}
           </p>
           <p className="font-medium text-[16px] text-neutral2 mb-6">
-            Get ready for your AVGS application with our expert-led course
+            {course.description}
           </p>
           <button
             onClick={() => router.push(`/dashboard/about-courses/${course.id}`)}
-            className='border-[1px] border-themetext text-themetext w-full py-[11px] rounded-lg font-semibold text-[16px] btn_hover'
+            className="border-[1px] border-themetext text-themetext w-full py-[11px] rounded-lg font-semibold text-[16px] btn_white_hover"
           >
             More details
           </button>

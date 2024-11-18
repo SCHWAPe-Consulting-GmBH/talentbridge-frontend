@@ -15,7 +15,7 @@ export const RegisterForCourseButton: React.FC<Props> = ({
     return (
     <button
       style={{ border: `1px solid ${borderColor}`, paddingInline: `${paddingX}px`, paddingBlock: `${paddingY}px` }} 
-      className="bg-primary w-fit btn_hover rounded-lg p-[9px] box-border font-semibold text-[16px]"
+      className="bg-primary w-fit btn_green_hover rounded-lg p-[9px] box-border font-semibold text-[16px]"
     >
       Register for courses
     </button>

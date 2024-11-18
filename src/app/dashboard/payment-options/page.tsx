@@ -29,7 +29,7 @@ const PaymentOptions = () => {
           <p className="text-success font-extrabold text-[32px] mb-5">
             $199/mo
           </p>
-          <button className="bg-primary w-full btn_hover rounded-lg py-[11px] box-border font-semibold text-[16px]">
+          <button className="bg-primary w-full rounded-lg py-[11px] box-border font-semibold text-[16px] btn_green_hover">
             Register to course
           </button>
         </div>
@@ -48,7 +48,7 @@ const PaymentOptions = () => {
           </p>
           <button
             onClick={() => router.push('/dashboard/get-free-program')}
-            className="border-[1px] border-themetext text-themetext w-full py-[11px] rounded-lg font-semibold text-[16px] btn_hover"
+            className="border-[1px] border-themetext text-themetext w-full py-[11px] rounded-lg font-semibold text-[16px] btn_white_hover"
           >
             Learn more
           </button>

@@ -34,7 +34,7 @@ export const WhyUs = () => {
             className='absolute top-0 left-0 z-0 rounded-3xl'
           />
           <button className='z-30' onClick={() => setIsVideoShown(true)}>
-            <Image src={play} alt="play" width={124} />
+            <Image src={play} alt="play" width={124} className='btn_shadow rounded-full'/>
           </button>
         </div>
       )}

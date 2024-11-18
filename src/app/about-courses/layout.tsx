@@ -3,5 +3,5 @@ export default function AboutCoursesLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <main className="bg2 background-style bg-background">{children}</main>;
+  return <main className="bg-background h-full">{children}</main>;
 }

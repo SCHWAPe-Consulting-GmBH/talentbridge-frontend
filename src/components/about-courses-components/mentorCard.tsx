@@ -30,7 +30,7 @@ export const MentorCard: React.FC<Props> = ({ mentor }) => {
           <p className="text-themetext font-medium text-[16px]">{rating}</p>
         </div>
       </div>
-      <button className="border border-second text-themetext w-full py-[11px] rounded-lg btn_hover">
+      <button className="border border-second text-themetext w-full py-[11px] rounded-lg btn_white_hover">
         Follow
       </button>
     </div>
