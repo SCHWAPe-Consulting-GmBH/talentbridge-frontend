@@ -16,10 +16,11 @@ import Controls from '@/components/video-call-components/Controls';
 import VideoDisplay from '@/components/video-call-components/VideoDisplay';
 import useRecordTimer from '@/hooks/useRecordTimer';
 
-import { servers } from '@/utils/servers.ts';
-import { Divider } from 'antd';
-// import JoinCall from '../join-call/page';
-import { JoinCallLayout } from '@/components/video-call-components/joinCall';
+import { servers } from '@/utils/servers';
+import { JoinCallLayout } from '@/components/video-call-components/joinCallLayout';
+import { CopyTextComponent } from '@/components/video-call-components/copyTextComponent';
+
+
 
 const VideoCall = () => {
   const [localStream, setLocalStream] = useState<MediaStream | null>(null);
@@ -280,12 +281,14 @@ const VideoCall = () => {
                   </button>
                 </div>
               )}
-
               {!isJoinCall && isCalling && (
-                <CallButton
-                  isCalling={isCalling}
-                  handleCall={isCalling ? handleEndCall : createCall}
-                />
+                <div className='flex justify-end space-x-2 items-center'>
+                  <CopyTextComponent callId={callId}/>
+                  <CallButton
+                    isCalling={isCalling}
+                    handleCall={isCalling ? handleEndCall : createCall}
+                  />
+                </div>
               )}
             </div>
           </div>

@@ -25,14 +25,14 @@ export const HeaderMenu = () => {
       <button
         ref={buttonRef}
         onClick={() => setIsDocumentsModalShown((prev) => !prev)}
-        className="rounded-full w-[38px] h-[38px] flex justify-center items-center bg-dark mr-4 hover:shadow-md hover:shadow-dark-gray"
+        className="rounded-full w-[38px] h-[38px] flex justify-center items-center bg-dark mr-4 btn_shadow"
       >
         <Image src={documents} alt="documents icon" width={20} />
       </button>
       <button
         ref={buttonNotificationRef}
         onClick={() => setIsNotificationsModalShown((prev) => !prev)}
-        className="rounded-full w-[38px] h-[38px] flex justify-center items-center bg-dark mr-4 relative hover:shadow-md hover:shadow-dark-gray"
+        className="rounded-full w-[38px] h-[38px] flex justify-center items-center bg-dark mr-4 relative btn_shadow"
       >
         {notifications.length > 0 && (
           <Image
@@ -44,7 +44,7 @@ export const HeaderMenu = () => {
         )}
         <Image src={notification} alt="notification icon" width={20} />
       </button>
-      <button className="rounded-full w-[38px] h-[38px] flex justify-center items-center bg-dark mr-4 hover:shadow-md hover:shadow-dark-gray">
+      <button className="rounded-full w-[38px] h-[38px] flex justify-center items-center bg-dark mr-4 btn_shadow">
         <Image src={settings} alt="settings icon" width={20} />
       </button>
       <Image

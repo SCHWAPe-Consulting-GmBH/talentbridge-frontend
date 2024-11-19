@@ -1,21 +1,12 @@
 'use client';
 
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
 import people from '@/assets/images/Avatars5.png';
 import { MatchingCourses } from '@/components/matchingCourses';
 
 const CourseMatching = () => {
-  const router = useRouter();
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      router.push('/about-courses');
-    }, 1500);
 
-    return () => clearTimeout(timer);
-  }, [router]);
 
   return (
     <main className="bg2 background-style px-[100px] bg-background">
@@ -31,7 +22,7 @@ const CourseMatching = () => {
           eiusmod tempor incididunt ut labore et dolore magna.
         </p>
         <div className="flex mb-[48px]">
-          <Image src={people} alt="people" width={120} className="mr-[8px]" />
+          <Image src={people} alt="people" width={120} className="mr-[8px]"/>
           <p className="text-neutral2 text-[16px] font-medium">
             Join over{' '}
             <span className="text-primary font-bold text-[20px]">+10K</span>{' '}
@@ -39,11 +30,6 @@ const CourseMatching = () => {
           </p>
         </div>
         <MatchingCourses />
-        <div className="w-full h-3 px-[50px] max-w-[1200px]">
-          <div className=" h-full bg-white rounded-full overflow-hidden flex items-center px-1">
-            <div className="h-2 bg-primary animate-loading rounded-full"></div>
-          </div>
-        </div>
       </div>
     </main>
   );

@@ -49,7 +49,10 @@ export const NotificationModal: React.FC<Props> = ({
             }
 
             return (
-              <div className="p-4 bg-background-third rounded-2xl mr-2 flex relative">
+              <div
+                key={notification.id}
+                className="p-4 bg-background-third rounded-2xl mr-2 flex relative"
+              >
                 <button
                   className="absolute top-2 right-4 text-3xl text-gray-400 hover:text-gray-800"
                 >

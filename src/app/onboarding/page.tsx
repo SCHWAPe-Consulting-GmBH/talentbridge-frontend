@@ -156,7 +156,7 @@ const Onboarding = () => {
                     className="rounded-full btn_green_hover border border-primary w-[66px] h-[56px] flex justify-center items-center"
                     onClick={changeQuestionBack}
                   >
-                    <Image src={arrowLeft} alt="arrow back" width={14} />
+                    <Image src={arrowLeft} alt="arrow back" width={14} className={cn('')}/>
                   </button>
                 )}
                 <button
@@ -177,14 +177,16 @@ const Onboarding = () => {
           <div className="ml-[50px]">
             <Image
               src={imageSrc}
-              alt="abstaction"
+              alt="abstraction"
               width={735}
               className="absolute object-cover"
             />
           </div>
         </>
       ) : (
-        <Loader width={150} height={150} border={20}/>
+        <div className='w-full flex justify-center'>
+          <Loader width={150} height={150} border={20} />
+        </div>
       )}
     </main>
   );
