@@ -1,0 +1,9 @@
+{
+  "title": "Total Progress",
+  "images": false,
+  "labels": ["0%", "43%", "74%", "100%"],
+  "colors": ["#5DE85B", "#9CFF9B", "none"],
+  "bgColors": ["#000000", "#666666", "#5DE85B", "#E8E25B"],
+  "subtitles": ["Self-Awareness", "Implementation", "Mastery", "Mastery"],
+  "times": ["Apr 12, 2024", "Apr 12, 2024", "Apr 12, 2024", "Apr 12, 2024"]
+}

@@ -1,16 +1,16 @@
 import Image from 'next/image';
 import addFile from '@/assets/icons/add_file.svg';
 import sendMessage from '@/assets/icons/send_message.svg';
-import { useState, useRef } from 'react';
+import { useState, useRef, ChangeEvent, MouseEvent } from 'react';
 
 const ChatSection = () => {
-  const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [fileInfo, setFileInfo] = useState('');
   const [message, setMessage] = useState('');
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handleFileChange = (event) => {
-    const file = event.target.files[0];
+  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const file = event?.target?.files?.[0];
     if (file) {
       setSelectedFile(file);
       setFileInfo(
@@ -23,11 +23,11 @@ const ChatSection = () => {
     fileInputRef.current!.click();
   };
 
-  const handleMessageChange = (event) => {
+  const handleMessageChange = (event: ChangeEvent<HTMLInputElement>) => {
     setMessage(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: MouseEvent) => {
     event.preventDefault();
     const formData = new FormData();
     if (selectedFile) {

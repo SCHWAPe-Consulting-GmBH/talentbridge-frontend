@@ -20,6 +20,9 @@ html {
   --shadow-revert: #ececec;
   --themetext: #1B1B1B;
   --button-text: #000000;
+  --aside-hover: #5DE85B;
+  --chart-2: 150 90% 45%;
+  --stroke-chart:rgba(15, 15, 15, 0.122);
   --boxshadow: 0px 4px 13px rgba(0, 0, 0, 0.25);
   --boxshadow-round: 0px 0px 25px 5px rgba(0, 0, 0, 0.50);
   --boxshadow-course: 0px 0px 15px 3px rgba(0, 0, 0, 0.25);
@@ -34,7 +37,17 @@ html {
   --shadow-revert: #272727;
   --themetext: #F7F7F5;
   --button-text: #5DE85B;
+  --aside-hover: #356e34;
+  --chart-2:  150 90% 45%;
+  --stroke-chart:rgba(233, 227, 227, 0.1);
   --boxshadow: 0px 4px 13px rgba(233, 227, 227, 0.25);
   --boxshadow-round: 0px 0px 20px 4px rgba(233, 227, 227, 0.25);
   --boxshadow-course: 0px 0px 20px 4px rgba(233, 227, 227, 0.25);
+}
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+  }
+
 }

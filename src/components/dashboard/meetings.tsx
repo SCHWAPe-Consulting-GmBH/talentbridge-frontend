@@ -11,10 +11,10 @@ export const Meetings = () => {
       <p className="text-themetext text-[24px] font-bold mb-[10px]">Meetings</p>
       <p className="text-themetext text-[14px] mb-[15px] max-w-[377px]">
         Lorem ipsum dolor sit amet consectetur. Lectus gravida praesent pretium
-        varius nulla arcu nunc elementum.{' '}
+        varius nulla arcu nunc elementum.
       </p>
 
-      <div className="grid grid-cols-2 gap-[13px]">
+      <div className="grid grid-cols-2 gap-[15px]">
         {[1, 2, 3, 4].map((value) => {
           return (
             <div
@@ -25,7 +25,7 @@ export const Meetings = () => {
                 Meetings
               </p>
               <p className="font-bold text-[12px] leading-[17px] text-dark-gray mb-2">
-                Lorem ipsum dolor sit amet dolor consectetur. Lectus gravida{' '}
+                Lorem ipsum dolor sit amet dolor consectetur. Lectus gravida
               </p>
               <div className="flex items-center mb-[9px]">
                 <div className="bg-opacity-warning rounded-lg p-1 inline-flex ">
