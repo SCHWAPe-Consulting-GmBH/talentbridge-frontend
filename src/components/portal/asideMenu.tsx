@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import cn from 'classnames';
+import { v4 as uuidv4 } from 'uuid';
 import dashboard from '@/assets/icons/menu_portal_dashboard.svg';
 import homework from '@/assets/icons/menu_portal_homework.svg';
 import meetings from '@/assets/icons/menu_portal_meetings.svg';
@@ -55,9 +56,12 @@ export const AsideMenu = () => {
           <div>
             {upperButtons.map((btn) => {
               return (
-                <button className={cn("h-12 flex items-center aside_menu w-[192px] px-[14px] pl-[16px] rounded-xl box-border", {
-                  'aside_menu_active': btn.name === 'dashboard'
-                })}>
+                <button 
+                  key={uuidv4()}
+                  className={cn("h-12 flex items-center aside_menu w-[192px] px-[14px] pl-[16px] rounded-xl box-border", {
+                    'aside_menu_active': btn.name === 'dashboard'
+                  })}
+                >
                   <Image
                     src={btn.imgSrc}
                     alt={`${btn.name} icon`}
@@ -75,7 +79,10 @@ export const AsideMenu = () => {
           <div>
             {bottomButtons.map((btn) => {
               return (
-                <button className="h-12 flex items-center aside_menu  w-[192px] px-[14px] pl-[16px] rounded-xl box-border">
+                <button
+                key={uuidv4()}
+                  className="h-12 flex items-center aside_menu  w-[192px] px-[14px] pl-[16px] rounded-xl box-border"
+                >
                   <Image
                     src={btn.imgSrc}
                     alt={`${btn.name} icon`}

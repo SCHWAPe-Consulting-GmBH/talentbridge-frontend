@@ -282,13 +282,13 @@ const VideoCall = () => {
                 </div>
               )}
               {!isJoinCall && isCalling && (
-                <>
+                <div className='flex justify-end space-x-2 items-center'>
                   <CopyTextComponent callId={callId}/>
                   <CallButton
                     isCalling={isCalling}
                     handleCall={isCalling ? handleEndCall : createCall}
                   />
-                </>
+                </div>
               )}
             </div>
           </div>

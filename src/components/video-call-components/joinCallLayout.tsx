@@ -14,29 +14,30 @@ export const JoinCallLayout: React.FC<Props> = ({
   onChangeCallId,
   onAnswerCall,
   onChangeIsCalling,
-  onChangeIsJoin
+  onChangeIsJoin,
 }) => {
-
   const handleAnswering = () => {
     onChangeIsCalling(true);
     onChangeIsJoin(false);
     onAnswerCall();
-  }
+  };
 
   return (
-    <div className='flex space-x-2'>
-      <input
-        value={callId}
-        onChange={(e) => onChangeCallId(e.target.value)}
-        placeholder="Enter Call ID"
-        className="input_text text-secondary w-full bg-white border border-light-gray"
-      />
+    <div className="flex space-x-2 items-end">
+      <div className='flex flex-col'>
+        <p className='ml-[2px] text-[12px] text-themetext font-semibold'>Enter call ID to join:</p>
+        <input
+          value={callId}
+          onChange={(e) => onChangeCallId(e.target.value)}
+          placeholder="Enter Call ID"
+          className="input_text h-[43px] text-secondary w-full bg-white border border-light-gray"
+        />
+      </div>
+
       <button
         onClick={handleAnswering}
         disabled={!callId}
-        className={cn("font-bold text-white rounded-lg shadow py-[14px] px-[20px] right-4 bg-primary btn_green_hover4", {
-          'bg-gray-400': !callId
-        })}
+        className={`max-h-[52px] font-bold text-white rounded-lg shadow py-[14px] px-[20px] right-4 ${callId ? 'bg-primary btn_green_hover' : 'bg-gray-400 cursor-not-allowed'}`}
       >
         ENTER
       </button>

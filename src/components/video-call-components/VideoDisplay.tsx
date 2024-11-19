@@ -34,7 +34,7 @@ const VideoDisplay: React.FC<VideoDisplayProps> = ({
 
       <button
         onClick={handleFullScreen}
-        className="z-[1] absolute top-6 right-6 w-[60px] h-[60px] bg-neutral2 rounded-full flex bg-opacity-50  justify-center items-center"
+        className="z-[1] absolute top-6 right-6 w-[60px] h-[60px] bg-neutral2 rounded-full flex bg-opacity-50 btn_scale justify-center items-center"
       >
         <Image src={maximize} alt="Maximize" width={32} height={32} />
       </button>

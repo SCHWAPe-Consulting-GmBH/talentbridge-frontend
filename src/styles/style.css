@@ -40,6 +40,13 @@
   box-shadow: var(--boxshadow-round);
 }
 
+.btn_scale {
+  transition: transform 0.3s ease-in-out;
+}
+.btn_scale:hover {
+  transform: scale(0.95);
+}
+
 .btn_light_shadow {
   transition: box-shadow 0.3s ease-in-out;
 }
@@ -95,7 +102,6 @@
   background-color: #0df346;
   color: #ffff;
 }
-
 
 
 .green_border_hover {
