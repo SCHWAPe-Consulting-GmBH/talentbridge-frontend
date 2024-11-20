@@ -3,3 +3,13 @@
     brightness(119%) contrast(119%);
 }
 
+.graphic_white_search {
+  filter: invert(70%) sepia(50%) saturate(152%) hue-rotate(42deg) 
+    brightness(119%) contrast(119%);
+}
+
+.graphic_portal_menu {
+  filter: invert(45%) sepia(93%) saturate(12%) hue-rotate(19deg) 
+    brightness(1019%) contrast(119%);
+}
+

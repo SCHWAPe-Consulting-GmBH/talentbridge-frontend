@@ -125,11 +125,11 @@
 }
 
 .aside_menu:hover {
-  background-color: #5DE85B;
+  background-color: var(--aside-hover);
 }
 
 .aside_menu_active {
-  background-color: #5DE85B;
+  background-color: var(--aside-hover);;
   position: relative;
 }
 
@@ -140,5 +140,5 @@
   height: 100%;
   position: absolute;
   left: -30px;
-  background-color: #5DE85B;
+  background-color: var(--aside-hover);;
 }

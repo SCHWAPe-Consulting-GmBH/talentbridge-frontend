@@ -2,6 +2,7 @@
 import { ChartDashboard } from '@/components/dashboard/chartDashboard';
 import { HeaderDashboard } from '@/components/dashboard/headerDashboard';
 import { CoachingProgress } from '@/components/dashboard/coachingProgress';
+import data from '@/dataJson/progressBarDashboard.json';
 
 export default function DashboardLayout({
   children,
@@ -26,7 +27,7 @@ export default function DashboardLayout({
           </div>
           <ChartDashboard />
         </div>
-        <CoachingProgress/>
+        <CoachingProgress data={data}/>
         {children}
       </div>
     </main>
