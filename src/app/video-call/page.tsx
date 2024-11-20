@@ -20,8 +20,6 @@ import { servers } from '@/utils/servers';
 import { JoinCallLayout } from '@/components/video-call-components/joinCallLayout';
 import { CopyTextComponent } from '@/components/video-call-components/copyTextComponent';
 
-
-
 const VideoCall = () => {
   const [localStream, setLocalStream] = useState<MediaStream | null>(null);
   const [remoteStream, setRemoteStream] = useState<MediaStream | null>(null);
@@ -29,7 +27,7 @@ const VideoCall = () => {
   const [isCalling, setIsCalling] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [isJoinCall, setIsJoinCall] = useState(false);
-  const pc = useRef(new RTCPeerConnection(servers));
+  const pc = useRef<RTCPeerConnection | null>(null);
 
   const [record, setRecord] = useState(false);
   const { startTimer, stopTimer, formattedTimer } = useRecordTimer();
@@ -282,8 +280,8 @@ const VideoCall = () => {
                 </div>
               )}
               {!isJoinCall && isCalling && (
-                <div className='flex justify-end space-x-2 items-center'>
-                  <CopyTextComponent callId={callId}/>
+                <div className="flex justify-end space-x-2 items-center">
+                  <CopyTextComponent callId={callId} />
                   <CallButton
                     isCalling={isCalling}
                     handleCall={isCalling ? handleEndCall : createCall}
