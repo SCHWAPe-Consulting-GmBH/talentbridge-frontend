@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { useEffect, useRef, useState, ChangeEvent } from 'react';
 import cn from 'classnames';
-import close from '@/assets/icons/close_white.svg';
+import closeIcon from '@/assets/icons/close_white.svg';
 import upload from '@/assets/icons/upload_documents.svg';
 import { Loader } from '@/components/loader';
 
@@ -18,7 +18,7 @@ const GetFreeProgram = () => {
     const file = event.target?.files?.[0];
     if (file) {
       if (file.size > 10000000) {
-        setFileSizeError('File should be smaller than 10mb')
+        setFileSizeError('File should be smaller than 10mb');
         return;
       }
       setIsModalShown(true);
@@ -38,21 +38,20 @@ const GetFreeProgram = () => {
     let timer2: NodeJS.Timeout;
 
     if (selectedFile) {
-      timer2 = setTimeout(() => {
-        
-      }, 5000)
+      timer2 = setTimeout(() => {}, 5000);
     }
 
     if (fileSizeError) {
       timer = setTimeout(() => {
         setFileSizeError('');
-      }, 2000)
+      }, 2000);
     }
 
-    return () => {clearTimeout(timer);
+    return () => {
+      clearTimeout(timer);
       clearTimeout(timer2);
     };
-  }, [fileSizeError, selectedFile])
+  }, [fileSizeError, selectedFile]);
 
   return (
     <div className="mt-[56px] flex flex-col items-center">
@@ -102,19 +101,23 @@ const GetFreeProgram = () => {
           <p className="font-extrabold text-themetext text-[24px] mb-4">
             Upload file. (Document that we need for giving the program for free)
           </p>
-          <div className={cn("border  rounded-md w-full h-[75%] flex flex-col items-center justify-center relative", {
-            'border-primary': !fileSizeError,
-            'border-error': fileSizeError,
-          })}>
+          <div
+            className={cn(
+              'border  rounded-md w-full h-[75%] flex flex-col items-center justify-center relative',
+              {
+                'border-primary': !fileSizeError,
+                'border-error': fileSizeError,
+              }
+            )}
+          >
             {selectedFile ? (
               <>
                 <p className="text-themetext text-sm mr-14 ml-10">{fileInfo}</p>
-                <button onClick={() => setSelectedFile(null)} className='absolute rounded-full bg-red-600 p-2 right-6'>
-                  <Image
-                    src={close}
-                    alt='close'
-                    width={20}
-                  />
+                <button
+                  onClick={() => setSelectedFile(null)}
+                  className="absolute rounded-full bg-red-600 p-2 right-6"
+                >
+                  {/* <Image src={closeIcon} alt="close" width={20} /> */}
                 </button>
               </>
             ) : (
@@ -132,7 +135,11 @@ const GetFreeProgram = () => {
               </button>
             )}
           </div>
-          {fileSizeError && <p className='absolute text-error font-semibold text-[14px]'>{fileSizeError}</p>}
+          {fileSizeError && (
+            <p className="absolute text-error font-semibold text-[14px]">
+              {fileSizeError}
+            </p>
+          )}
 
           <input
             type="file"
@@ -144,29 +151,33 @@ const GetFreeProgram = () => {
       </div>
 
       <div
-          className={cn(
-            'fixed inset-0 bg-gray-800 bg-opacity-30 flex justify-center items-center',
-            {
-              hidden: !isModalShown,
-            }
-          )}
-        >
-          <div className="bg-background-second rounded-lg shadow-xl relative p-[32px] flex flex-col items-center">
-            <button
-              onClick={() => setIsModalShown(false)}
-              className="absolute top-4 right-4 text-xl text-gray-500 hover:text-gray-800"
-            >
-              &times;
-            </button>
-            <p className="text-[24px] font-bold text-themetext mb-8">
+        className={cn(
+          'fixed inset-0 bg-gray-800 bg-opacity-30 flex justify-center items-center',
+          {
+            hidden: !isModalShown,
+          }
+        )}
+      >
+        <div className="bg-background-second rounded-lg shadow-xl relative p-[32px] flex flex-col items-center">
+          <button
+            onClick={() => setIsModalShown(false)}
+            className="absolute top-4 right-4 text-xl text-gray-500 hover:text-gray-800"
+          >
+            &times;
+          </button>
+          <p className="text-[24px] font-bold text-themetext mb-8">
             Thank you for submitting your document!
-            </p>
-            <Loader width={72} height={72} border={8}/>
+          </p>
+          <Loader width={72} height={72} border={8} />
 
-
-            <p className='text-neutral2 text-[20px] text-center mt-6 max-w-[475px]'>Our Talent Bridge team is now reviewing it to confirm your eligibility for free program access. This may take a short while. You’ll receive a notification once verification is complete, and then you’ll be able to start your course.</p>
-          </div>
+          <p className="text-neutral2 text-[20px] text-center mt-6 max-w-[475px]">
+            Our Talent Bridge team is now reviewing it to confirm your
+            eligibility for free program access. This may take a short while.
+            You’ll receive a notification once verification is complete, and
+            then you’ll be able to start your course.
+          </p>
         </div>
+      </div>
     </div>
   );
 };
