@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import cn from 'classnames';
+import { v4 as uuidv4 } from 'uuid';
 import green_icon from '@/assets/icons/green_picture.svg';
 import pink_icon from '@/assets/icons/pink_picture.svg';
 import orange_icon from '@/assets/icons/orange_picture.svg';
@@ -13,7 +14,7 @@ interface Props {
 export const ProgressBar: React.FC<Props> = ({ data }) => {
   const { title, colors, bgColors, times, labels, subtitles, images } = data;
 
-  const imagesForBar = [green_icon, blue_icon, pink_icon, orange_icon ];
+  const imagesForBar = [green_icon, blue_icon, pink_icon, orange_icon];
 
   return (
     <div className="bg-background-second rounded-2xl w-full px-[21px] py-[25px]">
@@ -24,6 +25,7 @@ export const ProgressBar: React.FC<Props> = ({ data }) => {
 
           return (
             <div
+              key={uuidv4()}
               className={cn('h-4 bg-progress-green2 w-full mr-[1px]', {
                 'mr-[1px]': index != lastElement,
                 'rounded-l-full': index === 0,
@@ -37,13 +39,15 @@ export const ProgressBar: React.FC<Props> = ({ data }) => {
       </div>
       <div className="flex justify-between mb-[46px]">
         {labels.map((label) => (
-          <p className="font-bold text-[12px] text-neutral2">{label}</p>
+          <p key={uuidv4()} className="font-bold text-[12px] text-neutral2">
+            {label}
+          </p>
         ))}
       </div>
       <div className="flex justify-around">
         {subtitles.map((subtitle, index) => {
           return (
-            <div className="flex space-x-[15px]">
+            <div key={uuidv4()} className="flex space-x-[15px]">
               {images ? (
                 <div
                   className="rounded-2xl p-[14px]"
@@ -69,7 +73,6 @@ export const ProgressBar: React.FC<Props> = ({ data }) => {
             </div>
           );
         })}
-
       </div>
     </div>
   );

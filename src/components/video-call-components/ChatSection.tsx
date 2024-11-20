@@ -1,13 +1,31 @@
 import Image from 'next/image';
 import addFile from '@/assets/icons/add_file.svg';
-import sendMessage from '@/assets/icons/send_message.svg';
-import { useState, useRef, ChangeEvent, MouseEvent } from 'react';
+import sendMessageIcon from '@/assets/icons/send_message.svg';
+import { useState, useRef } from 'react';
+import { auth, firestore } from '@/firebase/config';
+import {
+  collection,
+  query as fbQuery,
+  orderBy,
+  limit,
+  serverTimestamp,
+  addDoc,
+} from 'firebase/firestore';
+import { useCollectionData } from 'react-firebase-hooks/firestore';
+import ChatMessage from './ChatMessage';
 
 const ChatSection = () => {
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const messagesRef = collection(firestore, 'messages');
+  const messagesQuery = fbQuery(
+    messagesRef,
+    orderBy('createdAt', 'asc'),
+    limit(25)
+  );
+  const [messages] = useCollectionData(messagesQuery, { idField: 'id' });
+  const [formValue, setFormValue] = useState('');
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [fileInfo, setFileInfo] = useState('');
-  const [message, setMessage] = useState('');
-  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event?.target?.files?.[0];
@@ -23,40 +41,43 @@ const ChatSection = () => {
     fileInputRef.current!.click();
   };
 
-  const handleMessageChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setMessage(event.target.value);
-  };
+  const sendMessage = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const { uid, photoURL } = auth.currentUser;
 
-  const handleSubmit = (event: MouseEvent) => {
-    event.preventDefault();
-    const formData = new FormData();
     if (selectedFile) {
-      formData.append('file', selectedFile);
+      console.log('Handle file upload here');
     }
-    formData.append('message', message);
 
-    fetch('https://your-server.com/upload', {
-      method: 'POST',
-      body: formData,
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log('Success:', data);
-        alert('Message and file sent successfully!');
-        setMessage('');
-        setSelectedFile(null);
-        setFileInfo('');
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-        alert('Error sending message and file!');
+    if (formValue.trim()) {
+      await addDoc(messagesRef, {
+        text: formValue,
+        createdAt: serverTimestamp(),
+        uid,
+        photoURL,
       });
+    }
+
+    setFormValue('');
+    setSelectedFile(null);
+    setFileInfo('');
   };
 
   return (
     <div className="flex flex-col justify-end bg-background-second p-3 rounded-2xl">
-      <div className="flex items-center space-x-2 relative w-full">
-        <button onClick={handleFileClick} className="absolute left-5 transform hover:scale-90 transition-transform duration-300">
+      <div className="flex flex-col overflow-y-auto space-y-2 h-full">
+        {messages &&
+          messages.map((msg) => <ChatMessage key={msg.id} message={msg} />)}
+      </div>
+      <form
+        onSubmit={sendMessage}
+        className="flex items-center space-x-2 relative w-full mt-3"
+      >
+        <button
+          type='button'
+          onClick={handleFileClick}
+          className="absolute left-5 transform hover:scale-90 transition-transform duration-300"
+        >
           <Image src={addFile} alt="Add File" width={24} />
         </button>
         <input
@@ -66,16 +87,18 @@ const ChatSection = () => {
           style={{ display: 'none' }}
         />
         <input
-          className="flex-grow py-2 pl-[46px] rounded-xl pr-[50px] max-w-[288px] input_text bg-neutral3"
-          placeholder="Type Something..."
-          value={message}
-          onChange={handleMessageChange}
+          className="flex-grow py-2 pl-[46px] rounded-xl pr-[50px] max-w-[288px] input_text text-black bg-neutral3"
+          placeholder="Type something nice"
+          value={formValue}
+          onChange={(e) => setFormValue(e.target.value)}
         />
-
-        <button onClick={handleSubmit} className="absolute rounded-full right-2 btn_green_hover">
-          <Image src={sendMessage} alt="Send Message" width={40} />
+        <button
+          type='submit'
+          className="absolute rounded-full right-2 btn_green_hover"
+        >
+          <Image src={sendMessageIcon} alt="Send Message" width={40} />
         </button>
-      </div>
+      </form>
       {fileInfo && <p className="text-white text-sm">{fileInfo}</p>}
     </div>
   );

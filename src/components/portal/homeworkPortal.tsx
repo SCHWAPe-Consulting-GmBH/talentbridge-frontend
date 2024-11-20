@@ -1,4 +1,5 @@
 import cn from 'classnames';
+import { v4 as uuidv4 } from 'uuid';
 import homework from '@/dataJson/dataHomework.json';
 import time from '@/assets/icons/time-homework.svg';
 import message from '@/assets/icons/message-homework.svg';
@@ -9,7 +10,10 @@ export const HomeworkPortal = () => {
     <div className="grid grid-cols-3 gap-4">
       {homework.slice(0, 3).map((work) => {
         return (
-          <div className="bg-background-second rounded-2xl p-[15px] green_border_hover border-box border border-transparent cursor-pointer">
+          <div
+            key={uuidv4()}
+            className="bg-background-second rounded-2xl p-[15px] green_border_hover border-box border border-transparent cursor-pointer course_shadow"
+          >
             <div className="truncate">
               <p
                 className={cn(

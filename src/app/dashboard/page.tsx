@@ -1,7 +1,7 @@
 'use client';
 
 import { HomeworkDashboard } from '@/components/dashboard/homework';
-import { Meetings } from '@/components/dashboard/meetings';
+import { MeetingsDashboard } from '@/components/dashboard/meetingsDashboard';
 import { ProgressChart } from '@/components/progressChart';
 
 const Dashboard = () => {
@@ -19,7 +19,7 @@ const Dashboard = () => {
 
           <ProgressChart maxHeightWrap={475} maxHeightInner={465} />
         </div>
-        <Meetings />
+        <MeetingsDashboard />
       </div>
       <HomeworkDashboard />
     </div>
