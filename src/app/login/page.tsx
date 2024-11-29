@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import imgGirl from '@/assets/images/img.png';
 import apple from '@/assets/icons/apple.svg';
 import facebook from '@/assets/icons/facebook.svg';
@@ -13,7 +14,7 @@ import {
 } from 'react-firebase-hooks/auth';
 import { auth } from '@/firebase/config';
 import { useRouter } from 'next/navigation';
-import Link from 'next/link';
+import { accessTokenService } from '@/services/accessTokenService';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -27,10 +28,11 @@ const Login = () => {
     try {
       const res = await signInWithEmailAndPassword(email, password);
       console.log({ res });
-      sessionStorage.setItem('user', 'yes');
+      accessTokenService.save(`${await res?.user.getIdToken()}`);
+
       setEmail('');
       setPassword('');
-      router.push('/');
+      router.push('/onboarding');
     } catch (e) {
       console.error(e);
     }
@@ -39,15 +41,17 @@ const Login = () => {
   const handleGoogleSignIn = async () => {
     try {
       const res = await signInWithGoogle();
+      accessTokenService.save(`${await res?.user.getIdToken()}`);
+
       console.log({ res });
       sessionStorage.setItem('user', 'yes');
-      router.push('/');
+      router.push('/onboarding');
     } catch (e) {
       console.error(e);
     }
   };
   return (
-    <main className=" bg-background-fourth">
+    <main className="bg-background-fourth">
       <div className="max-w-[1650px] flex mx-auto px-[105px] justify-start relative overflow-hidden h-screen">
         <div className="flex flex-col items-center max-w-[500px] mt-[200px]">
           <h1 className="font-extrabold text-[56px] leading-[76px] text-shadow-custom text-themetext">

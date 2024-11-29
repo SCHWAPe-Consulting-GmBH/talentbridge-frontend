@@ -4,13 +4,14 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '@/firebase/config';
 import { useRouter } from 'next/navigation';
 import { signOut } from 'firebase/auth';
+import { accessTokenService } from '@/services/accessTokenService';
 
 export default function Home() {
   const [user] = useAuthState(auth);
   const router = useRouter();
   let userSession;
   if (typeof window !== 'undefined') {
-    userSession = sessionStorage.getItem('user');
+    userSession = accessTokenService.get();
   }
 
   console.log('-=-=-=-=USER: ', user);
@@ -20,7 +21,7 @@ export default function Home() {
       <button
         onClick={() => {
           signOut(auth);
-          sessionStorage.removeItem('user');
+          accessTokenService.remove();
         }}
       >
         Log out

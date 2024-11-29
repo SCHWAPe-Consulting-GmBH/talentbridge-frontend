@@ -2,7 +2,7 @@ import { auth } from '@/firebase/config';
 
 const ChatMessage = (props) => {
   const { text, uid, photoURL } = props.message;
-  const isSent = uid === auth.currentUser.uid;
+  const isSent = uid === auth.currentUser?.uid;
   const containerClass = isSent
     ? 'flex-row-reverse bg-green-500'
     : 'bg-medium-gray';
