@@ -15,6 +15,9 @@ import {
 import { auth } from '@/firebase/config';
 import { useRouter } from 'next/navigation';
 import { accessTokenService } from '@/services/accessTokenService';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { mutationKeys } from '@/reaqtQuery/mutationKeys';
+import { queryKeys } from '@/reaqtQuery/queryKeys';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -23,12 +26,27 @@ const Login = () => {
     useSignInWithEmailAndPassword(auth);
   const [signInWithGoogle, , , googleError] = useSignInWithGoogle(auth);
   const router = useRouter();
+  const queryClient = useQueryClient();
+
+
+  const loginMutationSignIn = useMutation({
+    mutationKey: [mutationKeys.login],
+    mutationFn: ({ email, password }: { email: string; password: string }) => signInWithEmailAndPassword(email, password),
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: [queryKeys.getCurrentUserId] })
+    },
+  })
+  const loginMutationGoogleSignIn = useMutation({
+    mutationKey: [mutationKeys.login],
+    mutationFn: () => signInWithGoogle(),
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: [queryKeys.getCurrentUserId] })
+    },
+  })
 
   const handleSignIn = async () => {
     try {
-      const res = await signInWithEmailAndPassword(email, password);
-      console.log({ res });
-      accessTokenService.save(`${await res?.user.getIdToken()}`);
+      await loginMutationSignIn.mutateAsync({email, password})
 
       setEmail('');
       setPassword('');
@@ -40,16 +58,16 @@ const Login = () => {
 
   const handleGoogleSignIn = async () => {
     try {
-      const res = await signInWithGoogle();
-      accessTokenService.save(`${await res?.user.getIdToken()}`);
+      await loginMutationGoogleSignIn.mutateAsync();
 
-      console.log({ res });
       sessionStorage.setItem('user', 'yes');
       router.push('/onboarding');
     } catch (e) {
       console.error(e);
     }
   };
+
+
   return (
     <main className="bg-background-fourth">
       <div className="max-w-[1650px] flex mx-auto px-[105px] justify-start relative overflow-hidden h-screen">

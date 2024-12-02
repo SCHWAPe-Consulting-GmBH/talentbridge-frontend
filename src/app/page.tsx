@@ -5,16 +5,21 @@ import { auth } from '@/firebase/config';
 import { useRouter } from 'next/navigation';
 import { signOut } from 'firebase/auth';
 import { accessTokenService } from '@/services/accessTokenService';
+import { useQuery } from '@tanstack/react-query';
+import { currentUserQuery } from '@/reaqtQuery/userQuery';
+
+
 
 export default function Home() {
   const [user] = useAuthState(auth);
+  const { data: currentUserId } = useQuery(currentUserQuery);
   const router = useRouter();
   let userSession;
   if (typeof window !== 'undefined') {
     userSession = accessTokenService.get();
   }
 
-  console.log('-=-=-=-=USER: ', user);
+  console.log('-=-=-=-=USER: ', currentUserId);
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">

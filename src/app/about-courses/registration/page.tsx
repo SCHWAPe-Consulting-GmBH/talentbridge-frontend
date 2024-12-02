@@ -22,6 +22,7 @@ const Registration = () => {
   const router = useRouter();
 
   const visibleDays = getVisibleDays(scheduledDate.month);
+  console.log('days:', visibleDays);
   const visibleHours = getVisibleHours(scheduledDate.month, scheduledDate.day);
 
   const handleOpenModal = () => {
