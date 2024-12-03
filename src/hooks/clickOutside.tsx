@@ -2,6 +2,7 @@ import { useRef, useEffect, ReactNode, MouseEventHandler } from 'react';
 
 interface ClickOutsideProps {
   children: ReactNode; 
+  top: number;
   exceptionRef?: React.RefObject<HTMLElement>;
   onClick: () => void;
   className?: string;
@@ -10,6 +11,7 @@ interface ClickOutsideProps {
 export default function ClickOutside({
   children,
   exceptionRef,
+  top,
   onClick,
   className = '',
 }: ClickOutsideProps) {
@@ -40,7 +42,7 @@ export default function ClickOutside({
   }, [exceptionRef, onClick]);
 
   return (
-    <div ref={wrapperRef} className='absolute top-[70px] bg-opacity-30 flex justify-end w-[477px]'>
+    <div ref={wrapperRef} style={{ top: `${top}px` }} className='absolute bg-opacity-30 flex justify-end w-[477px]'>
       {children}
     </div>
   );

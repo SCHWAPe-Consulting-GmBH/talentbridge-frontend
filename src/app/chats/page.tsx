@@ -63,7 +63,6 @@ const Chats = () => {
       getUserChats();
     }
   }, [currentUserId]);
-  console.log('all chat', allUsersChats);
 
   return (
     <div className="p-5">
@@ -93,6 +92,7 @@ const Chats = () => {
               <li
                 key={chat.id}
                 className="list-disc ml-8 flex items-center h-[42px]"
+                onClick={() => setActiveChatId(chat.id)}
               >
                 <span className="w-3 h-3 rounded-full bg-black mr-3"></span>
                 <button

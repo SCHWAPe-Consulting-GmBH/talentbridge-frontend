@@ -20,7 +20,7 @@ export const NotificationModal: React.FC<Props> = ({
   buttonRef,
 }) => {
   return (
-    <ClickOutside onClick={onClose} exceptionRef={buttonRef}>
+    <ClickOutside onClick={onClose} exceptionRef={buttonRef} top={70}>
       <div
         className={cn(
           'p-[25px] bg-background-second rounded-2xl border border-shadow-revert',

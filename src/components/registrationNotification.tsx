@@ -1,3 +1,5 @@
+'use client'
+
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import closeIcon from '@/assets/icons/Close_white.svg';

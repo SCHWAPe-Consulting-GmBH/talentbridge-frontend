@@ -3,6 +3,7 @@ import {
   collection,
   doc,
   endAt,
+  getDoc,
   getDocs,
   limit,
   orderBy,
@@ -30,7 +31,7 @@ export const AddUsersToChat: React.FC<Props> = ({ chatId }) => {
   const [selectedPeople, setSelectedPeople] = useState<IOptions[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const { data: currentUserId } = useQuery(currentUserQuery);
-  console.log('visiblePeople', visibleUsers);
+
   const fetchUsers = async () => {
     const usersRef = collection(firestore, 'users');
     let q;
@@ -66,23 +67,45 @@ export const AddUsersToChat: React.FC<Props> = ({ chatId }) => {
     try {
       const chatRef = doc(firestore, 'chats', chatId);
 
-      await updateDoc(chatRef, {
-        participants: arrayUnion(...selectedPeople),
-      });
+      const chatDoc = await getDoc(chatRef);
 
-      console.log('Participants added successfully');
+      if (chatDoc.exists()) {
+        const chatData = chatDoc.data();
+        const currentParticipants = chatData.participants || [];
+
+        const newParticipants = selectedPeople.filter(
+          (person) => !currentParticipants.includes(person)
+        );
+
+        if (newParticipants.length > 0) {
+          await updateDoc(chatRef, {
+            participants: arrayUnion(...newParticipants),
+          });
+          console.log('Participants added successfully');
+        } else {
+          console.log('All selected participants are already in the chat');
+        }
+      } else {
+        console.log('Chat does not exist');
+      }
     } catch (error) {
       console.error('Error adding participants to chat:', error);
     }
   };
 
-  useEffect(() => {
-    console.log('hello');
-    // setLoading(true);
+  const handleChangeSelectedPeople = (selectedUser: IOptions) => {
+    setSelectedPeople((prevSelected: IOptions[]) => {
+      if (prevSelected.find((user) => user.value === selectedUser.value)) {
+        return prevSelected.filter((user) => user.value != selectedUser.value);
+      }
 
+      return [...prevSelected, selectedUser];
+    });
+  };
+
+  useEffect(() => {
     fetchUsers()
       .then((resp) => {
-        console.log('resp:', resp);
         setVisibleUsers(
           resp.map((res) => ({ value: res.id, label: res.email }))
         );
@@ -96,39 +119,22 @@ export const AddUsersToChat: React.FC<Props> = ({ chatId }) => {
         <div className="w-[228px] h-[42px] bg-light-gray rounded-md animate-pulse"></div>
       ) : (
         <>
-          {console.log('visiblePeople2', visibleUsers)}
-          <Select
-            mode="multiple"
-            allowClear
-            style={{ width: '100%' }}
-            placeholder="Add to chat"
-            suffixIcon={<IconArrowForSelect />}
-            onChange={(e) => setSelectedPeople(e)}
-            onSearch={(value) => {
-              setSearchQuery(value);
-            }}
-            options={visibleUsers}
-          />
-          <MultiSelection 
-            options={visibleUsers} 
-            placeholder="Add to chat"
-            onChangeSelected={setSelectedPeople}
-            selected={selectedPeople}
-            searchQuery={searchQuery}
-            onSearch={setSearchQuery}
-          />
-          <button
-            onClick={addParticipantsToChat}
-            className="bg-primary ml-2 h-[56px] font-semibold mb-[20px] rounded-lg btn_green_hover"
-          >
-            Add Users
-          </button>
-          {visibleUsers.map((user) => (
-            <div>
-              <p>{user.label}</p>
-              <p>{user.value}</p>
-            </div>
-          ))}
+          <div className="flex items-center">
+            <MultiSelection
+              options={visibleUsers}
+              placeholder="Add to chat"
+              onChangeSelected={handleChangeSelectedPeople}
+              selected={selectedPeople}
+              searchQuery={searchQuery}
+              onSearch={setSearchQuery}
+            />
+            <button
+              onClick={addParticipantsToChat}
+              className="bg-primary ml-2 h-[42px] px-2 font-semibold rounded-lg btn_green_hover"
+            >
+              Add Users
+            </button>
+          </div>
         </>
       )}
     </>

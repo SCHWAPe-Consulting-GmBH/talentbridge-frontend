@@ -27,7 +27,7 @@ export const DocumentsModal: React.FC<Props> = ({
   const documentPics = [xlsx, docx, zip, pdf, jpg, exe, psd, pptx];
 
   return (
-    <ClickOutside onClick={onClose} exceptionRef={buttonRef}>
+    <ClickOutside onClick={onClose} exceptionRef={buttonRef} top={70}>
       <div
         className={cn({
           hidden: !isDocumentModalShown,
