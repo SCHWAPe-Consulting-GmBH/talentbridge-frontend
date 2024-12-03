@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { firestore } from '@/firebase/config';
 import imgGirl from '@/assets/images/img.png';
 import apple from '@/assets/icons/apple.svg';
 import facebook from '@/assets/icons/facebook.svg';
@@ -18,6 +19,7 @@ import { accessTokenService } from '@/services/accessTokenService';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { mutationKeys } from '@/reaqtQuery/mutationKeys';
 import { queryKeys } from '@/reaqtQuery/queryKeys';
+import { addDoc, collection } from 'firebase/firestore';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -28,25 +30,30 @@ const Login = () => {
   const router = useRouter();
   const queryClient = useQueryClient();
 
-
   const loginMutationSignIn = useMutation({
     mutationKey: [mutationKeys.login],
-    mutationFn: ({ email, password }: { email: string; password: string }) => signInWithEmailAndPassword(email, password),
+    mutationFn: ({ email, password }: { email: string; password: string }) =>
+      signInWithEmailAndPassword(email, password),
     onSuccess: (data) => {
-      queryClient.invalidateQueries({ queryKey: [queryKeys.getCurrentUserId] })
+      queryClient.invalidateQueries({ queryKey: [queryKeys.getCurrentUserId] });
     },
-  })
+  });
   const loginMutationGoogleSignIn = useMutation({
     mutationKey: [mutationKeys.login],
     mutationFn: () => signInWithGoogle(),
     onSuccess: (data) => {
-      queryClient.invalidateQueries({ queryKey: [queryKeys.getCurrentUserId] })
+      queryClient.invalidateQueries({ queryKey: [queryKeys.getCurrentUserId] });
     },
-  })
+  });
 
   const handleSignIn = async () => {
     try {
-      await loginMutationSignIn.mutateAsync({email, password})
+      await loginMutationSignIn.mutateAsync({ email, password });
+      //temporary added code
+      const docRef = await addDoc(collection(firestore, 'users'), {
+        email: email,
+        createdAt: new Date().toISOString(),
+      });
 
       setEmail('');
       setPassword('');
@@ -58,7 +65,14 @@ const Login = () => {
 
   const handleGoogleSignIn = async () => {
     try {
-      await loginMutationGoogleSignIn.mutateAsync();
+      const resp = await loginMutationGoogleSignIn.mutateAsync();
+
+      //temporary added code
+      const docRef = await addDoc(collection(firestore, 'users'), {
+        id: resp?.user.uid,
+        email: resp?.user.email,
+        createdAt: new Date().toISOString(),
+      });
 
       sessionStorage.setItem('user', 'yes');
       router.push('/onboarding');
@@ -66,7 +80,6 @@ const Login = () => {
       console.error(e);
     }
   };
-
 
   return (
     <main className="bg-background-fourth">
@@ -130,11 +143,13 @@ const Login = () => {
             />
           </div>
 
-          <div className='flex items-center'>
+          <div className="flex items-center">
             <p className="text-[18px] text-themetext mr-2">
               Don't have an account?
             </p>
-            <Link href="/" className="text-primary font-bold">Register now</Link>
+            <Link href="/" className="text-primary font-bold">
+              Register now
+            </Link>
           </div>
         </div>
 
