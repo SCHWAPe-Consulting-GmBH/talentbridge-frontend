@@ -5,9 +5,6 @@ import people from '@/assets/images/Avatars5.png';
 import { MatchingCourses } from '@/components/matchingCourses';
 
 const CourseMatching = () => {
-
-
-
   return (
     <main className="bg2 background-style px-[100px] bg-background">
       <div className="max-w-[1240px] mx-auto pt-[168px] flex flex-col items-center">
@@ -22,7 +19,7 @@ const CourseMatching = () => {
           eiusmod tempor incididunt ut labore et dolore magna.
         </p>
         <div className="flex mb-[48px]">
-          <Image src={people} alt="people" width={120} className="mr-[8px]"/>
+          <Image src={people} alt="people" width={120} className="mr-[8px]" />
           <p className="text-neutral2 text-[16px] font-medium">
             Join over{' '}
             <span className="text-primary font-bold text-[20px]">+10K</span>{' '}
