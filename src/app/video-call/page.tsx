@@ -26,15 +26,14 @@ const VideoCall = () => {
   const [callId, setCallId] = useState('');
   const [isCalling, setIsCalling] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
+  const pc = useRef<RTCPeerConnection | null>(new RTCPeerConnection(servers));
   const [isJoinCall, setIsJoinCall] = useState(false);
-  const pc = useRef<RTCPeerConnection | null>(null);
-
   const [record, setRecord] = useState(false);
   const { startTimer, stopTimer, formattedTimer } = useRecordTimer();
 
   const webcamVideoRef = useRef<HTMLVideoElement>(null);
   const remoteVideoRef = useRef<HTMLVideoElement>(null);
-  console.log(callId);
+
   useEffect(() => {
     if (!isCalling) {
       stopTimer();
@@ -47,8 +46,8 @@ const VideoCall = () => {
       audio: true,
     });
     const remoteStream = new MediaStream();
-    stream.getTracks().forEach((track) => pc.current.addTrack(track, stream));
-    pc.current.ontrack = (event) => {
+    stream.getTracks().forEach((track) => pc.current!.addTrack(track, stream));
+    pc.current!.ontrack = (event) => {
       event.streams[0]
         .getTracks()
         .forEach((track) => remoteStream.addTrack(track));
@@ -69,19 +68,21 @@ const VideoCall = () => {
     const answerCandidates = collection(callDoc, 'answerCandidates');
     setCallId(callDoc.id);
 
-    pc.current.onicecandidate = (event) => {
+    pc.current!.onicecandidate = (event) => {
       if (event.candidate)
         setDoc(doc(offerCandidates), event.candidate.toJSON());
     };
 
-    const offerDescription = await pc.current.createOffer();
-    await pc.current.setLocalDescription(offerDescription);
+    const offerDescription = await pc.current!.createOffer();
+    await pc.current!.setLocalDescription(offerDescription);
     await setDoc(callDoc, { offer: offerDescription });
 
     onSnapshot(callDoc, (snapshot) => {
       const data = snapshot.data();
-      if (!pc.current.currentRemoteDescription && data?.answer) {
-        pc.current.setRemoteDescription(new RTCSessionDescription(data.answer));
+      if (!pc.current!.currentRemoteDescription && data?.answer) {
+        pc.current!.setRemoteDescription(
+          new RTCSessionDescription(data.answer)
+        );
       }
     });
 
@@ -89,7 +90,7 @@ const VideoCall = () => {
       snapshot.docChanges().forEach((change) => {
         if (change.type === 'added') {
           const candidate = new RTCIceCandidate(change.doc.data());
-          pc.current.addIceCandidate(candidate);
+          pc.current!.addIceCandidate(candidate);
         }
       });
     });
@@ -103,26 +104,26 @@ const VideoCall = () => {
     const answerCandidates = collection(callDoc, 'answerCandidates');
     const offerCandidates = collection(callDoc, 'offerCandidates');
 
-    pc.current.onicecandidate = (event) => {
+    pc.current!.onicecandidate = (event) => {
       if (event.candidate)
         setDoc(doc(answerCandidates), event.candidate.toJSON());
     };
 
     const callData = (await getDoc(callDoc)).data();
     const offerDescription = callData?.offer;
-    await pc.current.setRemoteDescription(
+    await pc.current!.setRemoteDescription(
       new RTCSessionDescription(offerDescription)
     );
 
-    const answerDescription = await pc.current.createAnswer();
-    await pc.current.setLocalDescription(answerDescription);
+    const answerDescription = await pc.current!.createAnswer();
+    await pc.current!.setLocalDescription(answerDescription);
     await setDoc(callDoc, { answer: answerDescription });
 
     onSnapshot(offerCandidates, (snapshot) => {
       snapshot.docChanges().forEach((change) => {
         if (change.type === 'added') {
           const candidate = new RTCIceCandidate(change.doc.data());
-          pc.current.addIceCandidate(candidate);
+          pc.current!.addIceCandidate(candidate);
         }
       });
     });
@@ -143,14 +144,14 @@ const VideoCall = () => {
   const handleRecord = () => {
     setRecord(!record);
     if (!record) {
-      startTimer(timerDoc);
+      startTimer();
     } else {
-      stopTimer(timerDoc);
+      stopTimer();
     }
   };
 
   const handleEndCall = async () => {
-    const stopAndRemoveTracks = (stream) => {
+    const stopAndRemoveTracks = (stream: MediaStream) => {
       stream.getTracks().forEach((track) => {
         if (track.enabled) {
           track.enabled = false;
@@ -184,12 +185,12 @@ const VideoCall = () => {
     setIsCalling(false);
   };
 
-  const signalTrackStateChange = async (isEnabled) => {
+  const signalTrackStateChange = async (isEnabled: boolean) => {
     const callDoc = doc(firestore, 'calls', callId);
     await setDoc(callDoc, { videoEnabled: isEnabled }, { merge: true });
   };
 
-  const signalNewTrack = async (track) => {
+  const signalNewTrack = async (track: MediaStreamTrack) => {
     const callDoc = doc(firestore, 'calls', callId);
     const newTrackInfo = {
       trackId: track.id,
@@ -218,7 +219,7 @@ const VideoCall = () => {
         const newVideoTrack = newStream.getVideoTracks()[0];
         localStream.addTrack(newVideoTrack);
         signalNewTrack(newVideoTrack);
-        updateVideoSources(localStream);
+        // updateVideoSources(localStream);
       }
     }
   };
@@ -246,7 +247,7 @@ const VideoCall = () => {
               recordTimer={formattedTimer}
             />
 
-            <div className="flex items-center justify-around bg-background-second relative rounded-b-2xl">
+            <div className="flex justify-center items-center bg-background-second relative rounded-b-2xl">
               <Controls
                 isCalling={isCalling}
                 isMuted={isMuted}
@@ -254,7 +255,7 @@ const VideoCall = () => {
                 handleRecord={handleRecord}
                 handleVideoToggle={handleVideoToggle}
               />
-
+              
               {isJoinCall && !isCalling && (
                 <JoinCallLayout
                   callId={callId}
@@ -279,6 +280,7 @@ const VideoCall = () => {
                   </button>
                 </div>
               )}
+
               {!isJoinCall && isCalling && (
                 <div className="flex justify-end space-x-2 items-center">
                   <CopyTextComponent callId={callId} />

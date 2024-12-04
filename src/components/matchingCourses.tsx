@@ -57,7 +57,7 @@ export const MatchingCourses: React.FC = () => {
         return (
           <div
             key={uuidv4()}
-            className="bg-background-second rounded-2xl relative p-5 flex flex-col justify-between 
+            className="bg-background-second rounded-2xl relative p-5 flex flex-col justify-between cursor-pointer
             w-full overflow-hidden border border-transparent green_border_hover course_shadow"
           >
             {

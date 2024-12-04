@@ -26,7 +26,7 @@ const VideoDisplay: React.FC<VideoDisplayProps> = ({
   };
 
   return (
-    <div className="relative rounded-t-2xl h-[643px]" id="video-container">
+    <div className="relative rounded-t-2xl h-[643px] ">
       <div className="flex items-center space-x-2 py-2 px-6 absolute top-6 left-6 bg-neutral2 bg-opacity-50  rounded-full">
         <Image src={record} alt="Record" width={32} height={32} />
         <span className="text-white font-medium">{recordTimer}</span>
