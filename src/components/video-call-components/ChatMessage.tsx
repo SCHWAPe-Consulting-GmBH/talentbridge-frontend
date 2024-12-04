@@ -23,7 +23,7 @@ const ChatMessage = (props) => {
         className={`rounded-full w-10 h-10 object-cover ${imgClass}`}
       /> */}
       <div className={`rounded-full w-10 h-10 object-cover `}>
-
+        
       </div>
       <p className={`flex-1 text-sm text-white ${textAlignClass}`}>{text}</p>
     </div>

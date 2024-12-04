@@ -1,16 +1,7 @@
 'use client';
 
 import { createChat } from '@/utils/createChat';
-import {
-  collection,
-  endAt,
-  getDocs,
-  limit,
-  orderBy,
-  query,
-  startAt,
-  where,
-} from 'firebase/firestore';
+import { collection, getDocs, query, where } from 'firebase/firestore';
 import { firestore } from '@/firebase/config';
 import { useEffect, useState } from 'react';
 
@@ -58,6 +49,12 @@ const Chats = () => {
     }
   };
 
+  const handleCreateChat = async () => {
+    await createChat(chatName, currentUserId!);
+    getUserChats();
+    setChatName('');
+  };
+
   useEffect(() => {
     if (currentUserId) {
       getUserChats();
@@ -75,43 +72,42 @@ const Chats = () => {
         />
         <button
           className="font-main text-white  max-h-[52px] rounded-lg font-bold py-[14px] px-[20px] bg-primary btn_green_hover"
-          onClick={() => {
-            createChat(chatName, currentUserId!);
-            getUserChats();
-            setChatName('');
-          }}
+          onClick={handleCreateChat}
         >
           Create chat
         </button>
       </div>
-      <div className='flex gap-5'>
+      <div className="flex gap-5">
         <div>
           <h2 className="font-bold text-[36px]">Chats list:</h2>
           <ul>
-            {allUsersChats.map((chat) => (
-              <li
-                key={chat.id}
-                className="list-disc ml-8 flex items-center h-[42px]"
-                onClick={() => setActiveChatId(chat.id)}
-              >
-                <span className="w-3 h-3 rounded-full bg-black mr-3"></span>
-                <button
-                  className="btn_scale mr-4"
-                  onClick={() => setActiveChatId(chat.id)}
+            {allUsersChats.length > 0 ? (
+              allUsersChats.map((chat) => (
+                <li
+                  key={chat.id}
+                  className="list-disc ml-8 flex items-center h-[42px]"
                 >
-                  {chat.name}
-                </button>
-                <button
-                  onClick={() => handleOpenDropDown(chat.id)}
-                  className={`w-5 h-5 rounded-lg mr-5 flex items-center justify-center btn_green_hover ${activeChatPlusId === chat.id ? 'bg-error' : 'bg-primary'}`}
-                >
-                  {activeChatPlusId === chat.id ? '-' : '+'}
-                </button>
-                {activeChatPlusId === chat.id && (
-                  <AddUsersToChat chatId={activeChatPlusId} />
-                )}
-              </li>
-            ))}
+                  <span className="w-3 h-3 rounded-full bg-black mr-3"></span>
+                  <button
+                    className="btn_scale mr-4"
+                    onClick={() => setActiveChatId(chat.id)}
+                  >
+                    {chat.name}
+                  </button>
+                  <button
+                    onClick={() => handleOpenDropDown(chat.id)}
+                    className={`w-5 h-5 rounded-lg mr-5 flex items-center justify-center btn_green_hover ${activeChatPlusId === chat.id ? 'bg-error' : 'bg-primary'}`}
+                  >
+                    {activeChatPlusId === chat.id ? '-' : '+'}
+                  </button>
+                  {activeChatPlusId === chat.id && (
+                    <AddUsersToChat chatId={activeChatPlusId} />
+                  )}
+                </li>
+              ))
+            ) : (
+              <li className="ml-8">No chats found. Create a new one!</li>
+            )}
           </ul>
         </div>
         {activeChatId && <Messages activeChatId={activeChatId} />}
