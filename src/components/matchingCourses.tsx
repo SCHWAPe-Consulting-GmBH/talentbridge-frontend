@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react';
 import Image from 'next/image';
 import design from '@/assets/images/matching_graphic.png';
@@ -46,7 +48,7 @@ export const MatchingCourses: React.FC = () => {
   const { resolvedTheme } = useTheme();
 
   return (
-    <div className="flex max-w-[1239] space-x-[24px] mb-[48px]">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 max-w-[1239] gap-[24px] mb-[48px]">
       {courses.map((course) => {
         const text_style = {
           color: course.color,

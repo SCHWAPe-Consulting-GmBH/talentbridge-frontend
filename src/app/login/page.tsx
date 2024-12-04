@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { firestore } from '@/firebase/config';
-import imgGirl from '@/assets/images/img.png';
+import imgGirl from '@/assets/images/imgGirl.png';
 import apple from '@/assets/icons/apple.svg';
 import facebook from '@/assets/icons/facebook.svg';
 import google from '@/assets/icons/google.svg';
@@ -15,7 +15,7 @@ import {
 } from 'react-firebase-hooks/auth';
 import { auth } from '@/firebase/config';
 import { useRouter } from 'next/navigation';
-import { accessTokenService } from '@/services/accessTokenService';
+// import { accessTokenService } from '@/services/accessTokenService';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { mutationKeys } from '@/reaqtQuery/mutationKeys';
 import { queryKeys } from '@/reaqtQuery/queryKeys';
@@ -101,13 +101,13 @@ const Login = () => {
 
           <PasswordInput password={password} onChangePassword={setPassword} />
 
-          <p className="self-end text-themetext mb-[25px]">
+          <p className="self-end text-themetext mb-[25px] cursor-pointer btn_scale">
             Forgot your password?
           </p>
           <button
             type="button"
             onClick={handleSignIn}
-            className="bg-primary w-full h-[56px] font-semibold mb-[20px] rounded-lg btn_green_hover"
+            className="bg-primary w-full py-[17px] font-semibold mb-[20px] rounded-lg btn_green_hover"
           >
             See All
           </button>
@@ -147,7 +147,7 @@ const Login = () => {
             <p className="text-[18px] text-themetext mr-2">
               Don't have an account?
             </p>
-            <Link href="/" className="text-primary font-bold">
+            <Link href="/" className="text-primary font-bold btn_scale">
               Register now
             </Link>
           </div>

@@ -1,13 +1,11 @@
-'use client';
-
 import Image from 'next/image';
 import people from '@/assets/images/Avatars5.png';
 import { MatchingCourses } from '@/components/matchingCourses';
 
 const CourseMatching = () => {
   return (
-    <main className="bg2 background-style px-[100px] bg-background">
-      <div className="max-w-[1240px] mx-auto pt-[168px] flex flex-col items-center">
+    <main className="bg2 background-style px-[50px] bg-background overflow-auto">
+      <div className="max-w-[1240px] mx-auto pt-[150px] flex flex-col items-center">
         <p className="text-primary border border-primary rounded-full font-bold text-[24px] px-4 py-2 mb-8">
           Welcome to us!
         </p>
@@ -21,7 +19,7 @@ const CourseMatching = () => {
         <div className="flex mb-[48px]">
           <Image src={people} alt="people" width={120} className="mr-[8px]" />
           <p className="text-neutral2 text-[16px] font-medium">
-            Join over{' '}
+            Join over
             <span className="text-primary font-bold text-[20px]">+10K</span>{' '}
             student
           </p>

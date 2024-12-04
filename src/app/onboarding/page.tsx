@@ -100,7 +100,7 @@ const Onboarding = () => {
   return (
     <main className="px-[100px] pt-[100px] onboard1 background-style flex justify-start bg-background">
       {imageSrc ? (
-        <>
+        <div className='max-w-[1240px] mx-auto flex justify-between'>
           <div className="max-w-[620px] justify-center">
             <QuestionProgressBar questionNumber={questionNumber} />
 
@@ -170,7 +170,7 @@ const Onboarding = () => {
             </div>
           </div>
 
-          <div className="ml-[50px]">
+          <div className="relative ml-[50px] min-w-[735px] overflow-hidden ">
             <Image
               src={imageSrc}
               alt="abstraction"
@@ -178,7 +178,7 @@ const Onboarding = () => {
               className="absolute object-cover"
             />
           </div>
-        </>
+        </div>
       ) : (
         <div className='w-full flex justify-center'>
           <Loader width={150} height={150} border={20} />
