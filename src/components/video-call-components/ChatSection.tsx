@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import addFile from '@/assets/icons/add_file.svg';
 import sendMessageIcon from '@/assets/icons/send_message.svg';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { auth, firestore } from '@/firebase/config';
 import {
   collection,
@@ -14,14 +14,30 @@ import {
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import ChatMessage from './ChatMessage';
 
-const ChatSection = () => {
+const ChatSection = ({ chatId }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const messagesRef = collection(firestore, 'messages');
-  const messagesQuery = fbQuery(
-    messagesRef,
-    orderBy('createdAt', 'asc'),
-    limit(25)
-  );
+  const [messagesRef, setMessagesRef] = useState(null);
+  const [messagesQuery, setMessagesQuery] = useState(null);
+  useEffect(() => {
+    if (chatId) {
+      setMessagesRef(
+        collection(firestore, 'callChat', String(chatId), 'messages')
+      );
+    } else {
+      setMessagesRef(null);
+    }
+  }, [chatId]);
+  useEffect(() => {
+    if (messagesRef) {
+      setMessagesQuery(
+        fbQuery(messagesRef, orderBy('createdAt', 'asc'), limit(25))
+      );
+    } else {
+      setMessagesQuery(null);
+    }
+  }, [messagesRef]);
+  const chatRef = useRef<HTMLDivElement>(null);
+
   const [messages] = useCollectionData(messagesQuery, { idField: 'id' });
   const [formValue, setFormValue] = useState('');
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -40,10 +56,11 @@ const ChatSection = () => {
   const handleFileClick = () => {
     fileInputRef.current!.click();
   };
+  // console.log(auth.currentUser);
 
   const sendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
-    const { uid, photoURL } = auth.currentUser;
+    const { uid, displayName, photoURL, accessToken } = auth.currentUser;
 
     if (selectedFile) {
       console.log('Handle file upload here');
@@ -54,27 +71,36 @@ const ChatSection = () => {
         text: formValue,
         createdAt: serverTimestamp(),
         uid,
+        displayName,
         photoURL,
       });
     }
+    console.log(accessToken);
 
     setFormValue('');
     setSelectedFile(null);
     setFileInfo('');
   };
 
+  useEffect(() => {
+    if (chatRef.current && messages && messages.length) {
+      chatRef.current.scrollTop = chatRef.current.scrollHeight;
+    }
+  }, [messages]);
   return (
     <div className="flex flex-col justify-end bg-background-second p-3 rounded-2xl">
-      <div className="flex flex-col overflow-y-auto space-y-2 h-full">
+      <div ref={chatRef} className="flex flex-col overflow-y-auto space-y-2 ">
         {messages &&
-          messages.map((msg) => <ChatMessage key={msg.id} message={msg} />)}
+          messages.map((msg, index) => (
+            <ChatMessage key={msg.id || index} message={msg} />
+          ))}
       </div>
       <form
         onSubmit={sendMessage}
         className="flex items-center space-x-2 relative w-full mt-3"
       >
         <button
-          type='button'
+          type="button"
           onClick={handleFileClick}
           className="absolute left-5 transform hover:scale-90 transition-transform duration-300"
         >
@@ -91,10 +117,12 @@ const ChatSection = () => {
           placeholder="Type something nice"
           value={formValue}
           onChange={(e) => setFormValue(e.target.value)}
+          disabled={chatId == ''}
         />
         <button
-          type='submit'
+          type="submit"
           className="absolute rounded-full right-2 btn_green_hover"
+          disabled={chatId == ''}
         >
           <Image src={sendMessageIcon} alt="Send Message" width={40} />
         </button>

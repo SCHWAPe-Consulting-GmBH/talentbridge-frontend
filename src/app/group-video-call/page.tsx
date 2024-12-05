@@ -104,11 +104,7 @@ const GroupVideoCall = () => {
                     (peerObj: any) => peerObj.peerID === userID
                   )
                 ) {
-                  const peer = createPeer(
-                    userID,
-                    userId!,
-                    stream
-                  );
+                  const peer = createPeer(userID, userId!, stream);
                   peersRef.current.push({ peerID: userID, peer });
                   return peer;
                 }
@@ -158,9 +154,10 @@ const GroupVideoCall = () => {
         await setDoc(userRef, {
           roomID: roomId,
         });
-      }).catch((error) => {
+      })
+      .catch((error) => {
         console.error('Error accessing media devices:', error);
-      });;
+      });
   };
 
   function createPeer(
@@ -235,7 +232,7 @@ const GroupVideoCall = () => {
               })}
             </div>
           </div>
-          <ChatSection />
+          <ChatSection chatId={roomId} />
         </div>
       </div>
     </main>

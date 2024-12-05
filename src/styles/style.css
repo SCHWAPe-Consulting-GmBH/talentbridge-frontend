@@ -25,11 +25,13 @@
   border-radius: 6px;
   padding: 16px;
   outline: none;
-  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  transition:
+    background-color 0.3s ease-in-out,
+    color 0.3s ease-in-out;
 }
 
 .input_choose:hover {
-  background-color: #5DE85B;
+  background-color: #5de85b;
   color: white;
 }
 
@@ -65,8 +67,11 @@
   color: #000000;
   font-weight: 600;
   border-radius: 0.5rem;
-  transition: transform 0.3s ease-in-out, color 0.3s ease-in-out,
-  box-shadow 0.3s ease-in-out, background-color 0.3s ease-in-out;
+  transition:
+    transform 0.3s ease-in-out,
+    color 0.3s ease-in-out,
+    box-shadow 0.3s ease-in-out,
+    background-color 0.3s ease-in-out;
 }
 
 .btn_green_hover:hover {
@@ -82,13 +87,16 @@
 .btn_white_hover {
   font-weight: 600;
   border-radius: 0.5rem;
-  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out,
-  box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+  transition:
+    background-color 0.3s ease-in-out,
+    color 0.3s ease-in-out,
+    box-shadow 0.3s ease-in-out,
+    transform 0.3s ease-in-out;
 }
 
 .btn_white_hover:hover {
   transform: scale(0.95);
-  background-color: #5DE85B;
+  background-color: #5de85b;
   color: white;
   box-shadow: var(--boxshadow);
 }
@@ -97,12 +105,10 @@
   background-color: #238a3d;
 }
 
-
 .selected_btn {
   background-color: #0df346;
   color: #ffff;
 }
-
 
 .green_border_hover {
   transition: border 0.3s ease-in-out;
@@ -129,7 +135,7 @@
 }
 
 .aside_menu_active {
-  background-color: var(--aside-hover);;
+  background-color: var(--aside-hover);
   position: relative;
 }
 
@@ -140,5 +146,5 @@
   height: 100%;
   position: absolute;
   left: -30px;
-  background-color: var(--aside-hover);;
+  background-color: var(--aside-hover);
 }

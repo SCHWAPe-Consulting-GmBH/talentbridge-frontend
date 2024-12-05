@@ -19,6 +19,10 @@ import useRecordTimer from '@/hooks/useRecordTimer';
 import { servers } from '@/utils/servers';
 import { JoinCallLayout } from '@/components/video-call-components/joinCallLayout';
 import { CopyTextComponent } from '@/components/video-call-components/copyTextComponent';
+import {
+  deleteCollectionCallChatById,
+  deleteCallById,
+} from '../../firebase/chat.js';
 
 const VideoCall = () => {
   const [localStream, setLocalStream] = useState<MediaStream | null>(null);
@@ -78,14 +82,12 @@ const VideoCall = () => {
     await pc.current!.setLocalDescription(offerDescription);
     await setDoc(callDoc, { offer: offerDescription });
 
-    onSnapshot(callDoc, (snapshot) => {
-      const data = snapshot.data();
-      if (!pc.current!.currentRemoteDescription && data?.answer) {
-        pc.current!.setRemoteDescription(
-          new RTCSessionDescription(data.answer)
-        );
-      }
-    });
+   onSnapshot(callDoc, (snapshot) => {
+     const data = snapshot.data();
+     if (pc.current && !pc.current.currentRemoteDescription && data?.answer) {
+       pc.current.setRemoteDescription(new RTCSessionDescription(data.answer));
+     }
+   });
 
     onSnapshot(answerCandidates, (snapshot) => {
       snapshot.docChanges().forEach((change) => {
@@ -184,6 +186,11 @@ const VideoCall = () => {
     }
 
     setIsCalling(false);
+
+    await deleteCollectionCallChatById(callId);
+    await deleteCallById(callId);
+
+    setCallId('');
   };
 
   const signalTrackStateChange = async (isEnabled: boolean) => {
@@ -193,6 +200,7 @@ const VideoCall = () => {
 
   const signalNewTrack = async (track: MediaStreamTrack) => {
     const callDoc = doc(firestore, 'calls', callId);
+
     const newTrackInfo = {
       trackId: track.id,
       trackKind: track.kind,
@@ -256,7 +264,7 @@ const VideoCall = () => {
                 handleRecord={handleRecord}
                 handleVideoToggle={handleVideoToggle}
               />
-              
+
               {isJoinCall && !isCalling && (
                 <JoinCallLayout
                   callId={callId}
@@ -293,7 +301,7 @@ const VideoCall = () => {
               )}
             </div>
           </div>
-          <ChatSection />
+          <ChatSection chatId={callId} />
         </div>
       </div>
     </main>

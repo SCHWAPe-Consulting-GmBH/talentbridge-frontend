@@ -17,9 +17,10 @@ import { Select } from 'antd';
 import { useEffect, useState } from 'react';
 import { IconArrowForSelect } from '../iconArrowForSelect';
 import { useQuery } from '@tanstack/react-query';
-import { currentUserQuery } from '@/reaqtQuery/userQuery';
+import { currentUserQuery } from '@/reaсtQuery/userQuery';
 import { MultiSelection } from './multiSelect';
 import { IOptions } from '@/types/multiSelectTypes';
+import { searchUsers } from '@/api/operations';
 
 interface Props {
   chatId: string;
@@ -37,15 +38,9 @@ export const AddUsersToChat: React.FC<Props> = ({ chatId }) => {
     let q;
 
     if (searchQuery) {
-      console.log('hi');
-      q = query(
-        usersRef,
-        orderBy('email'),
-        startAt(searchQuery),
-        endAt(searchQuery + '\uf8ff'),
-        where('id', '!=', currentUserId),
-        limit(20)
-      );
+      console.log(searchQuery);
+      searchUsers(searchQuery);
+      // q = searchUsers(searchQuery);
     } else {
       q = query(
         usersRef,

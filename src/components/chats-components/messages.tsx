@@ -17,7 +17,7 @@ import { useCollectionData } from 'react-firebase-hooks/firestore';
 import ChatMessage from '../video-call-components/ChatMessage';
 import { FormEvent, useEffect, useRef, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { currentUserQuery } from '@/reaqtQuery/userQuery';
+import { currentUserQuery } from '@/reaсtQuery/userQuery';
 import { IMessage } from '@/types/messages';
 
 interface Props {
@@ -95,20 +95,18 @@ export const Messages: React.FC<Props> = ({ activeChatId }) => {
           ...(doc.data() as IMessage),
           id: doc.id,
         }));
-  
+
         // setMessages((prevMessages: IMessage[]) => [...currentMessages, ...prevMessages]);
 
         setMessages([...currentMessages].reverse());
         // setMessages(currentMessages);
-        console.log('reverse()', [...currentMessages].reverse())
+        console.log('reverse()', [...currentMessages].reverse());
         setLastDoc(snapshot.docs[snapshot.docs.length - 1]);
       }
     } catch {
       setErrorMessage('Something went wrong while loading messages!');
     }
-  }
-
-
+  };
 
   const addMessageToChat = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -149,8 +147,10 @@ export const Messages: React.FC<Props> = ({ activeChatId }) => {
 
       setMessages((prevMessages: IMessage[]) => {
         const existingIds = new Set(prevMessages.map((msg) => msg.id));
-        const uniqueMessages = newMessages.filter((msg) => !existingIds.has(msg.id));
-        console.log()
+        const uniqueMessages = newMessages.filter(
+          (msg) => !existingIds.has(msg.id)
+        );
+        console.log();
         return [...prevMessages, ...uniqueMessages];
       });
     });
@@ -160,12 +160,8 @@ export const Messages: React.FC<Props> = ({ activeChatId }) => {
 
   useEffect(() => {
     setIsLoading(true);
-    fetchingMessages()
-    .finally(() => setIsLoading(false));
-
-    
-  }, [])
-
+    fetchingMessages().finally(() => setIsLoading(false));
+  }, []);
 
   useEffect(() => {
     if (messages && messages.length) {
