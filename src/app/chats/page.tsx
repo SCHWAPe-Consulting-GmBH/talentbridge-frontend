@@ -6,7 +6,7 @@ import { firestore } from '@/firebase/config';
 import { useEffect, useState } from 'react';
 
 import { useQuery } from '@tanstack/react-query';
-import { currentUserQuery } from '@/reaqtQuery/userQuery';
+import { currentUserQuery } from '@/reaсtQuery/userQuery';
 import { AddUsersToChat } from '@/components/chats-components/addUsersToChat';
 import { Messages } from '@/components/chats-components/messages';
 

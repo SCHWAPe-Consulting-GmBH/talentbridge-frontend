@@ -17,8 +17,8 @@ import { auth } from '@/firebase/config';
 import { useRouter } from 'next/navigation';
 // import { accessTokenService } from '@/services/accessTokenService';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { mutationKeys } from '@/reaqtQuery/mutationKeys';
-import { queryKeys } from '@/reaqtQuery/queryKeys';
+import { mutationKeys } from '@/reaсtQuery/mutationKeys';
+import { queryKeys } from '@/reaсtQuery/queryKeys';
 import { addDoc, collection } from 'firebase/firestore';
 
 const Login = () => {
