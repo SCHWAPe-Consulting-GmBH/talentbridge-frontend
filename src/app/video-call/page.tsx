@@ -26,7 +26,7 @@ const VideoCall = () => {
   const [callId, setCallId] = useState('');
   const [isCalling, setIsCalling] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
-  const pc = useRef<RTCPeerConnection | null>(new RTCPeerConnection(servers));
+  const pc = useRef<RTCPeerConnection | null>(typeof window !== 'undefined' ? new RTCPeerConnection(servers) : null);
   const [isJoinCall, setIsJoinCall] = useState(false);
   const [record, setRecord] = useState(false);
   const { startTimer, stopTimer, formattedTimer } = useRecordTimer();
@@ -41,6 +41,7 @@ const VideoCall = () => {
   }, [isCalling]);
 
   const startWebcam = async () => {
+    if (typeof window === 'undefined') return;
     const stream = await navigator.mediaDevices.getUserMedia({
       video: true,
       audio: true,
