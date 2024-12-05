@@ -1,5 +1,3 @@
-'use client';
-
 import { HomeworkDashboard } from '@/components/dashboard/homework';
 import { MeetingsDashboard } from '@/components/dashboard/meetingsDashboard';
 import { ProgressChart } from '@/components/progressChart';

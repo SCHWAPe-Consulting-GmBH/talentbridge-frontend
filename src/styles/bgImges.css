@@ -23,4 +23,9 @@
 .bg5 {
   background-image: url('../assets/bg/dashboard_bg.png');
 }
+.bg6 {
+  background-image: url('../assets/bg/bg_6.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
 

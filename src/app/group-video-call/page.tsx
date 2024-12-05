@@ -30,6 +30,7 @@ const GroupVideoCall = () => {
   const auth = getAuth();
   const user = auth.currentUser;
   let userId: string | undefined = user?.uid;
+  
 
   useEffect(() => {
     const handleDisconnect = async () => {
@@ -45,7 +46,8 @@ const GroupVideoCall = () => {
         });
       }
     };
-
+    console.log(user?.getIdToken());
+  console.log(user);
     return () => {
       handleDisconnect();
     };
@@ -118,6 +120,8 @@ const GroupVideoCall = () => {
           }
 
           onSnapshot(roomRef, (snapshot) => {
+            console.log(user?.getIdToken());
+  console.log(user);
             const roomData = snapshot.data();
             const participants = roomData?.participants || [];
 

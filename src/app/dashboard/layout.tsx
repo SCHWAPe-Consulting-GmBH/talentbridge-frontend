@@ -1,8 +1,8 @@
-'use client';
 import { ChartDashboard } from '@/components/dashboard/chartDashboard';
 import { HeaderDashboard } from '@/components/dashboard/headerDashboard';
 import { CoachingProgress } from '@/components/dashboard/coachingProgress';
 import data from '@/dataJson/progressBarDashboard.json';
+import { SupportForm } from '@/components/dashboard/supportForm';
 
 export default function DashboardLayout({
   children,
@@ -29,6 +29,7 @@ export default function DashboardLayout({
         </div>
         <CoachingProgress data={data}/>
         {children}
+        <SupportForm/>
       </div>
     </main>
   );
