@@ -1,3 +1,5 @@
+'use client'
+
 import Image from 'next/image';
 import { useState } from 'react';
 import icon from '@/assets/icons/search_dashboard.svg';

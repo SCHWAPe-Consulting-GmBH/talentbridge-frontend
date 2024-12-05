@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react';
 import Image from 'next/image';
 import design from '@/assets/images/matching_graphic.png';
@@ -5,6 +7,7 @@ import architect from '@/assets/images/matching_architect.png';
 import programmer from '@/assets/images/matching_programmer.png';
 import not_sure from '@/assets/images/matching_not_sure.png';
 import arrow from '@/assets/icons/arrow_diagonal.svg';
+import { useRouter } from 'next/navigation';
 import { v4 as uuidv4 } from 'uuid';
 import { useTheme } from 'next-themes';
 import cn from 'classnames';
@@ -44,9 +47,10 @@ const courses = [
 
 export const MatchingCourses: React.FC = () => {
   const { resolvedTheme } = useTheme();
+  const router = useRouter();
 
   return (
-    <div className="flex max-w-[1239] space-x-[24px] mb-[48px]">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 max-w-[1239] gap-[24px] mb-[48px]">
       {courses.map((course) => {
         const text_style = {
           color: course.color,
@@ -57,11 +61,12 @@ export const MatchingCourses: React.FC = () => {
         return (
           <div
             key={uuidv4()}
-            className="bg-background-second rounded-2xl relative p-5 flex flex-col justify-between 
-            w-full overflow-hidden border border-transparent green_border_hover course_shadow"
+            className="bg-background-second rounded-2xl relative p-5 flex flex-col justify-between cursor-pointer
+            w-full overflow-hidden border border-transparent green_border_hover course_shadow z-20"
+            onClick={() => router.push('/financial-assistance')}
           >
             {
-              <div className="absolute top-[-98px] right-[-13px] ">
+              <div className="absolute top-[-98px] right-[-13px] z-[-1]">
                 <Image
                   src={course.image}
                   alt="background image"

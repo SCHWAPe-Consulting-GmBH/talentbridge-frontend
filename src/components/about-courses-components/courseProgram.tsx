@@ -1,3 +1,5 @@
+'use client'
+
 import Image from 'next/image';
 import { v4 as uuidv4 } from 'uuid';
 import plus from '@/assets/icons/plus.svg';

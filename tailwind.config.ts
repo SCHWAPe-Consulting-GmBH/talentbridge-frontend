@@ -32,6 +32,7 @@ const config: Config = {
       'opacity-pink': 'rgba(197, 13, 149, 0.15)',
       'opacity-orange': 'rgba(248, 88, 54, 0.15)',
       'opacity-secondary': 'rgba(0, 0, 0, 0.05)',
+      'opacity-modal': 'rgba(0, 0, 0, 0.45)',
       'light-gray': '#E4E4E4',
       'medium-gray': 'rgb(141, 141, 141)',
       'dark-gray': '#4D4D4D',

@@ -5,7 +5,7 @@ interface Props {
   callId: string;
   onAnswerCall: () => void;
   onChangeCallId: (value: string) => void;
-  onChangeIsJoin: (value: boolean) => void;
+  onChangeIsJoin?: (value: boolean) => void;
   onChangeIsCalling: (value: boolean) => void;
 }
 
@@ -18,7 +18,10 @@ export const JoinCallLayout: React.FC<Props> = ({
 }) => {
   const handleAnswering = () => {
     onChangeIsCalling(true);
-    onChangeIsJoin(false);
+
+    if (onChangeIsJoin) {
+      onChangeIsJoin(false);
+    }
     onAnswerCall();
   };
 

@@ -1,4 +1,3 @@
-'use client';
 import Image from 'next/image';
 import { AboutCoursesHeader } from '@/components/about-courses-components/aboutCoursesHeader';
 import { CourseProgram } from '@/components/about-courses-components/courseProgram';
@@ -8,8 +7,20 @@ import { Skills } from '@/components/about-courses-components/skills';
 import { WhyUs } from '@/components/about-courses-components/whyUs';
 import { RegisterForCourseButton } from '@/components/registerForCourseButton';
 import up from '@/assets/icons/up-arrow.svg';
+import { SummeryInformation } from '@/components/summaryInformation';
 
 const AboutCourses = () => {
+  const data = {
+    name: 'Graphic Design',
+    level: 'Beginning',
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    experience: 'basic web design skills, ability to work in Figma',
+    start: 'October 22, 2024',
+    group: '20 students',
+    duration: '3 months',
+  };
+
   return (
     <>
       <div className="absolute top-0 left-0 h-[747px] z-10 bg3 w-full bg-cover"></div>
@@ -17,33 +28,15 @@ const AboutCourses = () => {
         <div className="w-[190px] h-[22px] bg-orange-300 mb-6 rounded-lg flex justify-center">
           breadcrumbs
         </div>
-        <AboutCoursesHeader />
+        <AboutCoursesHeader
+          courseData={data}
+          isNeedButtonRegistration={true}
+          textSize={96}
+          textLineHeight={121}
+        />
 
-        <div className="bg-background-second rounded-full w-full py-[56px] flex justify-center space-x-[120px] mb-[100px]">
-          <p className="text-themetext font-bold text-[64px] leading-[87px] flex flex-col items-center">
-            34+
-            <span className="text-[24px] font-medium leading-[33px]">
-              Сlasses
-            </span>
-          </p>
-          <p className="text-themetext font-bold text-[64px] leading-[87px] flex flex-col items-center">
-            800K+
-            <span className="text-[24px] font-medium leading-[33px]">
-              Members
-            </span>
-          </p>
-          <p className="text-themetext font-bold text-[64px] leading-[87px] flex flex-col items-center">
-            10k+
-            <span className="text-[24px] font-medium leading-[33px]">
-              Mentor
-            </span>
-          </p>
-          <p className="text-themetext font-bold text-[64px] leading-[87px] flex flex-col items-center">
-            4.8
-            <span className="text-[24px] font-medium leading-[33px]">
-              Rating
-            </span>
-          </p>
+        <div className='mb-[100px]'>
+          <SummeryInformation />
         </div>
 
         <WhyUs />

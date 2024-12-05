@@ -1,5 +1,6 @@
-import Image from 'next/image';
+'use client'
 
+import Image from 'next/image';
 import notification from '@/assets/icons/notification.svg';
 import documents from '@/assets/icons/documents.svg';
 import settings from '@/assets/icons/settings.svg';

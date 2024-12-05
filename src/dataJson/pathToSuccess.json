@@ -1,0 +1,29 @@
+[
+  {
+    "type": "Subscription-based",
+    "title": "Self-Paced Learning:",
+    "benefits": [
+      "Unlimited access to all self-paced courses",
+      "Access to all course content without any time restrictions",
+      "Participation in discussion forums or peer groups to enhance learning",
+      "Automated assessments and feedback to track progress"
+    ]
+  },
+  {
+    "type": "Pay-per-course",
+    "title": "Hybrid Learning:",
+    "benefits": [
+      "Access to course materials, group sessions, and forums",
+      "Flexible learning with both self-paced and live group elements"
+    ]
+  },
+  {
+    "type": "Premium pricing with pay-as-you-go or package options.",
+    "title": "1:1 Coaching:",
+    "benefits": [
+      "Personalized one-on-one sessions for tailored guidance",
+      "Access to self-paced content in addition to coaching sessions",
+      "Premium support to provide more in-depth help and advice"
+    ]
+  }
+]
