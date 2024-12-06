@@ -24,13 +24,13 @@ export const MultiSelection: React.FC<Props> = ({
   const [isListShown, setIsListShown] = useState(false);
   const selectedLabels = selected.map((user) => user.label);
   const inputRef = useRef(null);
-  console.log('selected', selected)
+  console.log('selected', selected);
   const onClose = () => {
     setIsListShown(false);
-  }
+  };
 
   return (
-    <div className='relative'>
+    <div className="relative">
       <input
         type="text"
         value={searchQuery}
@@ -58,7 +58,7 @@ export const MultiSelection: React.FC<Props> = ({
                   className={`${selectedLabels.includes(option.label) ? 'bg-opacity-info' : ''} hover:bg-light-gray p-1 rounded-lg truncate w-[224px] border-box`}
                   onClick={() => onChangeSelected(option)}
                 >
-                {option.label}
+                  {option.label}
                 </button>
               );
             })}

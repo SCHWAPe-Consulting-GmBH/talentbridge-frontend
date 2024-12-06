@@ -6,15 +6,15 @@ const instance = axios.create({
   baseURL: 'http://3.71.18.123:8000/api/v1',
 });
 
-// instance.interceptors.request.use((config) => {
-//   const { accessToken } = auth.currentUser;
+instance.interceptors.request.use((config) => {
+  const {accessToken } = auth.currentUser;
 
-//   if (accessToken) {
-//     config.headers.authorization = `Bearer ${accessToken}`;
-//   }
+  if (accessToken) {
+    config.headers.authorization = `Bearer ${accessToken}`;  
+  }
 
-//   return config;
-// });
+  return config;
+});
 
 instance.interceptors.response.use(
   (res) => res.data,

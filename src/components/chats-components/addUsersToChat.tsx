@@ -21,6 +21,8 @@ import { currentUserQuery } from '@/reaсtQuery/userQuery';
 import { MultiSelection } from './multiSelect';
 import { IOptions } from '@/types/multiSelectTypes';
 import { searchUsers } from '@/api/operations';
+import { IoClose } from 'react-icons/io5';
+import { useAuth } from '@/firebase/context/authContext';
 
 interface Props {
   chatId: string;
@@ -31,16 +33,16 @@ export const AddUsersToChat: React.FC<Props> = ({ chatId }) => {
   const [visibleUsers, setVisibleUsers] = useState<IOptions[]>([]);
   const [selectedPeople, setSelectedPeople] = useState<IOptions[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
-  const { data: currentUserId } = useQuery(currentUserQuery);
+  const { currentUser } = useAuth();
+  const currentUserId = currentUser?.uid;
 
   const fetchUsers = async () => {
     const usersRef = collection(firestore, 'users');
     let q;
 
     if (searchQuery) {
-      console.log(searchQuery);
-      searchUsers(searchQuery);
-      // q = searchUsers(searchQuery);
+      const users = await searchUsers(searchQuery);
+      return users;
     } else {
       q = query(
         usersRef,
@@ -48,14 +50,13 @@ export const AddUsersToChat: React.FC<Props> = ({ chatId }) => {
         where('id', '!=', currentUserId),
         limit(20)
       );
+      const snapshot = await getDocs(q);
+
+      return snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
     }
-
-    const snapshot = await getDocs(q);
-
-    return snapshot.docs.map((doc) => ({
-      id: doc.id,
-      ...doc.data(),
-    }));
   };
 
   const addParticipantsToChat = async () => {
@@ -129,6 +130,17 @@ export const AddUsersToChat: React.FC<Props> = ({ chatId }) => {
             >
               Add Users
             </button>
+            <ul>
+              {selectedPeople.map((people) => (
+                <li key={people.value} className={'flex items-center gap-1.25'}>
+                  <p>{people.label}</p>
+                  <IoClose
+                    className={'cursor-pointer'}
+                    onClick={() => handleChangeSelectedPeople(people)}
+                  />
+                </li>
+              ))}
+            </ul>
           </div>
         </>
       )}

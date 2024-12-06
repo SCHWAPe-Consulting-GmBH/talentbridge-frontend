@@ -8,7 +8,7 @@ import {
   getDoc,
   onSnapshot,
 } from 'firebase/firestore';
-import { firestore } from '@/firebase/config';
+import { auth, firestore } from '@/firebase/config';
 import ChatSection from '@/components/video-call-components/ChatSection';
 import Header from '@/components/video-call-components/Header';
 import CallButton from '@/components/video-call-components/CallButton';
@@ -30,10 +30,13 @@ const VideoCall = () => {
   const [callId, setCallId] = useState('');
   const [isCalling, setIsCalling] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
-  const pc = useRef<RTCPeerConnection | null>(typeof window !== 'undefined' ? new RTCPeerConnection(servers) : null);
+  const pc = useRef<RTCPeerConnection | null>(
+    typeof window !== 'undefined' ? new RTCPeerConnection(servers) : null
+  );
   const [isJoinCall, setIsJoinCall] = useState(false);
   const [record, setRecord] = useState(false);
   const { startTimer, stopTimer, formattedTimer } = useRecordTimer();
+
 
   const webcamVideoRef = useRef<HTMLVideoElement>(null);
   const remoteVideoRef = useRef<HTMLVideoElement>(null);
@@ -82,12 +85,12 @@ const VideoCall = () => {
     await pc.current!.setLocalDescription(offerDescription);
     await setDoc(callDoc, { offer: offerDescription });
 
-   onSnapshot(callDoc, (snapshot) => {
-     const data = snapshot.data();
-     if (pc.current && !pc.current.currentRemoteDescription && data?.answer) {
-       pc.current.setRemoteDescription(new RTCSessionDescription(data.answer));
-     }
-   });
+    onSnapshot(callDoc, (snapshot) => {
+      const data = snapshot.data();
+      if (pc.current && !pc.current.currentRemoteDescription && data?.answer) {
+        pc.current.setRemoteDescription(new RTCSessionDescription(data.answer));
+      }
+    });
 
     onSnapshot(answerCandidates, (snapshot) => {
       snapshot.docChanges().forEach((change) => {

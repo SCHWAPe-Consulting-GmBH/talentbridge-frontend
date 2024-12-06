@@ -3,7 +3,7 @@ import { useHttp } from '@/api/http';
 export const searchUsers = async (searchQuery) => {
   try {
     const data = await useHttp.get(
-      `/user/?page_size=10&page=1&search=${searchQuery}`
+      `/user/?page_size=20&page=1&search=${searchQuery}`
     );
     console.log(data);
     return data;
