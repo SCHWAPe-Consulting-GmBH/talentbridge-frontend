@@ -9,6 +9,7 @@ import { useQuery } from '@tanstack/react-query';
 import { currentUserQuery } from '@/reaсtQuery/userQuery';
 import { AddUsersToChat } from '@/components/chats-components/addUsersToChat';
 import { Messages } from '@/components/chats-components/messages';
+import { useAuth } from '@/firebase/context/authContext';
 
 const Chats = () => {
   const [chatName, setChatName] = useState('');
@@ -16,11 +17,13 @@ const Chats = () => {
   const [activeChatId, setActiveChatId] = useState('');
 
   const [activeChatPlusId, setActiveChatPlusId] = useState('');
-  const { data: currentUserId } = useQuery(currentUserQuery);
+  // const { data: currentUserId } = useQuery(currentUserQuery);
+  const { currentUser } = useAuth();
+  const currentUserId = currentUser?.uid;
+  console.log(currentUser);
 
   const getUserChats = async () => {
     const chatsRef = collection(firestore, 'chats');
-
     const q = query(
       chatsRef,
       where('participants', 'array-contains', currentUserId)
@@ -40,6 +43,11 @@ const Chats = () => {
 
     setAllUserChats(chats);
   };
+  useEffect(() => {
+    if (currentUserId) {
+      getUserChats();
+    }
+  }, [currentUserId]);
 
   const handleOpenDropDown = (id: string) => {
     if (id === activeChatPlusId) {
@@ -54,12 +62,6 @@ const Chats = () => {
     getUserChats();
     setChatName('');
   };
-
-  useEffect(() => {
-    if (currentUserId) {
-      getUserChats();
-    }
-  }, [currentUserId]);
 
   return (
     <div className="p-5">

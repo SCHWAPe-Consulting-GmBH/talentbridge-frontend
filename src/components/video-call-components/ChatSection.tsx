@@ -13,11 +13,16 @@ import {
 } from 'firebase/firestore';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import ChatMessage from './ChatMessage';
+import { useAuth } from '@/firebase/context/authContext';
 
 const ChatSection = ({ chatId }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [messagesRef, setMessagesRef] = useState(null);
   const [messagesQuery, setMessagesQuery] = useState(null);
+  const { currentUser } = useAuth();
+
+  // console.log(currentUser.reloadUserInfo.customAttributes);
+
   useEffect(() => {
     if (chatId) {
       setMessagesRef(
@@ -56,11 +61,11 @@ const ChatSection = ({ chatId }) => {
   const handleFileClick = () => {
     fileInputRef.current!.click();
   };
-  // console.log(auth.currentUser);
 
   const sendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
-    const { uid, displayName, photoURL, accessToken } = auth.currentUser;
+    const { uid, displayName, photoURL } = currentUser;
+    console.log("photoURL",photoURL);
 
     if (selectedFile) {
       console.log('Handle file upload here');
@@ -75,7 +80,6 @@ const ChatSection = ({ chatId }) => {
         photoURL,
       });
     }
-    console.log(accessToken);
 
     setFormValue('');
     setSelectedFile(null);
