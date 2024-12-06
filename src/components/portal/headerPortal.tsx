@@ -52,7 +52,7 @@ export const HeaderPortal = () => {
         ) : (
           <div
             className={
-              'bg-[rgb(212,0,255)] rounded-full min-w-[40px] min-h-[40px] text-2xl flex justify-center items-center'
+              'bg-[rgb(212,0,255)] rounded-full min-w-[40px] min-h-[40px] text-2xl flex justify-center items-center mr-2'
             }
           >
             {displayName ? displayName[0] : email[0]}
