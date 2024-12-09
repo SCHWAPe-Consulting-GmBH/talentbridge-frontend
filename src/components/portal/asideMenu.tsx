@@ -86,8 +86,8 @@ export const AsideMenu = () => {
             className={cn(
               'h-12 flex items-center aside_menu w-[192px] px-[14px] pl-[16px] rounded-xl box-border'
             )}
-            onClick={() => {
-              logOut();
+            onClick={async() => {
+              await logOut();
               router.push('/login');
             }}
           >

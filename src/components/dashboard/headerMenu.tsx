@@ -1,12 +1,10 @@
 'use client';
-'use client';
 
 import Image from 'next/image';
 import notification from '@/assets/icons/notification.svg';
 import documents from '@/assets/icons/documents.svg';
 import messages from '@/assets/icons/messages.svg';
 import folder from '@/assets/icons/folder.svg';
-import avatar from '@/assets/images/avatar_dashboard.jpg';
 import ThemeSwitch from '../themeSwitcher';
 import hasNotification from '@/assets/icons/hasNotification.svg';
 import notifications from '@/dataJson/notificationData.json';
