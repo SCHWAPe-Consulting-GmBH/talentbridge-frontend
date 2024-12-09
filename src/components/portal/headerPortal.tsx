@@ -5,13 +5,14 @@ import { useTheme } from 'next-themes';
 import icon from '@/assets/icons/search_dashboard.svg';
 // import avatar from '@/assets/images/avatar_dashboard.jpg';
 import { useAuth } from '@/firebase/context/authContext';
+import { Loader } from '../loader';
 
 export const HeaderPortal = () => {
   const [query, setQuery] = useState('');
   const { resolvedTheme } = useTheme();
   const { currentUser } = useAuth();
   if (!currentUser) {
-    return <div>Loading</div>;
+    return <Loader width={20} height={20} border={3} />;
   }
   const { email, displayName, photoURL } = currentUser;
   console.log(currentUser);
