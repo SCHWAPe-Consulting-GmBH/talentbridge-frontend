@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { firestore } from '@/firebase/config';
 import imgGirl from '@/assets/images/imgGirl.png';
 import apple from '@/assets/icons/apple.svg';
 import facebook from '@/assets/icons/facebook.svg';
@@ -15,13 +14,15 @@ import {
 } from 'react-firebase-hooks/auth';
 import { auth } from '@/firebase/config';
 import { useRouter } from 'next/navigation';
-// import { accessTokenService } from '@/services/accessTokenService';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { mutationKeys } from '@/reaсtQuery/mutationKeys';
 import { queryKeys } from '@/reaсtQuery/queryKeys';
-import { addDoc, collection } from 'firebase/firestore';
+import { onAuthStateChanged } from 'firebase/auth';
+import { useAuth } from '@/firebase/context/authContext';
+import toast from 'react-hot-toast';
 
 const Login = () => {
+  const { currentUser } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [signInWithEmailAndPassword, , , emailError] =
@@ -29,6 +30,30 @@ const Login = () => {
   const [signInWithGoogle, , , googleError] = useSignInWithGoogle(auth);
   const router = useRouter();
   const queryClient = useQueryClient();
+  console.log('Login Page', currentUser);
+
+  if (currentUser) {
+    try {
+      const customAttributes = currentUser.reloadUserInfo?.customAttributes;
+
+      if (customAttributes) {
+        const attributes = JSON.parse(customAttributes);
+
+        if (attributes.role === 'admin' || attributes.role === 'coach') {
+          router.push('/portal');
+        } else if (attributes.role === 'student') {
+          router.push('/dashboard');
+        } else {
+          router.push('/onboarding');
+        }
+      } else {
+        router.push('/onboarding');
+      }
+    } catch (error) {
+      console.error('Error parsing customAttributes:', error);
+      router.push('/onboarding');
+    }
+  }
 
   const loginMutationSignIn = useMutation({
     mutationKey: [mutationKeys.login],
@@ -48,34 +73,79 @@ const Login = () => {
 
   const handleSignIn = async () => {
     try {
-      await loginMutationSignIn.mutateAsync({ email, password });
-      //temporary added code
-      const docRef = await addDoc(collection(firestore, 'users'), {
-        email: email,
-        createdAt: new Date().toISOString(),
-      });
+      const resp = await loginMutationSignIn.mutateAsync({ email, password });
 
-      setEmail('');
-      setPassword('');
-      router.push('/onboarding');
+      if (resp) {
+        setEmail('');
+        setPassword('');
+        toast.success('Login successfully.');
+      } else {
+        toast.error('Incorrect login or password.Try again.');
+      }
+      onAuthStateChanged(auth, async (user) => {
+        if (user) {
+          try {
+            const customAttributes = user.reloadUserInfo?.customAttributes;
+
+            if (customAttributes) {
+              const attributes = JSON.parse(customAttributes);
+
+              if (attributes.role === 'admin' || attributes.role === 'coach') {
+                router.push('/portal');
+              } else if (attributes.role === 'student') {
+                router.push('/dashboard');
+              } else {
+                router.push('/onboarding');
+              }
+            } else {
+              router.push('/onboarding');
+            }
+          } catch (error) {
+            console.error('Error parsing customAttributes:', error);
+            router.push('/onboarding');
+          }
+        } else {
+          router.push('/login');
+        }
+      });
     } catch (e) {
       console.error(e);
     }
   };
-
+  // console.log(currentUser.reloadUserInfo.customAttributes);
   const handleGoogleSignIn = async () => {
     try {
       const resp = await loginMutationGoogleSignIn.mutateAsync();
+      if (resp) {
+        toast.success('Login successfully.');
+      }
 
-      //temporary added code
-      const docRef = await addDoc(collection(firestore, 'users'), {
-        id: resp?.user.uid,
-        email: resp?.user.email,
-        createdAt: new Date().toISOString(),
+      onAuthStateChanged(auth, async (user) => {
+        if (user) {
+          try {
+            const customAttributes = user.reloadUserInfo?.customAttributes;
+
+            if (customAttributes) {
+              const attributes = JSON.parse(customAttributes);
+
+              if (attributes.role === 'admin' || attributes.role === 'coach') {
+                router.push('/portal');
+              } else if (attributes.role === 'student') {
+                router.push('/dashboard');
+              } else {
+                router.push('/onboarding');
+              }
+            } else {
+              router.push('/onboarding');
+            }
+          } catch (error) {
+            console.error('Error parsing customAttributes:', error);
+            router.push('/onboarding');
+          }
+        } else {
+          router.push('/login');
+        }
       });
-
-      sessionStorage.setItem('user', 'yes');
-      router.push('/onboarding');
     } catch (e) {
       console.error(e);
     }

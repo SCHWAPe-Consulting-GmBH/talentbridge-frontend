@@ -3,24 +3,31 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { useTheme } from 'next-themes';
 import icon from '@/assets/icons/search_dashboard.svg';
-// import avatar from '@/assets/images/avatar_dashboard.jpg';
 import { useAuth } from '@/firebase/context/authContext';
+import { Loader } from '../loader';
 
 export const HeaderPortal = () => {
   const [query, setQuery] = useState('');
   const { resolvedTheme } = useTheme();
   const { currentUser } = useAuth();
   if (!currentUser) {
-    return <div>Loading</div>;
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <Loader width={20} height={20} border={3} />
+      </div>
+    );
   }
-  const { email, displayName, photoURL } = currentUser;
+  const { email, displayName, photoURL} = currentUser;
   console.log(currentUser);
   console.log(currentUser.reloadUserInfo.customAttributes);
+
+  const customAttributes = currentUser.reloadUserInfo.customAttributes;
+  const attributes = JSON.parse(customAttributes);
 
   return (
     <div className="mr-6 flex justify-between items-center">
       <h1 className="text-[30px] text-themetext font-extrabold">
-        Welcome, {displayName ? displayName : email}
+        Welcome, {displayName ? displayName : email.split('@')[0]}
       </h1>
 
       <div className="flex items-center">
@@ -52,7 +59,7 @@ export const HeaderPortal = () => {
         ) : (
           <div
             className={
-              'bg-[rgb(212,0,255)] rounded-full min-w-[40px] min-h-[40px] text-2xl flex justify-center items-center'
+              'bg-[rgb(212,0,255)] rounded-full min-w-[40px] min-h-[40px] text-2xl flex justify-center items-center mr-2 leading-none'
             }
           >
             {displayName ? displayName[0] : email[0]}
@@ -60,9 +67,11 @@ export const HeaderPortal = () => {
         )}
         <div>
           <p className="font-bold text-themetext">
-            {displayName ? displayName : email}
+            {displayName ? displayName : email.split('@')[0]}
           </p>
-          <p className="font-semibold text-dark-gray">Student</p>
+          <p className="font-semibold text-dark-gray">
+            {attributes.role.charAt(0).toUpperCase() + attributes.role.slice(1)}
+          </p>
         </div>
       </div>
     </div>

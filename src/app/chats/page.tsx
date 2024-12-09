@@ -14,6 +14,10 @@ const Chats = () => {
   const [activeChatId, setActiveChatId] = useState('');
 
   const [activeChatPlusId, setActiveChatPlusId] = useState('');
+
+  const [searchQuery, setSearchQuery] = useState(''); // це треба додати в input->value
+  const [filteredChats, setFilteredChats] = useState([]); // це треба виводити замість allUsersChats
+
   const { currentUser } = useAuth();
   const currentUserId = currentUser?.uid;
 
@@ -58,6 +62,25 @@ const Chats = () => {
     getUserChats();
     setChatName('');
   };
+  const handleSearchChats = (query) => { // це треба додати в input на подію onChange
+    setSearchQuery(query);
+
+    if (!query) {
+      setFilteredChats(allUsersChats);
+      return;
+    }
+
+    const lowerCaseQuery = query.toLowerCase();
+
+    const filtered = allUsersChats.filter((chat) =>
+      chat.name.toLowerCase().includes(lowerCaseQuery)
+    );
+
+    setFilteredChats(filtered);
+  };
+  useEffect(() => {
+    setFilteredChats(allUsersChats);
+  }, [allUsersChats]);
 
   return (
     <div className="p-5">
