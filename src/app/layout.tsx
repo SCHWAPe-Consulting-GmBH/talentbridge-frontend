@@ -3,6 +3,8 @@ import { Nunito_Sans } from 'next/font/google';
 import './globals.css';
 import { Providers } from './providers';
 import { ReactQueryProvider } from './queryProvider';
+import { Toaster } from 'react-hot-toast';
+
 
 const nunito = Nunito_Sans({
   subsets: ['latin'],
@@ -25,6 +27,7 @@ export default function RootLayout({
         <ReactQueryProvider>
           <Providers>{children}</Providers>
         </ReactQueryProvider>
+        <Toaster position="top-center" reverseOrder={false} />
       </body>
     </html>
   );

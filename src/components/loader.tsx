@@ -8,8 +8,7 @@ interface Props {
 
 export const Loader: React.FC<Props> = ({ width, height, border }) => {
   return (
-    // <div className="max-w-[620px] justify-center items-center my-auto">
-    <div className="flex justify-center items-center min-h-screen">
+    <div className="max-w-[620px] justify-center items-center my-auto">
       <div
         style={{
           width: `${width}px`,
