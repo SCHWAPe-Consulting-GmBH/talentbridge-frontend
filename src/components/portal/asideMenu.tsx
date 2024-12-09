@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { usePathname, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useTheme } from 'next-themes';
+import { logOut } from '@/firebase/auth';
 
 export const AsideMenu = () => {
   const router = useRouter();
@@ -18,7 +19,7 @@ export const AsideMenu = () => {
     'chat',
   ];
 
-  const bottomButtons = ['support', 'settings', 'logout'];
+  const bottomButtons = ['support', 'settings'];
 
   return (
     <div className="h-[100vh] fixed z-10000 w-[236px] top-0 left-0 pt-[31px] pr-[20px] pl-[24px] pb-[80px] bg-background-second">
@@ -41,8 +42,8 @@ export const AsideMenu = () => {
                   src={`/icons/menu_portal_${btn}.svg`}
                   alt={`${btn} icon`}
                   width={20}
-                  className={cn("mr-[14px]", {
-                    'graphic_portal_menu': resolvedTheme === 'dark'
+                  className={cn('mr-[14px]', {
+                    graphic_portal_menu: resolvedTheme === 'dark',
                   })}
                 />
                 <p className="font-semibold text-[14px] text-themetext upper_first_letter">
@@ -70,8 +71,8 @@ export const AsideMenu = () => {
                   src={`/icons/menu_portal_${btn}.svg`}
                   alt={`${btn} icon`}
                   width={20}
-                  className={cn("mr-[14px]", {
-                    'graphic_portal_menu': resolvedTheme === 'dark'
+                  className={cn('mr-[14px]', {
+                    graphic_portal_menu: resolvedTheme === 'dark',
                   })}
                 />
                 <p className="font-semibold text-themetext text-[14px] upper_first_letter">
@@ -80,6 +81,26 @@ export const AsideMenu = () => {
               </button>
             );
           })}
+          <button
+            key={uuidv4()}
+            className={cn(
+              'h-12 flex items-center aside_menu w-[192px] px-[14px] pl-[16px] rounded-xl box-border'
+            )}
+            onClick={() => {
+              logOut();
+              router.push('/login');
+            }}
+          >
+            <img
+              src={`/icons/menu_portal_logout.svg`}
+              alt={`logout icon`}
+              width={20}
+              className={cn('mr-[14px]', {
+                graphic_portal_menu: resolvedTheme === 'dark',
+              })}
+            />
+            Logout
+          </button>
         </div>
       </div>
     </div>

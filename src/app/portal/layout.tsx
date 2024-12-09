@@ -20,6 +20,7 @@ export default function DashboardLayout({
     const checkUserRole = async () => {
       if (currentUser) {
         const customAttributes = currentUser.reloadUserInfo?.customAttributes;
+        console.log(customAttributes);
 
         if (customAttributes) {
           const attributes = JSON.parse(customAttributes);
@@ -28,13 +29,21 @@ export default function DashboardLayout({
             return;
           } else setIsLoading(false);
         }
+        if (!customAttributes) {
+          router.push('/dashboard');
+          return;
+        }
       }
     };
 
     checkUserRole();
   }, [currentUser, router]);
   if (isLoading) {
-    return <Loader width={50} height={50} border={5} />;
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <Loader width={50} height={50} border={5} />
+      </div>
+    );
   }
   return (
     <main className="bg-background">

@@ -19,6 +19,7 @@ import { mutationKeys } from '@/reaсtQuery/mutationKeys';
 import { queryKeys } from '@/reaсtQuery/queryKeys';
 import { onAuthStateChanged } from 'firebase/auth';
 import { useAuth } from '@/firebase/context/authContext';
+import toast from 'react-hot-toast';
 
 const Login = () => {
   const { currentUser } = useAuth();
@@ -72,11 +73,15 @@ const Login = () => {
 
   const handleSignIn = async () => {
     try {
-      await loginMutationSignIn.mutateAsync({ email, password });
+      const resp = await loginMutationSignIn.mutateAsync({ email, password });
 
-      setEmail('');
-      setPassword('');
-
+      if (resp) {
+        setEmail('');
+        setPassword('');
+        toast.success('Login successfully.');
+      } else {
+        toast.error('Incorrect login or password.Try again.');
+      }
       onAuthStateChanged(auth, async (user) => {
         if (user) {
           try {
@@ -111,6 +116,9 @@ const Login = () => {
   const handleGoogleSignIn = async () => {
     try {
       const resp = await loginMutationGoogleSignIn.mutateAsync();
+      if (resp) {
+        toast.success('Login successfully.');
+      }
 
       onAuthStateChanged(auth, async (user) => {
         if (user) {
