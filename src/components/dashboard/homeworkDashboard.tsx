@@ -50,7 +50,7 @@ export const HomeworkDashboard = () => {
             <div
               key={homework.id}
               onClick={() => handleHomeworkClick(homework.id)}
-              className={cn("bg-background-second rounded-2xl p-[15px] flex space-x-[10px] green_border_hover border-box border border-transparent cursor-pointer", 
+              className={cn("bg-background-second rounded-2xl p-[15px] flex space-x-[10px] green_border_hover course_shadow border-box border border-transparent cursor-pointer", 
                 {'homework_active': activeHomeworkId === homework.id}
               )}
             >

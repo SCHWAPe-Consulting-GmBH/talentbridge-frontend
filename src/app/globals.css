@@ -26,6 +26,7 @@ html {
   --boxshadow: 0px 4px 13px rgba(0, 0, 0, 0.25);
   --boxshadow-round: 0px 0px 25px 5px rgba(0, 0, 0, 0.50);
   --boxshadow-course: 0px 0px 15px 3px rgba(0, 0, 0, 0.25);
+  --boxshadow-course-static: 0px 0px 15px 3px rgba(0, 0, 0, 0.1);
 }
 
 .dark {
@@ -43,6 +44,7 @@ html {
   --boxshadow: 0px 4px 13px rgba(233, 227, 227, 0.25);
   --boxshadow-round: 0px 0px 20px 4px rgba(233, 227, 227, 0.25);
   --boxshadow-course: 0px 0px 20px 4px rgba(233, 227, 227, 0.25);
+  --boxshadow-course-static: 0px 0px 20px 4px rgba(233, 227, 227, 0.1);
 }
 
 @layer base {

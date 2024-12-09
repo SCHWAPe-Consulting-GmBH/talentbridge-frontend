@@ -13,13 +13,11 @@ const SignUp = () => {
   const [createUserWithEmailAndPassword] =
     useCreateUserWithEmailAndPassword(auth);
   const [signInWithGoogle, , , googleError] = useSignInWithGoogle(auth);
-console.log('hey')
   const router = useRouter();
 
   const handleSignUp = async () => {
     try {
       const res = await createUserWithEmailAndPassword(email, password);
-      console.log({ res });
       sessionStorage.setItem('user', 'yes');
       setEmail('');
       setPassword('');
@@ -32,7 +30,6 @@ console.log('hey')
   const handleGoogleSignUp = async () => {
     try {
       const res = await signInWithGoogle();
-      console.log({ res });
       sessionStorage.setItem('user', 'yes');
       router.push('/');
     } catch (e) {
@@ -42,7 +39,6 @@ console.log('hey')
 
   // useEffect(() => {
   //   const userSession = sessionStorage.getItem('user');
-  //   console.log('User session:', userSession);
   // }, []);
 
   return (

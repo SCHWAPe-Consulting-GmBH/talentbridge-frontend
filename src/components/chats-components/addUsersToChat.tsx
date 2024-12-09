@@ -2,26 +2,19 @@ import {
   arrayUnion,
   collection,
   doc,
-  endAt,
   getDoc,
   getDocs,
   limit,
   orderBy,
   query,
-  startAt,
   updateDoc,
   where,
 } from 'firebase/firestore';
 import { firestore } from '@/firebase/config';
-import { Select } from 'antd';
 import { useEffect, useState } from 'react';
-import { IconArrowForSelect } from '../iconArrowForSelect';
-import { useQuery } from '@tanstack/react-query';
-import { currentUserQuery } from '@/reaсtQuery/userQuery';
 import { MultiSelection } from './multiSelect';
 import { IOptions } from '@/types/multiSelectTypes';
 import { searchUsers } from '@/api/operations';
-import { IoClose } from 'react-icons/io5';
 import { useAuth } from '@/firebase/context/authContext';
 
 interface Props {
@@ -103,7 +96,7 @@ export const AddUsersToChat: React.FC<Props> = ({ chatId }) => {
     fetchUsers()
       .then((resp) => {
         setVisibleUsers(
-          resp.map((res) => ({ value: res.id, label: res.email }))
+          resp?.map((res) => ({ value: res.id, label: res.email }))
         );
       })
       .finally(() => setLoading(false));
@@ -126,18 +119,21 @@ export const AddUsersToChat: React.FC<Props> = ({ chatId }) => {
             />
             <button
               onClick={addParticipantsToChat}
-              className="bg-primary ml-2 h-[42px] px-2 font-semibold rounded-lg btn_green_hover"
+              className="bg-primary ml-2 h-[42px] px-2 font-semibold rounded-lg btn_green_hover text-white"
             >
-              Add Users
+              Add
             </button>
             <ul>
               {selectedPeople.map((people) => (
                 <li key={people.value} className={'flex items-center gap-1.25'}>
                   <p>{people.label}</p>
-                  <IoClose
-                    className={'cursor-pointer'}
+                  <button
                     onClick={() => handleChangeSelectedPeople(people)}
-                  />
+                    className='cursor-pointer'
+                    // className="absolute top-4 right-4 text-2xl text-gray-500 hover:text-gray-800"
+                  >
+                    &times;
+                  </button>
                 </li>
               ))}
             </ul>

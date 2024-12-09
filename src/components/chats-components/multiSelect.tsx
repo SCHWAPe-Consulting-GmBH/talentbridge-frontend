@@ -1,7 +1,7 @@
 import ClickOutside from '@/hooks/clickOutside';
 import { IOptions } from '@/types/multiSelectTypes';
 import cn from 'classnames';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 interface Props {
@@ -21,16 +21,26 @@ export const MultiSelection: React.FC<Props> = ({
   onChangeSelected,
   onSearch,
 }) => {
-  const [isListShown, setIsListShown] = useState(false);
+  const [isListShown, setIsListShown] = useState(true);
   const selectedLabels = selected.map((user) => user.label);
-  const inputRef = useRef(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   console.log('selected', selected);
+  console.log('options', options);
+  // let rect: DOMRect | null = null;
+  const [rect, setRect] = useState< DOMRect | null>(null)
   const onClose = () => {
     setIsListShown(false);
   };
 
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+      setRect(inputRef.current.getBoundingClientRect());
+    }
+  }, []);
+  console.log('rect3', rect)
   return (
-    <div className="relative">
+    <div className="">
       <input
         type="text"
         value={searchQuery}
@@ -41,27 +51,29 @@ export const MultiSelection: React.FC<Props> = ({
         onClick={() => setIsListShown((prev) => !prev)}
       />
 
-      <ClickOutside onClick={onClose} exceptionRef={inputRef} top={50}>
+      <ClickOutside onClick={onClose} exceptionRef={inputRef} top={rect ? rect?.top - 30 : 200}>
         <div
           className={cn(
-            'p-[10px] bg-background-second rounded-2xl border border-shadow-revert',
+            'p-[10px] bg-background-second rounded-2xl border border-shadow-revert ',
             {
               hidden: !isListShown,
             }
           )}
         >
-          <div className="top-[100px] max-h-[432px] overflow-auto flex flex-col custom-scrollbar items-start truncate">
-            {options.map((option) => {
-              return (
-                <button
-                  key={uuidv4()}
-                  className={`${selectedLabels.includes(option.label) ? 'bg-opacity-info' : ''} hover:bg-light-gray p-1 rounded-lg truncate w-[224px] border-box`}
-                  onClick={() => onChangeSelected(option)}
-                >
-                  {option.label}
-                </button>
-              );
-            })}
+          <div className="max-h-[400px] overflow-auto custom-scrollbar ">
+            <div className="truncate flex flex-col items-start">
+              {options.map((option) => {
+                return (
+                  <button
+                    key={uuidv4()}
+                    className={` min-h-[35px] ${selectedLabels.includes(option.label) ? 'bg-opacity-info' : ''} hover:bg-light-gray p-1 rounded-lg truncate w-[200px] border-box`}
+                    onClick={() => onChangeSelected(option)}
+                  >
+                    {option.label}
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </div>
       </ClickOutside>

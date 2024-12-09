@@ -21,8 +21,6 @@ const ChatSection = ({ chatId }) => {
   const [messagesQuery, setMessagesQuery] = useState(null);
   const { currentUser } = useAuth();
 
-  // console.log(currentUser.reloadUserInfo.customAttributes);
-
   useEffect(() => {
     if (chatId) {
       setMessagesRef(
@@ -65,7 +63,6 @@ const ChatSection = ({ chatId }) => {
   const sendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
     const { uid, displayName, photoURL } = currentUser;
-    console.log("photoURL",photoURL);
 
     if (selectedFile) {
       console.log('Handle file upload here');

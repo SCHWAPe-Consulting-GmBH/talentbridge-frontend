@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import Image from 'next/image';
 import { useState } from 'react';
@@ -12,7 +12,7 @@ export const HeaderDashboard = () => {
     <div className="flex items-center justify-between relative z-20">
       <p className="font-extrabold text-[30px] text-white">Logo</p>
 
-      <div className='flex items-center relative'>
+      <div className="flex items-center relative">
         <div className="relative max-w-[405px] mr-4">
           <input
             placeholder="Search"
@@ -27,7 +27,7 @@ export const HeaderDashboard = () => {
             className="absolute top-[10px] left-[23px]"
           />
         </div>
-        <HeaderMenu/>
+        <HeaderMenu />
       </div>
     </div>
   );

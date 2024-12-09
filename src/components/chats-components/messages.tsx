@@ -19,6 +19,15 @@ import { FormEvent, useEffect, useRef, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { currentUserQuery } from '@/reaсtQuery/userQuery';
 import { IMessage } from '@/types/messages';
+import text_under from '@/assets/icons/text_format_underline.svg';
+import text_add_photo from '@/assets/icons/text_photo-plus.svg';
+import text_tt from '@/assets/icons/text_tt.svg';
+import text_aa from '@/assets/icons/text-aa.svg';
+import copy from '@/assets/icons/copy.svg';
+import text_bold from '@/assets/icons/bold_b.svg';
+import text_list from '@/assets/icons/text-list.svg';
+import Image from 'next/image';
+import send from '@/assets/icons/btn_send.svg';
 
 interface Props {
   activeChatId: string;
@@ -96,11 +105,7 @@ export const Messages: React.FC<Props> = ({ activeChatId }) => {
           id: doc.id,
         }));
 
-        // setMessages((prevMessages: IMessage[]) => [...currentMessages, ...prevMessages]);
-
         setMessages([...currentMessages].reverse());
-        // setMessages(currentMessages);
-        console.log('reverse()', [...currentMessages].reverse());
         setLastDoc(snapshot.docs[snapshot.docs.length - 1]);
       }
     } catch {
@@ -150,7 +155,6 @@ export const Messages: React.FC<Props> = ({ activeChatId }) => {
         const uniqueMessages = newMessages.filter(
           (msg) => !existingIds.has(msg.id)
         );
-        console.log();
         return [...prevMessages, ...uniqueMessages];
       });
     });
@@ -170,37 +174,79 @@ export const Messages: React.FC<Props> = ({ activeChatId }) => {
   }, [messages]);
 
   return (
-    <div className="flex flex-col justify-end bg-blue-100 w-[100%] h-[600px] py-6 px-[100px] custom-scrollbar">
+    <div className="flex flex-col justify-end w-full h-full custom-scrollbar">
       <div
         ref={chatRef}
-        className="overflow-auto h-full custom-scrollbar mb-5"
+        className="overflow-auto h-full custom-scrollbar mb-5 flex flex-col"
         onScroll={() => {
           if (chatRef.current!.scrollTop === 0) {
             // loadMoreMessages();
-            console.log('load more');
           }
         }}
       >
         {messages &&
           messages?.map((msg) => <ChatMessage key={uuidv4()} message={msg} />)}
-        {messages && !messages.length && <p>No messages yet!</p>}
+        {messages && !messages.length && (
+          <p className="font-bold text-[32px] text-center m-auto">
+            No messages yet!
+          </p>
+        )}
       </div>
 
-      <form onSubmit={(e) => addMessageToChat(e)} className="flex">
-        <input
-          type="text"
-          placeholder="Enter text"
-          value={messageText}
-          onChange={(e) => setMessageText(e.target.value)}
-          className="input_text h-[43px] mr-4 text-secondary w-[100%] bg-white border border-light-gray"
-        />
+      <form
+        onSubmit={(e) => addMessageToChat(e)}
+        className="flex flex-col bg-white w-[100%] py-3 px-4 rounded-xl"
+      >
+        <div className="flex gap-2 mb-4">
+          <button className='w-8 h-8 flex items-center justify-center '>
+            <Image src={text_aa} alt="" width={16} />
+          </button>
 
-        <button
-          type="submit"
-          className="font-main text-white max-h-[43px] flex items-center justify-center rounded-lg font-bold py-[14px] px-[20px] bg-primary btn_green_hover"
-        >
-          Send
-        </button>
+          <button className='w-8 h-8 flex items-center justify-center '>
+            <Image src={text_bold} alt="" width={16} />
+          </button>
+
+          <button className='w-8 h-8 flex items-center justify-center '>
+            <Image src={text_tt} alt="" width={16} />
+          </button>
+
+          <button className='w-8 h-8 flex items-center justify-center '>
+            <Image src={text_under} alt="" width={16} />
+          </button>
+
+          <button className='w-8 h-8 flex items-center justify-center '>
+            <Image src={text_list} alt="" width={16} />
+          </button>
+
+          <button className='w-8 h-8 flex items-center justify-center '>
+            <Image src={copy} alt="" width={16} />
+          </button>
+
+          <button className='w-8 h-8 flex items-center justify-center '>
+            <Image src={text_add_photo} alt="" width={16} />
+          </button>
+        </div>
+
+        <div className="flex">
+          <input
+            type="text"
+            placeholder="Enter text"
+            value={messageText}
+            onChange={(e) => setMessageText(e.target.value)}
+            className="input_text h-[43px] mr-4 text-secondary w-full"
+          />
+
+          <button
+            type="submit"
+            className="h-[39px] w-[39px] flex items-center justify-center btn_scale"
+          >
+            <Image
+              src={send}
+              alt="button send"
+              width={24}
+            />
+          </button>
+        </div>
       </form>
     </div>
   );

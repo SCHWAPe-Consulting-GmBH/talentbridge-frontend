@@ -63,6 +63,10 @@
   box-shadow: var(--boxshadow-course);
 }
 
+.course_shadow_static {
+  box-shadow: var(--boxshadow-course-static);
+}
+
 .btn_green_hover {
   color: #000000;
   font-weight: 600;
@@ -147,4 +151,11 @@
   position: absolute;
   left: -30px;
   background-color: var(--aside-hover);
+}
+
+.dashboard_menu_header {
+  transition: box-shadow 0.3s ease-in-out;
+}
+.dashboard_menu_header:hover {
+  box-shadow: 0px 0px 25px 5px rgba(0, 0, 0, 0.50);
 }
