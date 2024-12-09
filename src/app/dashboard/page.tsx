@@ -1,4 +1,4 @@
-import { HomeworkDashboard } from '@/components/dashboard/homework';
+import { HomeworkDashboard } from '@/components/dashboard/homeworkDashboard';
 import { MeetingsDashboard } from '@/components/dashboard/meetingsDashboard';
 import { ProgressChart } from '@/components/progressChart';
 

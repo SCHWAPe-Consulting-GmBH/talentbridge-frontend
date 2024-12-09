@@ -6,7 +6,6 @@ interface Props {
 }
 
 export const QuestionProgressBar: React.FC<Props> = ({ questionNumber }) => {
-  console.log(questionNumber > 4)
   return (
   <div className="flex space-x-2 mb-[60px]">
     <div className="h-2 w-[149px] bg-white rounded-lg p-[2px]">

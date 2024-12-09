@@ -4,9 +4,6 @@ import { createChat } from '@/utils/createChat';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { firestore } from '@/firebase/config';
 import { useEffect, useState } from 'react';
-
-import { useQuery } from '@tanstack/react-query';
-import { currentUserQuery } from '@/reaсtQuery/userQuery';
 import { AddUsersToChat } from '@/components/chats-components/addUsersToChat';
 import { Messages } from '@/components/chats-components/messages';
 import { useAuth } from '@/firebase/context/authContext';
@@ -23,7 +20,6 @@ const Chats = () => {
 
   const { currentUser } = useAuth();
   const currentUserId = currentUser?.uid;
-  console.log(currentUser);
 
   const getUserChats = async () => {
     const chatsRef = collection(firestore, 'chats');
@@ -46,6 +42,7 @@ const Chats = () => {
 
     setAllUserChats(chats);
   };
+
   useEffect(() => {
     if (currentUserId) {
       getUserChats();

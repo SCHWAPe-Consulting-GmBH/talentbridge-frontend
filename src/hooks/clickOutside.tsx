@@ -2,7 +2,9 @@ import { useRef, useEffect, ReactNode, MouseEventHandler } from 'react';
 
 interface ClickOutsideProps {
   children: ReactNode; 
-  top: number;
+  top?: number;
+  width?: string;
+  isCenter?: boolean;
   exceptionRef?: React.RefObject<HTMLElement>;
   onClick: () => void;
   className?: string;
@@ -12,10 +14,13 @@ export default function ClickOutside({
   children,
   exceptionRef,
   top,
+  width,
+  isCenter,
   onClick,
   className = '',
 }: ClickOutsideProps) {
   const wrapperRef = useRef<HTMLDivElement | null>(null); 
+
 
   useEffect(() => {
     const handleClickListener = (event: MouseEvent) => {
@@ -42,7 +47,7 @@ export default function ClickOutside({
   }, [exceptionRef, onClick]);
 
   return (
-    <div ref={wrapperRef} style={{ top: `${top}px` }} className='absolute bg-opacity-30 flex justify-end w-[477px]'>
+    <div ref={wrapperRef} style={{ top: `${top}px`, width: `${width}` }} className={`absolute bg-opacity-30 flex justify-end ${isCenter && 'center_absolute'}`}>
       {children}
     </div>
   );

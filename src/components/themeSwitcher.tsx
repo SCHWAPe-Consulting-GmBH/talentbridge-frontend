@@ -21,7 +21,7 @@ export default function ThemeSwitch() {
       (
         <button
           onClick={() => setTheme('light')}
-          className='rounded-full w-[38px] h-[38px] flex justify-center items-center bg-dark mr-4 btn_shadow'
+          className='rounded-full w-[38px] h-[38px] flex justify-center items-center bg-dark mr-4 dashboard_menu_header'
         >
           <Image
             src={lightTheme}
@@ -37,7 +37,7 @@ export default function ThemeSwitch() {
     return (
       <button
         onClick={() => setTheme('dark')}
-        className='rounded-full w-[38px] h-[38px] flex justify-center items-center bg-dark mr-4 btn_shadow'
+        className='rounded-full w-[38px] h-[38px] flex justify-center items-center bg-dark mr-4 dashboard_menu_header'
       >
         <Image
           src={darkTheme}

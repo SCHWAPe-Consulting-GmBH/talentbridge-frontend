@@ -3,7 +3,8 @@
 import Image from 'next/image';
 import notification from '@/assets/icons/notification.svg';
 import documents from '@/assets/icons/documents.svg';
-import settings from '@/assets/icons/settings.svg';
+import messages from '@/assets/icons/messages.svg';
+import folder from '@/assets/icons/folder.svg';
 import ThemeSwitch from '../themeSwitcher';
 import hasNotification from '@/assets/icons/hasNotification.svg';
 import notifications from '@/dataJson/notificationData.json';
@@ -15,10 +16,12 @@ import { useAuth } from '@/firebase/context/authContext';
 import { FaAngleDown } from 'react-icons/fa';
 import { logOut } from '@/firebase/auth';
 import { useRouter } from 'next/navigation';
+import { MessagesModal } from './messagesModal';
 
 export const HeaderMenu = () => {
   const router = useRouter();
 
+  const [isMessagesModalShown, setIsMessagesModalShown] = useState(false);
   const [isDocumentsModalShown, setIsDocumentsModalShown] = useState(false);
   const [isNotificationsModalShown, setIsNotificationsModalShown] =
     useState(false);
@@ -48,32 +51,38 @@ export const HeaderMenu = () => {
 
   return (
     <>
-      <ThemeSwitch />
+      <button
+        onClick={() => setIsMessagesModalShown(true)}
+        className="rounded-full w-[38px] h-[38px] flex justify-center items-center bg-dark mr-4 dashboard_menu_header"
+      >
+        <Image src={messages} alt="settings icon" width={20} />
+      </button>
+      <button className="rounded-full w-[38px] h-[38px] flex justify-center items-center bg-dark mr-4 dashboard_menu_header">
+        <Image src={folder} alt="settings icon" width={20} />
+      </button>
       <button
         ref={buttonRef}
         onClick={() => setIsDocumentsModalShown((prev) => !prev)}
-        className="rounded-full w-[38px] h-[38px] flex justify-center items-center bg-dark mr-4 btn_shadow"
+        className="rounded-full w-[38px] h-[38px] flex justify-center items-center bg-dark mr-4 dashboard_menu_header"
       >
         <Image src={documents} alt="documents icon" width={20} />
       </button>
       <button
         ref={buttonNotificationRef}
         onClick={() => setIsNotificationsModalShown((prev) => !prev)}
-        className="rounded-full w-[38px] h-[38px] flex justify-center items-center bg-dark mr-4 relative btn_shadow"
+        className="rounded-full w-[38px] h-[38px] flex justify-center items-center bg-dark mr-4 relative dashboard_menu_header"
       >
         {notifications.length > 0 && (
           <Image
             src={hasNotification}
             alt=""
             width={7}
-            className="absolute top-[10px] right-[9px]"
+            className="absolute top-[10px] right-[11px]"
           />
         )}
-        <Image src={notification} alt="notification icon" width={20} />
+        <Image src={notification} alt="notification icon" width={16} />
       </button>
-      <button className="rounded-full w-[38px] h-[38px] flex justify-center items-center bg-dark mr-4 btn_shadow">
-        <Image src={settings} alt="settings icon" width={20} />
-      </button>
+      <ThemeSwitch />
       {photoURL ? (
         <Image
           src={photoURL}
@@ -136,6 +145,10 @@ export const HeaderMenu = () => {
         isNotificationsModalShown={isNotificationsModalShown}
         onClose={() => setIsNotificationsModalShown(false)}
         buttonRef={buttonNotificationRef}
+      />
+      <MessagesModal
+        isMessagesModalShown={isMessagesModalShown}
+        onClose={() => setIsMessagesModalShown(false)}
       />
     </>
   );

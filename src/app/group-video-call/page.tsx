@@ -46,8 +46,7 @@ const GroupVideoCall = () => {
         });
       }
     };
-    console.log(user?.getIdToken());
-  console.log(user);
+
     return () => {
       handleDisconnect();
     };
@@ -116,8 +115,6 @@ const GroupVideoCall = () => {
           }
 
           onSnapshot(roomRef, (snapshot) => {
-            console.log(user?.getIdToken());
-  console.log(user);
             const roomData = snapshot.data();
             const participants = roomData?.participants || [];
 

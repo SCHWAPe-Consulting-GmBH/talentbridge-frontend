@@ -6,11 +6,9 @@ import design from '@/assets/images/matching_graphic.png';
 import architect from '@/assets/images/matching_architect.png';
 import programmer from '@/assets/images/matching_programmer.png';
 import not_sure from '@/assets/images/matching_not_sure.png';
-import arrow from '@/assets/icons/arrow_diagonal.svg';
 import { useRouter } from 'next/navigation';
 import { v4 as uuidv4 } from 'uuid';
-import { useTheme } from 'next-themes';
-import cn from 'classnames';
+import { RoundLinkButton } from './roundLinkButton';
 
 const courses = [
   {
@@ -46,7 +44,6 @@ const courses = [
 ];
 
 export const MatchingCourses: React.FC = () => {
-  const { resolvedTheme } = useTheme();
   const router = useRouter();
 
   return (
@@ -75,16 +72,7 @@ export const MatchingCourses: React.FC = () => {
               </div>
             }
 
-            <button className="rounded-full bg-background-revert flex items-center justify-center w-[38px] h-[38px] mb-[60px]">
-              <Image
-                src={arrow}
-                alt="move to course"
-                width={21.27}
-                className={cn({
-                  graphic_gray_answer: resolvedTheme === 'dark',
-                })}
-              />
-            </button>
+            <RoundLinkButton />
 
             <div>
               {course.color && (

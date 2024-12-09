@@ -23,6 +23,14 @@
 .bg5 {
   background-image: url('../assets/bg/dashboard_bg.png');
 }
+
+.bg-messages {
+  background-image: url('../assets/bg/bg-messages.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+
 .bg6 {
   background-image: url('../assets/bg/bg_6.png');
   background-size: contain;

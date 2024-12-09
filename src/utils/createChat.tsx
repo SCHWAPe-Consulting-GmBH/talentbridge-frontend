@@ -12,5 +12,4 @@ export async function createChat(chatName: string, creatorId: string) {
     owner: creatorId,
     participants: [creatorId],
   });
-  console.log('Chat created with ID:', chatDoc.id);
 }
