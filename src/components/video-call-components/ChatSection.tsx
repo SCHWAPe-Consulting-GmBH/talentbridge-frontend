@@ -72,11 +72,11 @@ const ChatSection = ({ chatId }) => {
       await addDoc(messagesRef, {
         text: formValue,
         createdAt: serverTimestamp(),
-        uid,
-        displayName: currentUser.displayName
+        photoURL: currentUser.photoURL,
+        senderId: currentUser.uid,
+        senderName: currentUser.displayName
           ? currentUser.displayName
           : currentUser.email.split('@')[0],
-        photoURL,
       });
     }
 

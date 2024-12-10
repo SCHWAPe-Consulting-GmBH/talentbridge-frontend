@@ -9,13 +9,28 @@ import arrowLeft from '@/assets/icons/arrow_left.svg';
 import { QuestionInput } from '@/components/questionInput';
 import { QuestionProgressBar } from '@/components/questionProgressBar';
 import { Loader } from '@/components/loader';
+import { useAuth } from '@/firebase/context/authContext';
+import { getUserData, saveUserData } from '@/firebase/auth';
 
 const Onboarding = () => {
   const [questionNumber, setQuestionNumber] = useState(0);
   const [answers, setAnswers] = useState<Answers>({});
   const router = useRouter();
   const [imageSrc, setImageSrc] = useState('');
+  const { currentUser } = useAuth();
 
+  useEffect(() => {
+    const checkUserData = async () => {
+      if (currentUser) {
+        const userData = await getUserData(currentUser.uid);
+        if (userData && userData.completedOnboarding) {
+          router.push('/course-matching');
+        }
+      }
+    };
+
+    checkUserData();
+  }, [currentUser, router]);
   const currentQuestion = questions[questionNumber];
   const currentAnswers = answers[currentQuestion.question];
   const isManyOptions =
@@ -33,7 +48,6 @@ const Onboarding = () => {
   }, [currentQuestion]);
 
   const addAnswer = (answer: string) => {
-
     setAnswers((prev) => {
       const question = currentQuestion.question;
       const options = currentQuestion.options;
@@ -65,10 +79,23 @@ const Onboarding = () => {
     }
   };
 
-  const changeQuestionNext = () => {
+  const changeQuestionNext = async () => {
     if (questionNumber === questions.length - 1) {
-      router.push('/course-matching');
-      return;
+      if (currentUser) {
+        const userId = currentUser.uid;
+        const userData = { answers, completedOnboarding: true };
+
+        try {
+          await saveUserData(userId, userData);
+          console.log('Answers saved successfully');
+          router.push('/course-matching');
+        } catch (error) {
+          console.error('Error saving answers:', error);
+        }
+      } else {
+        console.error('No user logged in');
+        router.push('/login');
+      }
     }
 
     if (currentQuestion.options && currentQuestion.options.amount === 1) {
@@ -100,7 +127,7 @@ const Onboarding = () => {
   return (
     <main className="px-[100px] pt-[100px] onboard1 background-style flex justify-start bg-background">
       {imageSrc ? (
-        <div className='max-w-[1240px] mx-auto flex justify-between'>
+        <div className="max-w-[1240px] mx-auto flex justify-between">
           <div className="max-w-[620px] justify-center">
             <QuestionProgressBar questionNumber={questionNumber} />
 
@@ -152,7 +179,12 @@ const Onboarding = () => {
                     className="rounded-full btn_green_hover border border-primary w-[66px] h-[56px] flex justify-center items-center"
                     onClick={changeQuestionBack}
                   >
-                    <Image src={arrowLeft} alt="arrow back" width={14} className={cn('')}/>
+                    <Image
+                      src={arrowLeft}
+                      alt="arrow back"
+                      width={14}
+                      className={cn('')}
+                    />
                   </button>
                 )}
                 <button
@@ -180,7 +212,7 @@ const Onboarding = () => {
           </div>
         </div>
       ) : (
-        <div className='w-full flex justify-center'>
+        <div className="w-full flex justify-center">
           <Loader width={150} height={150} border={20} />
         </div>
       )}
