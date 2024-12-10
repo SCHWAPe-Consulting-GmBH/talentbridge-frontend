@@ -7,6 +7,8 @@ const ChatMessage = ({ message }) => {
   const { currentUser } = useAuth();
 
   const { text, senderId, photoURL, senderName } = message;
+  console.log(message);
+  
   const isSent = senderId === currentUser.uid;
   const containerClass = isSent
     ? 'flex-row-reverse bg-green-500'
