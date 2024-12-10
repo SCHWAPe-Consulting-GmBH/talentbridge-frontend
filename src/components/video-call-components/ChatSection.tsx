@@ -73,7 +73,9 @@ const ChatSection = ({ chatId }) => {
         text: formValue,
         createdAt: serverTimestamp(),
         uid,
-        displayName,
+        displayName: currentUser.displayName
+          ? currentUser.displayName
+          : currentUser.email.split('@')[0],
         photoURL,
       });
     }

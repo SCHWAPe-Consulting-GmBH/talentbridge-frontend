@@ -6,8 +6,8 @@ import Image from 'next/image';
 const ChatMessage = ({ message }) => {
   const { currentUser } = useAuth();
 
-  const { text, uid, photoURL, displayName } = message;
-  const isSent = uid === currentUser.uid;
+  const { text, senderId, photoURL, senderName } = message;
+  const isSent = senderId === currentUser.uid;
   const containerClass = isSent
     ? 'flex-row-reverse bg-green-500'
     : 'bg-medium-gray';
@@ -15,9 +15,9 @@ const ChatMessage = ({ message }) => {
 
   return (
     <div
-      className={`flex  gap-1 shadow-md items-center ${containerClass} p-2 rounded-lg my-1 mx-3 max-w-xs md:max-w-md lg:max-w-lg ${isSent ? 'ml-auto flex-row-reverse' : 'mr-auto'}`}
+      className={`flex gap-1 shadow-md items-center bg-opacity-gray p-2 rounded-lg my-1 mx-3 max-w-xs md:max-w-md lg:max-w-lg ${isSent ? 'ml-auto flex-row-reverse' : 'mr-auto'}`}
     >
-      <div className={`rounded-full w-10 h-10 object-cover`}>
+      <div className='rounded-full w-10 h-10 object-cover'>
         {photoURL ? (
           <Image
             src={photoURL}
@@ -32,13 +32,13 @@ const ChatMessage = ({ message }) => {
               'bg-[rgb(212,0,255)] rounded-full min-w-[40px] min-h-[40px] text-2xl flex justify-center items-center'
             }
           >
-            {displayName && displayName[0]}
+            {senderName && senderName[0]}
           </div>
         )}
       </div>
       <div>
         <p
-          className={`flex-1 text-sm text-white ${textAlignClass} max-w-[170px] break-words`}
+          className={`flex-1 text-sm text-themetext ${textAlignClass} max-w-[170px] break-words mx-2`}
         >
           {text}
         </p>
