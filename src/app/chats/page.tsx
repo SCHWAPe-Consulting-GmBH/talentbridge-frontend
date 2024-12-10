@@ -19,6 +19,7 @@ const Chats = () => {
   const [filteredChats, setFilteredChats] = useState([]); // це треба виводити замість allUsersChats
 
   const { currentUser } = useAuth();
+  console.log(currentUser)
   const currentUserId = currentUser?.uid;
 
   const getUserChats = async () => {
@@ -58,10 +59,12 @@ const Chats = () => {
   };
 
   const handleCreateChat = async () => {
+    const owner = {id: currentUserId, label: currentUser.email, value: 0};
     await createChat(chatName, currentUserId!);
     getUserChats();
     setChatName('');
   };
+
   const handleSearchChats = (query) => { // це треба додати в input на подію onChange
     setSearchQuery(query);
 
@@ -131,6 +134,7 @@ const Chats = () => {
             )}
           </ul>
         </div>
+        
         {activeChatId && <Messages activeChatId={activeChatId} />}
       </div>
     </div>

@@ -4,3 +4,9 @@ export interface IChat {
   owner: string,
   participants: string[]
 }
+
+export interface IChatCreator {
+  id: string,
+  label: string,
+  value: number
+}

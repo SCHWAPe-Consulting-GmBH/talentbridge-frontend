@@ -12,6 +12,7 @@ import { Messages } from '@/components/chats-components/messages';
 import { useAuth } from '@/firebase/context/authContext';
 import message from '@/assets/icons/message_black.svg';
 import { IChat } from '@/types/chat';
+import { Divider } from 'antd';
 
 export const ChatsComponent = () => {
   const [chatName, setChatName] = useState('');
@@ -19,6 +20,10 @@ export const ChatsComponent = () => {
   const [activeChatId, setActiveChatId] = useState('');
 
   const [activeChatPlusId, setActiveChatPlusId] = useState('');
+
+  const [searchQuery, setSearchQuery] = useState(''); // це треба додати в input->value
+  const [filteredChats, setFilteredChats] = useState([]); // це треба виводити замість allUsersChats
+
   const { currentUser } = useAuth();
   const currentUserId = currentUser?.uid;
   const roleObj = currentUser?.reloadUserInfo.customAttributes;
@@ -64,10 +69,31 @@ export const ChatsComponent = () => {
   };
 
   const handleCreateChat = async () => {
-    await createChat(chatName, currentUserId!);
+    const owner = {id: currentUserId, label: currentUser.email, value: 0};
+    await createChat(chatName, owner);
     getUserChats();
     setChatName('');
   };
+
+  const handleSearchChats = (query) => { // це треба додати в input на подію onChange
+    setSearchQuery(query);
+
+    if (!query) {
+      setFilteredChats(allUsersChats);
+      return;
+    }
+
+    const lowerCaseQuery = query.toLowerCase();
+
+    const filtered = allUsersChats.filter((chat) =>
+      chat.name.toLowerCase().includes(lowerCaseQuery)
+    );
+
+    setFilteredChats(filtered);
+  };
+  useEffect(() => {
+    setFilteredChats(allUsersChats);
+  }, [allUsersChats]);
 
   return (
     <section className="flex gap-6 h-full">
@@ -122,6 +148,7 @@ export const ChatsComponent = () => {
                 >
                   {activeChatPlusId === chat.id ? '-' : '+'}
                 </button>}
+                {chat.id === activeChatId && (<div className='bg-primary w-5 h-5 rounded-full p-2'/>)}
                 {activeChatPlusId === chat.id && role?.role === 'coach' && (
                   <AddUsersToChat chatId={activeChatPlusId} />
                 )}
@@ -132,7 +159,7 @@ export const ChatsComponent = () => {
           )}
         </ul>
       </div>
-
+      
       {activeChatId ? <Messages activeChatId={activeChatId} /> : (
         <div className='flex flex-col justify-center items-center w-full gap-[26px]'>
           <Image
