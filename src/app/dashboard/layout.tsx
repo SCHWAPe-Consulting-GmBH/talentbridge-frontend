@@ -13,10 +13,11 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   const { currentUser } = useAuth();
+
   if (!currentUser) {
     return (
       <div className="flex justify-center items-center min-h-screen">
-        <Loader width={20} height={20} border={3} />
+        <Loader width={180} height={180} border={15} />
       </div>
     );
   }

@@ -20,16 +20,15 @@ export const MessagesModal: React.FC<Props> = ({
         }
       )}
     >
-      <div className="p-[25px] relative max-w-[1320px] w-full bg-background bg-messages rounded-2xl border border-shadow-revert">
+      <div className="p-[25px] relative max-w-[1320px] h-[85%] max-h-[970px] min-h-[500px] w-full bg-background bg-messages rounded-2xl border border-shadow-revert">
         <button
           onClick={onClose}
           className="absolute top-[25px] right-8 text-4xl text-gray-500 hover:text-gray-800 btn_scale"
         >
           &times;
         </button>
-        <div className="top-[70px] overflow-auto flex flex-col space-y-2 custom-scrollbar h-[770px]">
-          <ChatsComponent />
-        </div>
+        
+        <ChatsComponent />
       </div>
     </div>
   );
