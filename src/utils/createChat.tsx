@@ -1,7 +1,8 @@
 import { firestore } from '@/firebase/config';
+import { IChatCreator } from '@/types/chat';
 import { collection, addDoc } from 'firebase/firestore';
 
-export async function createChat(chatName: string, creatorId: string) {
+export async function createChat(chatName: string, owner: IChatCreator) {
   if (!chatName) {
     return;
   }
@@ -9,7 +10,7 @@ export async function createChat(chatName: string, creatorId: string) {
   const chatRef = collection(firestore, 'chats');
   const chatDoc = await addDoc(chatRef, {
     name: chatName,
-    owner: creatorId,
-    participants: [creatorId],
+    owner: owner.id,
+    participants: [owner],
   });
 }

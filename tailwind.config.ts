@@ -28,6 +28,7 @@ const config: Config = {
       'light-orange': '#FEEACC',
       'light-blue': '#C4CEFF',
       'opacity-green': 'rgba(82, 169, 130, 0.15)',
+      'opacity-gray': 'rgba(196, 196, 196, 0.15)',
       'opacity-blue': 'rgba(82, 112, 255, 0.15)',
       'opacity-pink': 'rgba(197, 13, 149, 0.15)',
       'opacity-orange': 'rgba(248, 88, 54, 0.15)',

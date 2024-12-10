@@ -41,8 +41,9 @@ export const Messages: React.FC<Props> = ({ activeChatId }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [lastDoc, setLastDoc] = useState<QueryDocumentSnapshot | null>(null);
   const [hasMore, setHasMore] = useState(true);
-  const { currentUser } = useAuth();
 
+
+  const { currentUser } = useAuth();
   const chatRef = useRef<HTMLDivElement>(null);
 
   // const loadMoreMessages = async () => {
@@ -139,9 +140,10 @@ export const Messages: React.FC<Props> = ({ activeChatId }) => {
     }
   };
 
+  console.log(messages)
+
   useEffect(() => {
     if (!activeChatId) return;
-
     const messagesRef = collection(firestore, 'messages');
     const messagesQuery = fbQuery(
       messagesRef,
@@ -164,7 +166,10 @@ export const Messages: React.FC<Props> = ({ activeChatId }) => {
       });
     });
 
-    return () => unsubscribe();
+    return () => {
+      unsubscribe();
+      setMessages([]);
+    };
   }, [activeChatId]);
 
   useEffect(() => {
@@ -182,7 +187,7 @@ export const Messages: React.FC<Props> = ({ activeChatId }) => {
     <div className="flex flex-col justify-end w-full h-full custom-scrollbar">
       <div
         ref={chatRef}
-        className="overflow-auto h-full custom-scrollbar mb-5 flex flex-col"
+        className="overflow-auto h-full custom-scrollbar mb-5 flex flex-col justify-end"
         onScroll={() => {
           if (chatRef.current!.scrollTop === 0) {
             // loadMoreMessages();
