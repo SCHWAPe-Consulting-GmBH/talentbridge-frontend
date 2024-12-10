@@ -6,8 +6,8 @@ import Image from 'next/image';
 const ChatMessage = ({ message }) => {
   const { currentUser } = useAuth();
 
-  const { text, uid, photoURL, displayName } = message;
-  const isSent = uid === currentUser.uid;
+  const { text, senderId, photoURL, senderName } = message;
+  const isSent = senderId === currentUser.uid;
   const containerClass = isSent
     ? 'flex-row-reverse bg-green-500'
     : 'bg-medium-gray';
@@ -32,7 +32,7 @@ const ChatMessage = ({ message }) => {
               'bg-[rgb(212,0,255)] rounded-full min-w-[40px] min-h-[40px] text-2xl flex justify-center items-center'
             }
           >
-            {displayName && displayName[0]}
+            {senderName && senderName[0]}
           </div>
         )}
       </div>

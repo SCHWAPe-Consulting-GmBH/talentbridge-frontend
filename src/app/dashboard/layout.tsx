@@ -6,6 +6,9 @@ import data from '@/dataJson/progressBarDashboard.json';
 import { SupportForm } from '@/components/dashboard/supportForm';
 import { useAuth } from '@/firebase/context/authContext';
 import { Loader } from '@/components/loader';
+import { useRouter } from 'next/navigation';
+import { logOut } from '@/firebase/auth';
+import { useEffect, useState } from 'react';
 
 export default function DashboardLayout({
   children,
@@ -13,11 +16,27 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   const { currentUser } = useAuth();
+  const router = useRouter();
+  const routeToLogin = async () => {
+    await router.push('/login');
+  };
+  const [isTimeout, setIsTimeout] = useState(false);
 
-  if (!currentUser) {
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (!currentUser) {
+        setIsTimeout(true);
+        routeToLogin();
+      }
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, [currentUser, router]);
+
+  if (!currentUser && !isTimeout) {
     return (
       <div className="flex justify-center items-center min-h-screen">
-        <Loader width={180} height={180} border={15} />
+        <Loader width={20} height={20} border={3} />
       </div>
     );
   }
