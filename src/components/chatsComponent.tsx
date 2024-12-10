@@ -11,11 +11,11 @@ import { AddUsersToChat } from '@/components/chats-components/addUsersToChat';
 import { Messages } from '@/components/chats-components/messages';
 import { useAuth } from '@/firebase/context/authContext';
 import message from '@/assets/icons/message_black.svg';
-import { Chat } from '@/types/chat';
+import { IChat } from '@/types/chat';
 
 export const ChatsComponent = () => {
   const [chatName, setChatName] = useState('');
-  const [allUsersChats, setAllUserChats] = useState<Chat[]>([]);
+  const [allUsersChats, setAllUserChats] = useState<IChat[]>([]);
   const [activeChatId, setActiveChatId] = useState('');
 
   const [activeChatPlusId, setActiveChatPlusId] = useState('');
@@ -43,7 +43,7 @@ export const ChatsComponent = () => {
 
     const chats = querySnapshot.docs.map((doc) => ({
       id: doc.id,
-      ...doc.data() as Omit<Chat, 'id'>,
+      ...doc.data() as Omit<IChat, 'id'>,
     }));
 
     setAllUserChats(chats);
@@ -76,11 +76,11 @@ export const ChatsComponent = () => {
 
         <div className="flex justify-between items-center gap-6 mb-[15px]">
           <p className="font-bold text-[24px] text-themetext">Chats</p>
-          <div className='flex gap-6'>
-            <button className='w-[6px]'>
+          <div className='flex gap-4'>
+            <button className='px-2 btn_scale'>
               <Image src={menu} alt="kebab menu" width={6}/>
             </button>
-            <button className='w-[22px]'>
+            <button className='w-[22px] btn_scale'>
               <Image src={search} alt="search" width={22} />
             </button>
           </div>

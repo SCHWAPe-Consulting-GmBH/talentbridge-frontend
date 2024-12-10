@@ -195,34 +195,34 @@ export const Messages: React.FC<Props> = ({ activeChatId }) => {
 
       <form
         onSubmit={(e) => addMessageToChat(e)}
-        className="flex flex-col bg-white w-[100%] py-3 px-4 rounded-xl"
+        className="flex flex-col bg-background-second w-[100%] py-3 px-4 rounded-xl"
       >
         <div className="flex gap-2 mb-4">
-          <button className='w-8 h-8 flex items-center justify-center '>
+          <button className='w-8 h-8 flex items-center justify-center btn_scale'>
             <Image src={text_aa} alt="" width={16} />
           </button>
 
-          <button className='w-8 h-8 flex items-center justify-center '>
+          <button className='w-8 h-8 flex items-center justify-center btn_scale'>
             <Image src={text_bold} alt="" width={16} />
           </button>
 
-          <button className='w-8 h-8 flex items-center justify-center '>
+          <button className='w-8 h-8 flex items-center justify-center btn_scale'>
             <Image src={text_tt} alt="" width={16} />
           </button>
 
-          <button className='w-8 h-8 flex items-center justify-center '>
+          <button className='w-8 h-8 flex items-center justify-center btn_scale'>
             <Image src={text_under} alt="" width={16} />
           </button>
 
-          <button className='w-8 h-8 flex items-center justify-center '>
+          <button className='w-8 h-8 flex items-center justify-center btn_scale'>
             <Image src={text_list} alt="" width={16} />
           </button>
 
-          <button className='w-8 h-8 flex items-center justify-center '>
+          <button className='w-8 h-8 flex items-center justify-center btn_scale'>
             <Image src={copy} alt="" width={16} />
           </button>
 
-          <button className='w-8 h-8 flex items-center justify-center '>
+          <button className='w-8 h-8 flex items-center justify-center btn_scale'>
             <Image src={text_add_photo} alt="" width={16} />
           </button>
         </div>
@@ -233,7 +233,7 @@ export const Messages: React.FC<Props> = ({ activeChatId }) => {
             placeholder="Enter text"
             value={messageText}
             onChange={(e) => setMessageText(e.target.value)}
-            className="input_text h-[43px] mr-4 text-secondary w-full"
+            className="input_text h-[43px] mr-4 bg-background-second w-full"
           />
 
           <button

@@ -4,8 +4,11 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import support from '@/assets/images/need-support-financial.png';
 import fine from '@/assets/images/fine-financial.png';
+import { useState } from 'react';
+import { SupportDetailModal } from './supportDetailModal';
 
 export const FinancialChoices = () => {
+  const [isSupportDetailShown, setIsSupportDetailShown] = useState(false);
   const router = useRouter();
 
   return (
@@ -45,12 +48,14 @@ export const FinancialChoices = () => {
           className="self-center mb-6"
         />
         <button
-          // onClick={() => router.push()}
+          onClick={() => setIsSupportDetailShown(true)}
           className="py-[11px] border border-themetext rounded-lg text-themetext btn_white_hover hover:border-transparent"
         >
           Get Started
         </button>
       </div>
+
+      {isSupportDetailShown && <SupportDetailModal isSupportDetailShown={isSupportDetailShown} onChangeSupportDetailShown={setIsSupportDetailShown}/>}
     </div>
   );
 };
