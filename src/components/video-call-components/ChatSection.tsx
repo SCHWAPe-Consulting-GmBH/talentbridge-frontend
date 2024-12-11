@@ -15,7 +15,7 @@ import { useCollectionData } from 'react-firebase-hooks/firestore';
 import ChatMessage from './ChatMessage';
 import { useAuth } from '@/firebase/context/authContext';
 
-const ChatSection = ({ chatId }) => {
+const ChatSection = ({ chatId, isCalling }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [messagesRef, setMessagesRef] = useState(null);
   const [messagesQuery, setMessagesQuery] = useState(null);
@@ -120,12 +120,12 @@ const ChatSection = ({ chatId }) => {
           placeholder="Type something nice"
           value={formValue}
           onChange={(e) => setFormValue(e.target.value)}
-          disabled={chatId == ''}
+          disabled={isCalling == ''}
         />
         <button
           type="submit"
           className="absolute rounded-full right-2 btn_green_hover"
-          disabled={chatId == ''}
+          disabled={isCalling == ''}
         >
           <Image src={sendMessageIcon} alt="Send Message" width={40} />
         </button>

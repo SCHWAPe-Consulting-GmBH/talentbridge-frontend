@@ -8,7 +8,7 @@ import {
   getDoc,
   onSnapshot,
 } from 'firebase/firestore';
-import { auth, firestore } from '@/firebase/config';
+import { firestore } from '@/firebase/config';
 import ChatSection from '@/components/video-call-components/ChatSection';
 import Header from '@/components/video-call-components/Header';
 import CallButton from '@/components/video-call-components/CallButton';
@@ -23,11 +23,16 @@ import {
   deleteCollectionCallChatById,
   deleteCallById,
 } from '../../firebase/chat.js';
-
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useAuth } from '@/firebase/context/authContext.jsx';
+import { Loader } from '@/components/loader';
 const VideoCall = () => {
+  const router = useRouter();
+  const query = useSearchParams();
+  const { currentUser } = useAuth();
   const [localStream, setLocalStream] = useState<MediaStream | null>(null);
   const [remoteStream, setRemoteStream] = useState<MediaStream | null>(null);
-  const [callId, setCallId] = useState('');
+  const [callId, setCallId] = useState(query.get('callId'));
   const [isCalling, setIsCalling] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const pc = useRef<RTCPeerConnection | null>(
@@ -70,10 +75,10 @@ const VideoCall = () => {
 
     setIsCalling(true);
 
-    const callDoc = doc(collection(firestore, 'calls'));
+    const callDoc = doc(firestore, 'calls', callId);
     const offerCandidates = collection(callDoc, 'offerCandidates');
     const answerCandidates = collection(callDoc, 'answerCandidates');
-    setCallId(callDoc.id);
+    // setCallId(callDoc.id);
 
     pc.current!.onicecandidate = (event) => {
       if (event.candidate)
@@ -171,7 +176,19 @@ const VideoCall = () => {
         }
       });
     };
-    console.log('end call');
+    const customAttributes = currentUser.reloadUserInfo?.customAttributes;
+
+    if (customAttributes) {
+      const attributes = JSON.parse(customAttributes);
+      if (attributes.role !== 'admin' && attributes.role !== 'coach') {
+        router.push('/dashboard');
+        return;
+      } else router.push('/portal');
+    }
+    if (!customAttributes) {
+      router.push('/dashboard');
+      return;
+    }
 
     if (localStream) {
       stopAndRemoveTracks(localStream);
@@ -310,7 +327,7 @@ const VideoCall = () => {
               )}
             </div>
           </div>
-          <ChatSection chatId={callId} />
+          <ChatSection chatId={callId} isCalling={isCalling} />
         </div>
       </div>
     </main>
