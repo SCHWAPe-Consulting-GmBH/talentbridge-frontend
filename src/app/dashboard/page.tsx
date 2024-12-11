@@ -1,10 +1,8 @@
 import { HomeworkDashboard } from '@/components/dashboard/homeworkDashboard';
 import { MeetingsDashboard } from '@/components/dashboard/meetingsDashboard';
 import { ProgressChart } from '@/components/progressChart';
-import { useAuth } from '@/firebase/context/authContext';
 
 const Dashboard = () => {
-
   return (
     <div className="mt-[30px]">
       <div className="flex space-x-[30px]">

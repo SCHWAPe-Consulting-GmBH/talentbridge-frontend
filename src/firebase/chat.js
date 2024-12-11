@@ -21,16 +21,57 @@ export const deleteCollectionCallChatById = async (chatId) => {
     console.error('Error deleting collection:', error);
   }
 };
+
+const deleteCollection = async (parentDoc, subcollection) => {
+  const subColRef = collection(parentDoc, subcollection);
+  const subColDocs = await getDocs(subColRef);
+
+  await Promise.all(subColDocs.docs.map((doc) => deleteDoc(doc.ref)));
+};
+
 export const deleteCallById = async (callId) => {
   try {
-    // Створюємо посилання на документ у колекції "calls" за його ID
     const callDocRef = doc(firestore, 'calls', callId);
 
-    // Видаляємо документ
+    await deleteCollection(callDocRef, 'offerCandidates');
+    await deleteCollection(callDocRef, 'answerCandidates');
     await deleteDoc(callDocRef);
-
     console.log(`Document with ID ${callId} deleted successfully.`);
   } catch (error) {
-    console.error(`Error deleting document with ID ${callId}:`, error);
+    console.error(
+      `Error scheduling deletion for document with ID ${callId}:`,
+      error
+    );
+  }
+};
+
+export const createCallWithLink = async (pc) => {
+  try {
+    // Створюємо документ для дзвінка
+    const callDoc = doc(collection(firestore, 'calls'));
+    const offerCandidates = collection(callDoc, 'offerCandidates');
+
+    // Генеруємо ID дзвінка
+    const callId = callDoc.id;
+
+    // Обробляємо ICE-кандидатів
+    pc.onicecandidate = (event) => {
+      if (event.candidate) {
+        setDoc(doc(offerCandidates), event.candidate.toJSON());
+      }
+    };
+
+    // Створюємо пропозицію (offer)
+    const offerDescription = await pc.createOffer();
+    await pc.setLocalDescription(offerDescription);
+
+    // Зберігаємо пропозицію у Firestore
+    await setDoc(callDoc, { offer: offerDescription });
+
+    // Повертаємо ID дзвінка
+    return callId;
+  } catch (error) {
+    console.error('Error creating call:', error);
+    return null;
   }
 };

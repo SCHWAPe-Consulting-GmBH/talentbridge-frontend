@@ -1,13 +1,13 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import {logOut} from '@/firebase/auth'
+import { logOut } from '@/firebase/auth';
 export const LogoutButton = () => {
   const router = useRouter();
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     try {
-      logOut();
+      await logOut();
       router.push('/login');
     } catch (error) {
       console.error('Logout Error:', error);
