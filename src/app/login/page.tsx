@@ -39,7 +39,7 @@ const Login = () => {
       if (customAttributes) {
         const attributes = JSON.parse(customAttributes);
 
-        if (attributes.role === 'admin' || attributes.role === 'coach') {
+        if (attributes.role === 'moderator' || attributes.role === 'coach') {
           router.push('/portal');
         } else if (attributes.role === 'student') {
           router.push('/dashboard');
@@ -90,7 +90,10 @@ const Login = () => {
             if (customAttributes) {
               const attributes = JSON.parse(customAttributes);
 
-              if (attributes.role === 'admin' || attributes.role === 'coach') {
+              if (
+                attributes.role === 'moderator' ||
+                attributes.role === 'coach'
+              ) {
                 router.push('/portal');
               } else if (attributes.role === 'student') {
                 router.push('/dashboard');
@@ -127,8 +130,11 @@ const Login = () => {
 
             if (customAttributes) {
               const attributes = JSON.parse(customAttributes);
-
-              if (attributes.role === 'admin' || attributes.role === 'coach') {
+              console.log('Custom attributes:', attributes);
+              if (
+                attributes.role === 'coach' ||
+                attributes.role === 'moderator'
+              ) {
                 router.push('/portal');
               } else if (attributes.role === 'student') {
                 router.push('/dashboard');

@@ -179,7 +179,7 @@ const VideoCall = () => {
 
     if (customAttributes) {
       const attributes = JSON.parse(customAttributes);
-      if (attributes.role !== 'admin' && attributes.role !== 'coach') {
+      if (attributes.role !== 'moderator' && attributes.role !== 'coach') {
         router.push('/dashboard');
         return;
       } else router.push('/portal');
