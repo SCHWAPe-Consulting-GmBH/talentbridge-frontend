@@ -1,8 +1,8 @@
 import { useHttp } from '@/api/http';
 
-export const getHomeworkByStudentId = async (studentId) => {
+export const getHomeworkForStudent = async () => {
   try {
-    const data = await useHttp.get(`/student/homework/${studentId}`);
+    const data = await useHttp.get(`/student/homework`);
     console.log('запит відправлено', data);
     return data;
   } catch (error) {
@@ -10,18 +10,18 @@ export const getHomeworkByStudentId = async (studentId) => {
   }
 };
 
-export const getMeetingByStudentId = async (studentId) => {
+export const getMeetingForStudent = async () => {
   try {
-    const data = await useHttp.get(`/student/meeting/${studentId}`);
+    const data = await useHttp.get(`/student/meeting`);
     console.log('запит відправлено', data);
     return data;
   } catch (error) {
     console.error('Error fetching users:', error);
   }
 };
-export const getDocumentByStudentId = async (studentId) => {
+export const getDocumentByStudentId = async () => {
   try {
-    const data = await useHttp.get(`/student/document/${studentId}`);
+    const data = await useHttp.get(`/student/document`);
     console.log('запит відправлено', data);
     return data;
   } catch (error) {

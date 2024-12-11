@@ -9,74 +9,33 @@ import { ProgressChart } from '@/components/progressChart';
 import data from '@/dataJson/progressBarPortal.json';
 import Link from 'next/link';
 import { HomeworkPortalCoach } from '@/components/portal/homeworkPortalCoach';
+import { StudentPortalCoach } from '@/components/portal/studentPortalCoach';
+import { CoursePortalCoach } from '@/components/portal/coursePortalCoach';
+import { MeetingPortalCoach } from '@/components/portal/meetingPortalCoach';
 
 const PortalDashboard = () => {
-  let user = 'coach';
-
   return (
-    <div className={cn("mt-[20px]  max-w-[1200px] mx-auto", {
-      'grid grid-cols-[minmax(0,_860px)_280px] gap-x-4': user === 'student',
-      'flex flex-col space-y-4': user === 'coach'
-    })}>
-      {user === 'student' && (
-        <>
-          <div className="">
-            <CoachingProgressPortal data={data} />
-            <section className="mt-[16px]">
-              <h2 className="mb-[10px] text-themetext font-bold text-[20px]">
-                Progress
-              </h2>
-              <ProgressChart maxHeightWrap={377} maxHeightInner={367} />
-            </section>
-
-            <section className="mt-4 w-full">
-              <div className="mb-[12px] flex justify-between">
-                <h2 className=" text-themetext font-bold text-[20px]">
-                  Homework
-                </h2>
-                <Link
-                  href="/portal/homework"
-                  className="text-primary btn_scale"
-                >
-                  See All
-                </Link>
-              </div>
-
-              <HomeworkPortal />
-            </section>
-          </div>
-
-          <div className="">
-            <section>
-              <div className="flex justify-between items-center mb-[10px]">
-                <h2 className="text-themetext font-bold text-[20px]">
-                  Meetings
-                </h2>
-                <Link
-                  href="/portal/meetings"
-                  className="text-primary btn_scale"
-                >
-                  See All
-                </Link>
-              </div>
-              <Meetings isShortVersion={true} />
-            </section>
-            <DocumentsPortal />
-          </div>
-        </>
+    <div
+      className={cn(
+        'mt-[20px]  max-w-[1200px] mx-auto',
+        'flex flex-col space-y-4'
       )}
-
-      {user === 'coach' && (
-        <>
-        <div className='flex'>
-          <HomeworkPortalCoach/>
+    >
+      <>
+        <div className="flex">
+          <HomeworkPortalCoach />
+        </div>
+        <div>
+          <CoursePortalCoach />
+        </div>
+        <div>
+          <MeetingPortalCoach />
         </div>
 
         <div>
-
+          <StudentPortalCoach />
         </div>
-        </>
-      )}
+      </>
     </div>
   );
 };
