@@ -4,6 +4,7 @@ import './globals.css';
 import { Providers } from './providers';
 import { ReactQueryProvider } from './queryProvider';
 import { Toaster } from 'react-hot-toast';
+import { Suspense } from 'react';
 
 
 const nunito = Nunito_Sans({
@@ -24,10 +25,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${nunito.className} antialiased`}>
+        <Suspense fallback={<div>Loading...</div>}>
         <ReactQueryProvider>
           <Providers>{children}</Providers>
         </ReactQueryProvider>
         <Toaster position="top-center" reverseOrder={false} />
+        </Suspense>
       </body>
     </html>
   );
