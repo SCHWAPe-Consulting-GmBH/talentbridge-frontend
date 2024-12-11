@@ -87,7 +87,7 @@ const Onboarding = () => {
 
         try {
           await saveUserData(userId, userData);
-          console.log('Answers saved successfully');
+  
           router.push('/course-matching');
         } catch (error) {
           console.error('Error saving answers:', error);

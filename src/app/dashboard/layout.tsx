@@ -7,8 +7,9 @@ import { SupportForm } from '@/components/dashboard/supportForm';
 import { useAuth } from '@/firebase/context/authContext';
 import { Loader } from '@/components/loader';
 import { useRouter } from 'next/navigation';
-import { logOut } from '@/firebase/auth';
+import { getUserPayment, logOut } from '@/firebase/auth';
 import { useEffect, useState } from 'react';
+import { isNull } from 'util';
 
 export default function DashboardLayout({
   children,
@@ -16,51 +17,72 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   const { currentUser } = useAuth();
+  const [paymentData, setPaymentData] = useState(null);
   const router = useRouter();
+  const roleObj = currentUser?.reloadUserInfo.customAttributes;
+  let role: Record<'role', string> | null = null;
+
+  if (roleObj) {
+    role = JSON.parse(roleObj);
+  }
+
   const routeToLogin = async () => {
     await router.push('/login');
   };
   const [isTimeout, setIsTimeout] = useState(false);
 
+  const getPayment = async () => {
+    setPaymentData(await getUserPayment(currentUser.uid));
+  };
+
   useEffect(() => {
     const timer = setTimeout(() => {
+      getPayment();
       if (!currentUser) {
         setIsTimeout(true);
         routeToLogin();
       }
     }, 3000);
 
+    
+
     return () => clearTimeout(timer);
   }, [currentUser, router]);
 
-  if (!currentUser && !isTimeout) {
+  if (!currentUser && !isTimeout || (typeof paymentData != 'undefined' && !paymentData)) {
     return (
       <div className="flex justify-center items-center min-h-screen">
-        <Loader width={20} height={20} border={3} />
+        <Loader width={150} height={150} border={20} />
       </div>
     );
   }
   const { email, displayName } = currentUser;
 
   return (
-    <main className="bg5 background-style bg-background h-full w-full pt-[10px] px-10 pb-[100px]">
-      <div className="max-w-[1350px] mx-auto ">
+    <main
+      className={`background-style bg-background h-full w-full pt-[10px] px-10 pb-[100px] ${(paymentData?.method === 'aid' && currentUser) ? 'bg-portal-aid' : 'bg5'}`}
+    >
+      <div className="max-w-[1350px] mx-auto relative">
         <HeaderDashboard />
-        <div className="flex px-20 justify-between mt-[105px] relative z-10">
-          <div>
-            <h1 className="font-extrabold text-[60px] text-white">
-              Welcome,
-              <br /> {displayName ? displayName : email.split('@')[0]}
-            </h1>
-            <p className="font-bold text-white max-w-[465px]">
-              Lorem ipsum dolor sit amet consectetur. Lectus gravida praesent
-              pretium varius nulla arcu nunc elementum. Tincidunt quam dui in
-              sagittis mattis tincidunt cum egestas.{' '}
-            </p>
-          </div>
-          <ChartDashboard />
-        </div>
-        <CoachingProgress data={data} />
+        {(paymentData?.method != 'aid') && currentUser &&
+          <>
+            <div className="flex px-20 justify-between mt-[105px] relative z-10 min-h-[455px]">
+              <div>
+                <h1 className="font-extrabold text-[60px] text-white">
+                  Welcome,
+                  <br /> {displayName ? displayName : email.split('@')[0]}
+                </h1>
+                <p className="font-bold text-white max-w-[465px]">
+                  Lorem ipsum dolor sit amet consectetur. Lectus gravida
+                  praesent pretium varius nulla arcu nunc elementum. Tincidunt
+                  quam dui in sagittis mattis tincidunt cum egestas.{' '}
+                </p>
+              </div>
+              {role?.role === 'student' && <ChartDashboard />}
+            </div>
+            <CoachingProgress data={data} />
+          </>
+        }
         {children}
         <SupportForm />
       </div>
