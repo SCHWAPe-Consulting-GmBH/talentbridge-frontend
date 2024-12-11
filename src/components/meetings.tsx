@@ -36,6 +36,7 @@ export const Meetings: React.FC<Props> = ({ isShortVersion }) => {
       {calls.map((call) => {
         return (
           <div
+            onClick={() => router.push(`/video-call?callId=${call.id}`)}
             className={`bg-background-second rounded-2xl green_border_hover border-box border border-transparent cursor-pointer course_shadow ${isShortVersion ? 'p-[15px]' : 'px-[18px] py-[21px]'}`}
             key={uuidv4()}
           >
