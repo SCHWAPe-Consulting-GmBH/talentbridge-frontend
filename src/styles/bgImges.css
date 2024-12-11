@@ -24,6 +24,10 @@
   background-image: url('../assets/bg/dashboard_bg.png');
 }
 
+.bg-portal-aid {
+  background-image: url('../assets/bg/student-aid.png');
+}
+
 .bg-messages {
   background-image: url('../assets/bg/bg-messages.png');
   background-size: cover;

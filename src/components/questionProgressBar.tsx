@@ -16,7 +16,7 @@ export const QuestionProgressBar: React.FC<Props> = ({ questionNumber }) => {
           'w-[108px]': questionNumber === 2,
           'w-full': questionNumber > 3,
         })}
-      ></div>
+      />
     </div>
     <div className="h-2 w-[149px] bg-white rounded-lg p-[2px]">
       <div
@@ -25,7 +25,7 @@ export const QuestionProgressBar: React.FC<Props> = ({ questionNumber }) => {
           'w-[72px]': questionNumber === 4,
           'w-full': questionNumber > 4,
         })}
-      ></div>
+      />
     </div>
     <div className="h-2 w-[149px] bg-white rounded-lg p-[2px]">
       <div
@@ -33,7 +33,7 @@ export const QuestionProgressBar: React.FC<Props> = ({ questionNumber }) => {
           'w-0': questionNumber < 6,
           'w-full': questionNumber >= 6,
         })}
-      ></div>
+      />
     </div>
     <div className="h-2 w-[149px] bg-white rounded-lg p-[2px]">
       <div
@@ -42,7 +42,7 @@ export const QuestionProgressBar: React.FC<Props> = ({ questionNumber }) => {
           'w-[72px]': questionNumber === 7,
           'w-full': questionNumber > 7,
         })}
-      ></div>
+      />
     </div>
   </div>
 )};
