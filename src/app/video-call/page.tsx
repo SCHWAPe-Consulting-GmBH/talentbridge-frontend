@@ -37,7 +37,6 @@ const VideoCall = () => {
   const [record, setRecord] = useState(false);
   const { startTimer, stopTimer, formattedTimer } = useRecordTimer();
 
-
   const webcamVideoRef = useRef<HTMLVideoElement>(null);
   const remoteVideoRef = useRef<HTMLVideoElement>(null);
 
@@ -115,6 +114,12 @@ const VideoCall = () => {
         setDoc(doc(answerCandidates), event.candidate.toJSON());
     };
 
+    pc.current!.onconnectionstatechange = () => {
+      if (pc.current!.connectionState === 'disconnected') {
+        handleEndCall();
+      }
+    };
+
     const callData = (await getDoc(callDoc)).data();
     const offerDescription = callData?.offer;
     await pc.current!.setRemoteDescription(
@@ -166,6 +171,7 @@ const VideoCall = () => {
         }
       });
     };
+    console.log('end call');
 
     if (localStream) {
       stopAndRemoveTracks(localStream);
@@ -236,16 +242,16 @@ const VideoCall = () => {
     }
   };
 
-  useEffect(() => {
-    let unsubscribe = () => {};
+  // useEffect(() => {
+  //   let unsubscribe = () => {};
 
-    if (callId) {
-      const callDocRef = doc(firestore, 'calls', callId);
-      unsubscribe = onSnapshot(callDocRef, () => {});
-    }
+  //   if (callId) {
+  //     const callDocRef = doc(firestore, 'calls', callId);
+  //     unsubscribe = onSnapshot(callDocRef, () => {});
+  //   }
 
-    return unsubscribe;
-  }, [callId]);
+  //   return unsubscribe;
+  // }, [callId]);
 
   return (
     <main className="px-[100px] pt-[100px] bg4 background-style bg-background">

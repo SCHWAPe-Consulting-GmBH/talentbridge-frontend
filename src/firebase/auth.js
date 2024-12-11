@@ -1,7 +1,9 @@
+'use client';
 import { auth } from '@/firebase/config';
 import { signOut } from 'firebase/auth';
 import { firestore } from '@/firebase/config';
-import { doc, setDoc, getDoc } from 'firebase/firestore';
+import { doc, setDoc, getDoc, updateDoc } from 'firebase/firestore';
+// import { updateProfile } from 'firebase/auth';
 
 export const logOut = async () => {
   await signOut(auth);
@@ -28,8 +30,7 @@ export const updateUserPayment = async (userId, paymentData) => {
   try {
     const userRef = doc(firestore, 'users', userId);
 
-    await updateDoc(userRef, { payment: paymentData });
-
+ await setDoc(userRef, { payment: paymentData }, { merge: true });
     console.log('Payment data updated successfully!');
   } catch (error) {
     console.error('Error updating payment data:', error);
@@ -59,5 +60,18 @@ export const getUserPayment = async (userId) => {
   } catch (error) {
     console.error('Error fetching payment data:', error);
     throw error;
+  }
+};
+import { updateProfile } from 'firebase/auth';
+
+export const updateDisplayName = async (newDisplayName, newPhotoURL) => {
+  try {
+    await updateProfile(auth.currentUser, {
+      displayName: newDisplayName,
+      photoURL: newPhotoURL,
+    });
+    console.log('Display name updated successfully!');
+  } catch (error) {
+    console.error('Error updating display name:', error);
   }
 };
