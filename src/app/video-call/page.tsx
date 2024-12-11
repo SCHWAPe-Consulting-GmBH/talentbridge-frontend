@@ -25,7 +25,6 @@ import {
 } from '../../firebase/chat.js';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useAuth } from '@/firebase/context/authContext.jsx';
-import { Loader } from '@/components/loader';
 const VideoCall = () => {
   const router = useRouter();
   const query = useSearchParams();
