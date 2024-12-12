@@ -41,7 +41,7 @@ export default function DashboardLayout({
   if (isLoading) {
     return (
       <div className="flex justify-center items-center min-h-screen">
-        <Loader width={50} height={50} border={5} />
+        <Loader width={150} height={150} border={20} />
       </div>
     );
   }

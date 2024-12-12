@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { auth } from '../config';
 import { onAuthStateChanged } from 'firebase/auth';
-import { getUserData } from '@/firebase/auth';
+import { getUserData, getUserPayment } from '@/firebase/auth';
 
 const AuthContext = React.createContext();
 
@@ -15,6 +15,7 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
   const [userInfo, setUserInfo] = useState(null);
   const [attributes, setAttributes] = useState(null);
+  const [paymentData, setPaymentData] = useState(null);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, initializeUser);
@@ -26,12 +27,11 @@ export function AuthProvider({ children }) {
       setCurrentUser(user);
       setUserLoggedIn(true);
       setUserInfo(getUserData(user.uid));
-      localStorage.setItem('currentUser', JSON.stringify(user));
       setAttributes(JSON.parse(user.reloadUserInfo?.customAttributes));
+      setPaymentData(await getUserPayment(user.uid) || undefined)
     } else {
       setUserLoggedIn(false);
       setCurrentUser(null);
-      localStorage.removeItem('currentUser');
     }
     setLoading(false);
   }
@@ -42,6 +42,7 @@ export function AuthProvider({ children }) {
     userLoggedIn,
     loading,
     attributes,
+    paymentData
   };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

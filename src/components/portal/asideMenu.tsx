@@ -8,11 +8,11 @@ import { logOut } from '@/firebase/auth';
 export const AsideMenu = () => {
   const router = useRouter();
   const pathname = usePathname();
-  const currentPage = pathname.split('/').at(-1);
+  const currentPage = pathname.split('/').at(-1) ? pathname.split('/').at(-1) : 'dashboard';
   const { resolvedTheme } = useTheme();
 
   const upperButtons = [
-    'dashboard',
+    '',
     'homework',
     'meetings',
     'documents',
@@ -27,27 +27,28 @@ export const AsideMenu = () => {
       <div className="flex flex-col justify-between h-full">
         <div>
           {upperButtons.map((btn) => {
+            const currBtn = btn ? btn : 'dashboard';
             return (
               <Link
                 key={uuidv4()}
                 className={cn(
                   'h-12 flex items-center aside_menu w-[192px] px-[14px] pl-[16px] rounded-xl box-border',
                   {
-                    aside_menu_active: btn === currentPage,
+                    aside_menu_active: currBtn === currentPage,
                   }
                 )}
-                href={`/portal/${btn}`}
+                href={`/portal/${currBtn}`}
               >
                 <img
-                  src={`/icons/menu_portal_${btn}.svg`}
-                  alt={`${btn} icon`}
+                  src={`/icons/menu_portal_${currBtn}.svg`}
+                  alt={`${currBtn} icon`}
                   width={20}
                   className={cn('mr-[14px]', {
                     graphic_portal_menu: resolvedTheme === 'dark',
                   })}
                 />
                 <p className="font-semibold text-[14px] text-themetext upper_first_letter">
-                  {btn}
+                  {currBtn }
                 </p>
               </Link>
             );

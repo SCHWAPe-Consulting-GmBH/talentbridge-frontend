@@ -27,7 +27,6 @@ function findKeyByValue(obj: IPaymentData, value: TStepStatus) {
 
   if (result) {
     const number = result[result.length - 1];
-    console.log('number', number);
 
     return +number;
   } else {
@@ -38,9 +37,12 @@ function findKeyByValue(obj: IPaymentData, value: TStepStatus) {
 const FinancialAid = () => {
   const { currentUser } = useAuth();
   const router = useRouter();
-  const { email, displayName } = currentUser;
+  const [userData, setUserData] = useState({
+    email: '',
+    name: '',
+  });
   const [paymentData, setPaymentData] = useState<IPaymentData | null>(null);
-  const [activeStepId, setActiveStepId] = useState(0);
+  const [activeStepId, setActiveStepId] = useState(1);
   const [reloadPayment, setReloadPayment] = useState('');
 
   const [isFirstStepShown, setIsFirstStepShown] = useState(false);
@@ -58,15 +60,17 @@ const FinancialAid = () => {
   ];
 
   const payment = async () => {
-    const payment = await getUserPayment(currentUser.uid);
-    if (!payment || payment.done) {
-      router.push('/dashboard');
-      return;
-    }
-    setPaymentData(payment);
+    if (currentUser) {
+      const payment = await getUserPayment(currentUser.uid);
+      if (!payment || payment.done) {
+        router.push('/dashboard');
+        return;
+      }
+      setPaymentData(payment);
 
-    const activeId = findKeyByValue(payment, 'in progress');
-    setActiveStepId(activeId);
+      const activeId = findKeyByValue(payment, 'in progress');
+      setActiveStepId(activeId);
+    }
   };
 
   const ifDone = async () => {
@@ -76,6 +80,16 @@ const FinancialAid = () => {
     await updateUserPayment(currentUser.uid, paymentToUpdate);
   };
 
+  useEffect(() => {
+    if (currentUser) {
+      const { email, displayName } = currentUser;
+      setUserData({
+        email,
+        name: displayName,
+      });
+    }
+  }, [currentUser]);
+
   if (activeStepId === 6) {
     ifDone();
     router.push('/dashboard');
@@ -83,11 +97,11 @@ const FinancialAid = () => {
 
   useEffect(() => {
     payment();
-  }, [reloadPayment]);
+  }, [reloadPayment])
 
   return (
     <>
-      {!paymentData ? (
+      {!paymentData || !currentUser ? (
         <div className="flex justify-center items-center min-h-screen">
           <Loader width={120} height={120} border={15} />
         </div>
@@ -96,7 +110,8 @@ const FinancialAid = () => {
           <div className="flex flex-col py-[16px] px-5 items-center mt-[105px] mx-auto rounded-xl bg-opacity-light-black max-w-[960px] z-10 min-h-[480px] backdrop-blur-sm">
             <h1 className="font-extrabold text-[60px] text-white mb-[40px]">
               Welcome,
-              <br /> {displayName ? displayName : email.split('@')[0]}
+              <br />{' '}
+              {userData.name ? userData.name : userData.email.split('@')[0]}
             </h1>
 
             <StepsSwap activeStepId={activeStepId} />
@@ -107,14 +122,12 @@ const FinancialAid = () => {
               Steps to be Implemented
             </h2>
             <div className="bg-background-second rounded-full gap-3">
-              <button
-                className='py-2 px-[45px] font-semibold border rounded-full bg-opacity-primary border-primary text-themetext'
-              >
+              <button className="py-2 px-[45px] font-semibold border rounded-full bg-opacity-primary border-primary text-themetext">
                 Steps to Success
               </button>
               <button
                 onClick={() => router.push('/learning-hub')}
-                className='py-2 px-[45px] font-semibold border rounded-full border-transparent text-neutral2'
+                className="py-2 px-[45px] font-semibold border rounded-full border-transparent text-neutral2"
               >
                 Learning Hub
               </button>

@@ -29,7 +29,7 @@ export const StepsSwap: React.FC<Props> = ({ activeStepId }) => {
     </div>
 
     <div className="flex flex-col items-center w-[462px]">
-      {activeStepId != 6 && (
+      {activeStepId <= 5 && (
         <>
           <div className="rounded-xl bg-primary flex items-center justify-center w-[48px] h-[48px] ">
             <Image src={currentStep} alt="" width={13} />

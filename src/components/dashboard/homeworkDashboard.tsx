@@ -37,10 +37,8 @@ export const HomeworkDashboard = () => {
       }
     };
 
-    if (attributes.role === 'student') fetchData();
+    if (attributes?.role === 'student') fetchData();
   }, []);
-  console.log('homeworks', homeworks);
-  console.log('documents', documents);
 
   function getRandomNumber() {
     return Math.floor(Math.random() * 5);
