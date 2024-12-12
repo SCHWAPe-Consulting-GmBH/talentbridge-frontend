@@ -2,27 +2,21 @@
 
 import { useState } from 'react';
 import cn from 'classnames';
-import { Select } from 'antd';
 import { useRouter } from 'next/navigation'
-import months from '@/dataJson/months.json';
-import { IconArrowForSelect } from '@/components/iconArrowForSelect';
 import { RegistrationNotification } from '@/components/registrationNotification';
-import { getVisibleDays } from '@/utils/getDays';
-import { getVisibleHours } from '@/utils/getHours';
+import { IDateSelect } from '@/types/dateSelect';
+import { SelectDate } from '@/components/selectDate';
 
 
 const Registration = () => {
   const [isModalShown, setIsModalShown] = useState(false);
-  const [scheduledDate, setSchedulateDate] = useState({
+  const [scheduledDate, setSchedulateDate] = useState<IDateSelect>({
     month: '',
     day: 0,
     hours: ''
   })
 
   const router = useRouter();
-
-  const visibleDays = getVisibleDays(scheduledDate.month);
-  const visibleHours = getVisibleHours(scheduledDate.month, scheduledDate.day);
 
   const handleOpenModal = () => {
     setIsModalShown(true);
@@ -82,37 +76,9 @@ const Registration = () => {
               Choose a date
             </h2>
 
-            <div className="flex items-center mb-8">
-              <Select
-                style={{ width: 228, height: 56 }}
-                placeholder='Month'
-                suffixIcon={<IconArrowForSelect/>}
-                onChange={e => handleChangeDate(e, 'month')}
-                options={months}
-              />
+            <SelectDate scheduledDate={scheduledDate} onChangeSheduledDate={handleChangeDate} width={228}/>
 
-              <div className='w-3 h-1 bg-neutral2 mx-2'></div>
-
-              <Select
-                style={{ width: 228, height: 56 }}
-                placeholder='Day'
-                suffixIcon={<IconArrowForSelect/>}
-                onChange={e => handleChangeDate(e, 'day')}
-                options={visibleDays}
-              />
-
-              <div className='w-3 h-1 bg-neutral2 mx-2'></div>
-
-              <Select
-                style={{ width: 228, height: 56 }}
-                placeholder='Hours'
-                suffixIcon={<IconArrowForSelect/>}
-                onChange={e => handleChangeDate(e, 'hours')}
-                options={visibleHours}
-              />
-            </div>
-
-            <button className='btn_green_hover bg-primary p-[10px]'>Schedule a meeting</button>
+            <button className='btn_green_hover bg-primary p-[10px] mt-8'>Schedule a meeting</button>
           </div>
         </div>
       </div>

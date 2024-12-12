@@ -9,7 +9,7 @@ import { Loader } from '@/components/loader';
 import { useRouter } from 'next/navigation';
 import { getUserPayment, logOut } from '@/firebase/auth';
 import { useEffect, useState } from 'react';
-import { isNull } from 'util';
+import { IPaymentData } from '@/types/steps';
 
 export default function DashboardLayout({
   children,
@@ -17,7 +17,7 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   const { currentUser } = useAuth();
-  const [paymentData, setPaymentData] = useState(null);
+  const [paymentData, setPaymentData] = useState<null | undefined | IPaymentData>(null);
   const router = useRouter();
   const roleObj = currentUser?.reloadUserInfo.customAttributes;
   let role: Record<'role', string> | null = null;
@@ -52,7 +52,13 @@ export default function DashboardLayout({
   }, [currentUser, router]);
 
   const getPayment = async () => {
-    setPaymentData(await getUserPayment(currentUser.uid));
+    const payment = await getUserPayment(currentUser.uid)
+    if (payment) {
+      setPaymentData(payment);
+      return;
+    }
+    setPaymentData(undefined);
+
   };
 
   useEffect(() => {
@@ -85,7 +91,7 @@ export default function DashboardLayout({
     >
       <div className="max-w-[1350px] mx-auto relative">
         <HeaderDashboard />
-        {(paymentData?.method != 'aid') && currentUser &&
+        {(paymentData?.method != 'aid' || paymentData?.done) && currentUser &&
           <>
             <div className="flex px-20 justify-between mt-[105px] relative z-10 min-h-[455px]">
               <div>

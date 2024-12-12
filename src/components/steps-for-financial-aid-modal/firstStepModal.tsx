@@ -1,33 +1,118 @@
+import { updateUserPayment } from '@/firebase/auth';
+import { useAuth } from '@/firebase/context/authContext';
+import { IPaymentData } from '@/types/steps';
 import cn from 'classnames';
 import { useState } from 'react';
 
 interface Props {
   isFirstStepShown: boolean;
   onChangeFirstStepShown: (value: boolean) => void;
+  onChangeReloadPayment: (value: string) => void;
 }
 
 export const FirstStepModal: React.FC<Props> = ({
   isFirstStepShown,
   onChangeFirstStepShown,
+  onChangeReloadPayment
 }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [answers, setAnswers] = useState<string[]>([]);
   const [selectedAnswer, setSelectedAnswer] = useState<string>('');
+  const { currentUser } = useAuth();
 
-  const data = [
-    {
-      question: 'What is your current situation?',
-      answers: [
-        'I am already receiving financial support',
-        'I have applied for financial support but haven’t received a decision yet',
-        'I have not applied for financial support yet',
-      ],
-    },
-  ];
+  const initialData = {
+    number: 1,
+    question: 'What is your current situation?',
+    answers: [
+      'I am already receiving financial support',
+      'I have applied for financial support but haven’t received a decision yet',
+      'I have not applied for financial support yet',
+    ],
+    additionalInfo: '',
+  };
+
+  const secondForFirst = {
+    number: 1.2,
+    question: 'From which agency are you receiving financial support?',
+    answers: [
+      'Job Center (Büregergeld)',
+      'Agentur für Arbeit (Arbeitsloseneld)',
+    ],
+    additionalInfo:
+      'Thank you. We will collect additional details in the next step.',
+  };
+
+  const secondForSecond = {
+    number: 1.2,
+    question: 'Where did you apply for support?',
+    answers: [
+      'Job Center (Büregergeld)',
+      'Agentur für Arbeit (Arbeitsloseneld)',
+    ],
+    additionalInfo:
+      'Thank you. We will collect additional details in the next step.',
+  };
+
+  const secondForThird = {
+    number: 1.2,
+    question:
+      'Have you worked at least 12 months in a social insurance-paying job within the last 30 months before losing your job?',
+    answers: [
+      'Yes -> You are likely eligible for Arbeitslosengeld. We recommend applying at the Agentur für Arbeit.',
+      'No -> You may be eligible for Bürgergeld. We recommend contacting your local Job Center.',
+    ],
+    additionalInfo: 'We will guide you through the next steps to apply.',
+  };
+
+  const [data, setData] = useState(initialData);
 
   const handleSelectAnswer = (answer: string) => {
     setSelectedAnswer(answer);
   };
+
+  const handleMoveToNextQuestion = async () => {
+    setAnswers((prev) => [...prev, selectedAnswer]);
+
+    if (activeIndex === 1) {
+      const paymentToUpdate = {
+        step_1: 'completed',
+        step_2: 'in progress',
+      };
+      await updateUserPayment(currentUser.uid, paymentToUpdate);
+      
+      onChangeReloadPayment('1');
+
+      onChangeFirstStepShown(false);
+      return;
+    }
+
+    setActiveIndex(1);
+
+    if (selectedAnswer === data.answers[0]) {
+      setData(secondForFirst);
+      setSelectedAnswer('');
+      return;
+    }
+
+    if (selectedAnswer === data.answers[1]) {
+      setData(secondForSecond);
+      setSelectedAnswer('');
+      return;
+    }
+
+    if (selectedAnswer === data.answers[2]) {
+      setData(secondForThird);
+      setSelectedAnswer('');
+      return;
+    }
+  };
+
+  const handleMoveToBack = () => {
+    setActiveIndex(0);
+    setSelectedAnswer(answers[0]);
+    setData(initialData);
+    setAnswers([]);
+  } 
 
   return (
     <div
@@ -54,8 +139,8 @@ export const FirstStepModal: React.FC<Props> = ({
         </p>
 
         <div className="p-4 rounded-xl shadow-md mb-8">
-          <p className="font-bold text-[20px] text-themetext mb-6">{`${activeIndex + 1}. ${data[activeIndex].question}`}</p>
-          {data[activeIndex].answers.map((answer) => {
+          <p className="font-bold text-[20px] text-themetext mb-6">{`${data.number}. ${data.question}`}</p>
+          {data.answers.map((answer) => {
             return (
               <div className="ml-4 flex gap-2 mb-3 items-center">
                 <input
@@ -68,6 +153,9 @@ export const FirstStepModal: React.FC<Props> = ({
               </div>
             );
           })}
+          {data.additionalInfo && (
+            <p className="mt-3 text-neutral2 ">{data.additionalInfo}</p>
+          )}
         </div>
         <div className="flex justify-between items-center">
           <div className="flex space-x-4">
@@ -91,12 +179,24 @@ export const FirstStepModal: React.FC<Props> = ({
             </div>
           </div>
 
-          <button
-            disabled={!selectedAnswer}
-            className={` py-[5px] px-[26px] text-white rounded-lg ${selectedAnswer ? 'bg-primary btn_green_hover' : 'bg-neutral2' }`}
-          >
-            Next
-          </button>
+          <div>
+            {activeIndex === 1 && (
+              <button
+                onClick={() => handleMoveToBack()}
+                className="font-semibold text-themetext box-border border border-themetext mr-8 rounded-lg py-[5px] px-[26px] btn_scale"
+              >
+                Back
+              </button>
+            )}
+
+            <button
+              disabled={!selectedAnswer}
+              onClick={() => handleMoveToNextQuestion()}
+              className={`py-[5px] px-[26px] text-white rounded-lg ${selectedAnswer ? 'bg-primary border border-primary btn_green_hover' : 'bg-neutral2 border border-neutral2'}`}
+            >
+              Next
+            </button>
+          </div>
         </div>
       </div>
     </div>
