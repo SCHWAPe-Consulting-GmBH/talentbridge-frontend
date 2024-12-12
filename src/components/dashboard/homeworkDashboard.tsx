@@ -12,25 +12,35 @@ import pic4 from '@/assets/images/picture4_homework.png';
 import pic5 from '@/assets/images/picture5_homework.png';
 import { useEffect, useState } from 'react';
 import { HomeworkModal } from './homeworkModal';
-import { getHomeworkForStudent } from '@/api/studentOperations';
+import {
+  getDocumentForStudent,
+  getHomeworkForStudent,
+} from '@/api/studentOperations';
+import { useAuth } from '@/firebase/context/authContext';
 
 export const HomeworkDashboard = () => {
   const [activeHomeworkId, setActiveHomeworkId] = useState(0);
   const [isHomeworkModalShown, setIsHomeworkModalShown] = useState(false);
   const [homeworks, setHomework] = useState([]);
+  const [documents, getDocuments] = useState([]);
+  const { attributes } = useAuth();
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const homeworkData = await getHomeworkForStudent();
+        const documentsData = await getDocumentForStudent();
+        getDocuments(documentsData);
         setHomework(homeworkData);
       } catch (error) {
         console.error('Failed to fetch homework data:', error);
       }
     };
 
-    fetchData();
+    if (attributes.role === 'student') fetchData();
   }, []);
-  console.log(homeworks);
+  console.log('homeworks', homeworks);
+  console.log('documents', documents);
 
   function getRandomNumber() {
     return Math.floor(Math.random() * 5);
@@ -58,69 +68,74 @@ export const HomeworkDashboard = () => {
       </p>
 
       <div className="grid grid-cols-3 gap-x-[16px] gap-y-[15px]">
-        {homeworks.map((homework) => {
-          const picture = randomPictures[getRandomNumber()];
+        {Array.isArray(homeworks) && homeworks.length > 0 ? (
+          homeworks.map((homework) => {
+            const picture = randomPictures[getRandomNumber()];
 
-          return (
-            <div
-              key={homework.homework_title}
-              onClick={() => handleHomeworkClick(homework.homework_title)}
-              className={cn(
-                'bg-background-second rounded-2xl p-[15px] flex space-x-[10px] green_border_hover course_shadow border-box border border-transparent cursor-pointer',
-                {
-                  homework_active: activeHomeworkId === homework.homework_title,
-                }
-              )}
-            >
+            return (
               <div
-                className="rounded-2xl p-[7px] w-[66px]"
-                style={{ backgroundColor: picture.style }}
+                key={homework.homework_title}
+                onClick={() => handleHomeworkClick(homework.homework_title)}
+                className={cn(
+                  'bg-background-second rounded-2xl p-[15px] flex space-x-[10px] green_border_hover course_shadow border-box border border-transparent cursor-pointer',
+                  {
+                    homework_active:
+                      activeHomeworkId === homework.homework_title,
+                  }
+                )}
               >
-                <Image src={picture.src} alt="abstraction" width={50} />
-              </div>
+                <div
+                  className="rounded-2xl p-[7px] w-[66px]"
+                  style={{ backgroundColor: picture.style }}
+                >
+                  <Image src={picture.src} alt="abstraction" width={50} />
+                </div>
 
-              <div className="flex justify-between w-[80%]">
-                <div className="truncate">
-                  <p className="font-bold text-[16px] text-themetext mb-[2px]">
-                    {homework.homework_title}
-                  </p>
-                  <p className="font-bold text-[12px] text-themetext mb-1 truncate">
-                    {homework.homework_description}
-                  </p>
-                  <div className="flex items-center">
-                    <Image
-                      src={time}
-                      alt="time icon"
-                      width={14}
-                      className="mr-[6px]"
-                    />
-                    <p className="font-bold text-[12px] text-neutral2 mt-[1px]">
-                      {homework.homework_submission_date}
+                <div className="flex justify-between w-[80%]">
+                  <div className="truncate">
+                    <p className="font-bold text-[16px] text-themetext mb-[2px]">
+                      {homework.homework_title}
                     </p>
+                    <p className="font-bold text-[12px] text-themetext mb-1 truncate">
+                      {homework.homework_description}
+                    </p>
+                    <div className="flex items-center">
+                      <Image
+                        src={time}
+                        alt="time icon"
+                        width={14}
+                        className="mr-[6px]"
+                      />
+                      <p className="font-bold text-[12px] text-neutral2 mt-[1px]">
+                        {homework.homework_submission_date}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex flex-col justify-between">
+                    <p
+                      className={cn(
+                        'rounded-full text-[12px] font-bold px-3 py-1 leading-[20px]',
+                        {
+                          'bg-opacity-green text-primary':
+                            homework.homework_status === 'Complete',
+                          'bg-opacity-info text-info':
+                            homework.homework_status === 'Pending',
+                        }
+                      )}
+                    >
+                      {homework.homework_status}
+                    </p>
+                    <button className="ml-auto">
+                      <Image src={message} alt="message icon" width={24} />
+                    </button>
                   </div>
                 </div>
-                <div className="flex flex-col justify-between">
-                  <p
-                    className={cn(
-                      'rounded-full text-[12px] font-bold px-3 py-1 leading-[20px]',
-                      {
-                        'bg-opacity-green text-primary':
-                          homework.homework_status === 'Complete',
-                        'bg-opacity-info text-info':
-                          homework.homework_status === 'Pending',
-                      }
-                    )}
-                  >
-                    {homework.homework_status}
-                  </p>
-                  <button className="ml-auto">
-                    <Image src={message} alt="message icon" width={24} />
-                  </button>
-                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })
+        ) : (
+          <div>You don`t have homework!</div>
+        )}
       </div>
 
       <HomeworkModal

@@ -30,6 +30,26 @@ export default function DashboardLayout({
     await router.push('/login');
   };
   const [isTimeout, setIsTimeout] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const checkUserRole = async () => {
+      if (currentUser) {
+        const customAttributes = currentUser.reloadUserInfo?.customAttributes;
+        console.log(customAttributes);
+
+        if (customAttributes) {
+          const attributes = JSON.parse(customAttributes);
+          if (attributes.role === 'moderator' || attributes.role === 'coach') {
+            router.push('/portal');
+            return;
+          } else setIsLoading(false);
+        }
+      }
+    };
+
+    checkUserRole();
+  }, [currentUser, router]);
 
   const getPayment = async () => {
     setPaymentData(await getUserPayment(currentUser.uid));
@@ -49,7 +69,8 @@ export default function DashboardLayout({
     return () => clearTimeout(timer);
   }, [currentUser, router]);
 
-  if (!currentUser && !isTimeout || (typeof paymentData != 'undefined' && !paymentData)) {
+
+  if (!currentUser && !isTimeout  && isLoading || (typeof paymentData != 'undefined' && !paymentData)) {
     return (
       <div className="flex justify-center items-center min-h-screen">
         <Loader width={150} height={150} border={20} />

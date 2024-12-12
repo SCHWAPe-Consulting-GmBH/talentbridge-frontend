@@ -20,6 +20,8 @@ export const Meetings: React.FC<Props> = ({ isShortVersion }) => {
   const { currentUser } = useAuth();
   const [calls, setCalls] = useState([]);
   const [meetings, setMeetings] = useState([]);
+  const { attributes } = useAuth();
+
   useEffect(() => {
     if (currentUser?.uid) {
       const fetchUserCalls = async () => {
@@ -29,10 +31,11 @@ export const Meetings: React.FC<Props> = ({ isShortVersion }) => {
         setCalls(userCalls);
       };
 
-      fetchUserCalls();
+      if (attributes.role === 'student') fetchUserCalls();
     }
   }, [currentUser]);
   const futureMeetings = calls.concat(meetings);
+  console.log('futureMeetings', futureMeetings);
 
   return (
     <div

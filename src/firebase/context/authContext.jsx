@@ -14,6 +14,7 @@ export function AuthProvider({ children }) {
   const [userLoggedIn, setUserLoggedIn] = useState(null);
   const [loading, setLoading] = useState(true);
   const [userInfo, setUserInfo] = useState(null);
+  const [attributes, setAttributes] = useState(null);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, initializeUser);
@@ -26,6 +27,7 @@ export function AuthProvider({ children }) {
       setUserLoggedIn(true);
       setUserInfo(getUserData(user.uid));
       localStorage.setItem('currentUser', JSON.stringify(user));
+      setAttributes(JSON.parse(user.reloadUserInfo?.customAttributes));
     } else {
       setUserLoggedIn(false);
       setCurrentUser(null);
@@ -39,6 +41,7 @@ export function AuthProvider({ children }) {
     userInfo,
     userLoggedIn,
     loading,
+    attributes,
   };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

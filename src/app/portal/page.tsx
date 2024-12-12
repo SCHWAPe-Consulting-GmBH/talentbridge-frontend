@@ -1,19 +1,35 @@
 'use client';
 
-import { updateUserPayment } from '@/firebase/auth';
-import { useAuth } from '@/firebase/context/authContext';
-import { useEffect, useRef, useState } from 'react';
-import { servers } from '@/utils/servers';
-import { createCallWithLink, getUserCalls } from '@/firebase/chat';
-import { useRouter } from 'next/navigation';
+import cn from 'classnames';
+import { Meetings } from '@/components/meetings';
+import { CoachingProgressPortal } from '@/components/portal/coachingProgressPortal';
+import { DocumentsPortal } from '@/components/portal/documetsPortal';
+import { HomeworkPortal } from '@/components/portal/homeworkPortal';
+import { ProgressChart } from '@/components/progressChart';
+import data from '@/dataJson/progressBarPortal.json';
+import Link from 'next/link';
+import { HomeworkPortalCoach } from '@/components/portal/homeworkPortalCoach';
+import { StudentPortalCoach } from '@/components/portal/studentPortalCoach';
+import { CoursePortalCoach } from '@/components/portal/coursePortalCoach';
+import { MeetingPortalCoach } from '@/components/portal/meetingPortalCoach';
 
 const Portal = () => {
-
-
   return (
-    <div className="mb-30px">
-      <p>hello</p>
-      
+    <div
+      className={cn(
+        'mt-[20px]  max-w-[1200px] pr-[24px]',
+        'flex flex-col space-y-4'
+      )}
+    >
+      <div className="flex justify-between  w-full ">
+        <HomeworkPortalCoach />
+        <CoursePortalCoach />
+        <MeetingPortalCoach />
+      </div>
+
+      <div>
+        <StudentPortalCoach />
+      </div>
     </div>
   );
 };
