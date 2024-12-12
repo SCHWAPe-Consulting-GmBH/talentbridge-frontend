@@ -22,7 +22,7 @@ import { useAuth } from '@/firebase/context/authContext';
 import toast from 'react-hot-toast';
 
 const Login = () => {
-  const { currentUser } = useAuth();
+  const { currentUser, paymentData } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [signInWithEmailAndPassword, , , emailError] =
@@ -30,7 +30,7 @@ const Login = () => {
   const [signInWithGoogle, , , googleError] = useSignInWithGoogle(auth);
   const router = useRouter();
   const queryClient = useQueryClient();
-  console.log('Login Page', currentUser);
+  // console.log('Login Page', currentUser);
 
   if (currentUser) {
     try {
@@ -41,8 +41,10 @@ const Login = () => {
 
         if (attributes.role === 'moderator' || attributes.role === 'coach') {
           router.push('/portal');
-        } else if (attributes.role === 'student') {
+        } else if (attributes.role === 'student' && (typeof paymentData === 'undefined' || paymentData.done)) {
           router.push('/dashboard');
+        } else if (attributes.role === 'student' && paymentData && !paymentData.done) {
+          router.push('/dashboard/financial-aid');
         } else {
           router.push('/onboarding');
         }
