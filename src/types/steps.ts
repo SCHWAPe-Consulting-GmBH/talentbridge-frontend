@@ -13,4 +13,5 @@ export interface IPaymentData {
   step_3: TStepStatus,
   step_4: TStepStatus,
   step_5: TStepStatus,
+  done: boolean,
 }

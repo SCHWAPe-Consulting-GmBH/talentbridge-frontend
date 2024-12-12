@@ -22,7 +22,7 @@ export const StepsSwap: React.FC<Props> = ({ activeStepId }) => {
             Your Previous Step was ...
           </p>
           <p className="text-next-step-gray font-bold text-[14px] text-center">
-            {steps[activeStepId - 1].title}
+            {steps[activeStepId - 2].title}
           </p>
         </>
       )}
@@ -39,11 +39,11 @@ export const StepsSwap: React.FC<Props> = ({ activeStepId }) => {
             Your Current Step is...
           </p>
           <p className="text-white font-medium text-[20px] mb-[30px]">
-            {steps[activeStepId].title}
+            {steps[activeStepId - 1].title}
           </p>
           <div className="max-w-[465px] max-h-[47px]">
             <p className="text-white font-bold text-[16px] text-center line-clamp-3">
-              {steps[activeStepId].description}
+              {steps[activeStepId - 1].description}
             </p>
           </div>
         </>
@@ -61,7 +61,7 @@ export const StepsSwap: React.FC<Props> = ({ activeStepId }) => {
             Your Next Step will be ...
           </p>
           <p className="text-next-step-gray font-bold text-[14px] text-center">
-            {steps[activeStepId + 1].title}
+            {steps[activeStepId].title}
           </p>
         </>
       )}

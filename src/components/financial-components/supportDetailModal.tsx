@@ -30,6 +30,7 @@ export const SupportDetailModal: React.FC<Props> = ({
       step_3: 'pending',
       step_4: 'pending',
       step_5: 'pending',
+      done: false,
     };
 
     await updateUserPayment(currentUser.uid, payUserData);

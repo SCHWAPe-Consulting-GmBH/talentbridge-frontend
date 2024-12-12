@@ -28,7 +28,9 @@ export const Meetings: React.FC<Props> = ({ isShortVersion }) => {
         const userCalls = await getUserCalls(currentUser.uid);
         const userMeetings = await getMeetingForStudent();
         setMeetings(userMeetings);
+        console.log('userMeetings', userMeetings)
         setCalls(userCalls);
+        console.log('userCalls', userCalls)
       };
 
       if (attributes.role === 'student') fetchUserCalls();
