@@ -4,6 +4,7 @@ import { MeetingsDashboard } from '@/components/dashboard/meetingsDashboard';
 import { ProgressChart } from '@/components/progressChart';
 
 const Dashboard = () => {
+
   return (
     <div className="mt-[30px]">
       <div className="flex space-x-[30px]">
