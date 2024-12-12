@@ -19,7 +19,7 @@ export const getMeetingForStudent = async () => {
     console.error('Error fetching users:', error);
   }
 };
-export const getDocumentByStudentId = async () => {
+export const getDocumentForStudent = async () => {
   try {
     const data = await useHttp.get(`/student/document`);
     console.log('запит відправлено', data);

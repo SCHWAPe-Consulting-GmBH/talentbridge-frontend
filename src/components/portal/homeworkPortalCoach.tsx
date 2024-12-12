@@ -23,13 +23,11 @@ export const HomeworkPortalCoach = () => {
   console.log('homeworks', homeworks);
 
   return (
-    <section>
-      <div className="flex justify-between mb-[10px]">
-        <h2 className="mb-[10px] text-themetext font-bold text-[20px]">
-          Homework
-        </h2>
+    <section className="max-w-[570px] w-[100%]">
+      <div className="flex justify-between items-center mb-[10px] ">
+        <h2 className="text-themetext font-bold text-[20px]">Homework</h2>
 
-        <div className="flex space-x-1">
+        <div className="flex space-x-1 items-center">
           <button>
             <Image src={plus} alt="add homework" width={11} />
           </button>
@@ -37,13 +35,13 @@ export const HomeworkPortalCoach = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
+      <ul className="grid grid-cols-2 gap-4">
         {Array.isArray(homeworks) && homeworks.length > 0 ? (
-          homeworks.map((homework, index) => {
+          homeworks.slice(0, 4).map((homework, index) => {
             return (
-              <div
+              <li
                 key={uuidv4()}
-                className="bg-background-second rounded-2xl p-[15px] truncate green_border_hover border-box border border-transparent cursor-pointer course_shadow"
+                className="w-[276px] h-[146px] bg-background-second rounded-2xl p-[15px] truncate green_border_hover border-box border border-transparent cursor-pointer course_shadow"
               >
                 <p className="text-themetext font-bold text-[16px] truncate">
                   Homework {index + 1}
@@ -51,13 +49,13 @@ export const HomeworkPortalCoach = () => {
                 <p className="truncate text-[12px] text-themetext">
                   {homework.homework_title}
                 </p>
-              </div>
+              </li>
             );
           })
         ) : (
           <div>You don`t have homework!</div>
         )}
-      </div>
+      </ul>
     </section>
   );
 };
