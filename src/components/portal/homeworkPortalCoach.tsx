@@ -38,21 +38,25 @@ export const HomeworkPortalCoach = () => {
       </div>
 
       <div className="grid grid-cols-2 gap-4">
-        {homeworks.map((homework, index) => {
-          return (
-            <div
-              key={uuidv4()}
-              className="bg-background-second rounded-2xl p-[15px] truncate green_border_hover border-box border border-transparent cursor-pointer course_shadow"
-            >
-              <p className="text-themetext font-bold text-[16px] truncate">
-                Homework {index + 1}
-              </p>
-              <p className="truncate text-[12px] text-themetext">
-                {homework.homework_title}
-              </p>
-            </div>
-          );
-        })}
+        {Array.isArray(homeworks) && homeworks.length > 0 ? (
+          homeworks.map((homework, index) => {
+            return (
+              <div
+                key={uuidv4()}
+                className="bg-background-second rounded-2xl p-[15px] truncate green_border_hover border-box border border-transparent cursor-pointer course_shadow"
+              >
+                <p className="text-themetext font-bold text-[16px] truncate">
+                  Homework {index + 1}
+                </p>
+                <p className="truncate text-[12px] text-themetext">
+                  {homework.homework_title}
+                </p>
+              </div>
+            );
+          })
+        ) : (
+          <div>You don`t have homework!</div>
+        )}
       </div>
     </section>
   );
