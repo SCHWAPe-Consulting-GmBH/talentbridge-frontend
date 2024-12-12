@@ -29,7 +29,7 @@ export const updateUserPayment = async (userId, paymentData) => {
   try {
     const userRef = doc(firestore, 'users', userId);
 
- await setDoc(userRef, { payment: paymentData }, { merge: true });
+  await setDoc(userRef, { payment: paymentData }, { merge: true });
     console.log('Payment data updated successfully!');
   } catch (error) {
     console.error('Error updating payment data:', error);

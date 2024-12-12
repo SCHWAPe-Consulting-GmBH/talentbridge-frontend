@@ -1,18 +1,16 @@
 import { useAuth } from '@/firebase/context/authContext';
-import { currentUserQuery } from '@/reaсtQuery/userQuery';
-import { useQuery } from '@tanstack/react-query';
+import { IMessage } from '@/types/messages';
 import Image from 'next/image';
 
-const ChatMessage = ({ message }) => {
+interface Props {
+  message: IMessage;
+}
+
+const ChatMessage: React.FC<Props> = ({ message }) => {
   const { currentUser } = useAuth();
 
-  const { text, senderId, photoURL, senderName } = message;
-  console.log(message);
-  
+  const { text, senderId, photo, senderName } = message;
   const isSent = senderId === currentUser.uid;
-  const containerClass = isSent
-    ? 'flex-row-reverse bg-green-500'
-    : 'bg-medium-gray';
   const textAlignClass = isSent ? 'text-right' : 'text-left';
 
   return (
@@ -20,9 +18,9 @@ const ChatMessage = ({ message }) => {
       className={`flex gap-1 shadow-md items-center bg-opacity-gray p-2 rounded-lg my-1 mx-3 max-w-xs md:max-w-md lg:max-w-lg ${isSent ? 'ml-auto flex-row-reverse' : 'mr-auto'}`}
     >
       <div className='rounded-full w-10 h-10 object-cover'>
-        {photoURL ? (
+        {photo ? (
           <Image
-            src={photoURL}
+            src={photo}
             width={42}
             height={42}
             alt="avatar"
