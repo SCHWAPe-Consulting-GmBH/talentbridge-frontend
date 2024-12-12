@@ -20,6 +20,14 @@ const nextConfig = {
       },
     ];
   },
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: 'http://3.71.18.123:8000/api/v1/:path*',
+      },
+    ];
+  },
 };
 
 export default nextConfig;
