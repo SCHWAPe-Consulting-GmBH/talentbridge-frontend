@@ -34,10 +34,9 @@ export const getCourseForCoach = async () => {
   }
 };
 
-export const getStudentProgress = async (studentId) => {
+export const getStudentProgress = async () => {
   try {
-    const data = await useHttp.get(`/coach/student/progress/${studentId}`);
-    console.log('запит відправлено', data);
+    const data = await useHttp.get(`/coach/student/progress`);
     return data;
   } catch (error) {
     console.error('Error fetching users:', error);
