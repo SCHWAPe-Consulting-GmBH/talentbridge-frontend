@@ -72,6 +72,12 @@ const config: Config = {
         loading: 'loading 3s linear infinite',
         'loading-thirty-second': 'loading 30s ease-in-out infinite',
       },
+      gridTemplateColumns: {
+        'category-hub': 'repeat(4, minmax(230px, 264px))'
+      },
+      gridTemplateRows: {
+        'category-hub': 'repeat(2, minmax(230px, 264px))'
+      },
       keyframes: {
         loading: {
           '0%': {

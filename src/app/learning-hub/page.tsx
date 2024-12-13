@@ -1,5 +1,7 @@
 'use client'
 
+import { DevelopSkillsHub } from '@/components/learning-hub-components.tsx/developSkillsHub';
+import { HotCategoriesHub } from '@/components/learning-hub-components.tsx/hotCategoriesHub';
 import { MustKnowHub } from '@/components/learning-hub-components.tsx/mustKnowHub';
 import { RecommendationsHub } from '@/components/learning-hub-components.tsx/recommendationsHub';
 import { useRouter } from 'next/navigation';
@@ -22,7 +24,9 @@ const LearningHub = () => {
       </div>
 
       <RecommendationsHub />
-      {/* <MustKnowHub /> */}
+      <MustKnowHub />
+      <HotCategoriesHub />
+      <DevelopSkillsHub/>
     </div>
   );
 };

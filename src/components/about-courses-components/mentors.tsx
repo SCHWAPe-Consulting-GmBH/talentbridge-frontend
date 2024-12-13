@@ -3,8 +3,6 @@
 import mentorsData from '@/dataJson/mentorsData.json';
 import Slider from 'react-slick';
 import { MentorCard } from './mentorCard';
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 
 export const Mentors = () => {
   const settings = {
