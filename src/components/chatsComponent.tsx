@@ -12,7 +12,6 @@ import { Messages } from '@/components/chats-components/messages';
 import { useAuth } from '@/firebase/context/authContext';
 import message from '@/assets/icons/message_black.svg';
 import { IChat } from '@/types/chat';
-import { Divider } from 'antd';
 
 export const ChatsComponent = () => {
   const [chatName, setChatName] = useState('');
@@ -25,7 +24,8 @@ export const ChatsComponent = () => {
   const [filteredChats, setFilteredChats] = useState([]); // це треба виводити замість allUsersChats
 
   const { currentUser } = useAuth();
-  const currentUserId = currentUser?.uid;
+  console.log('curr user', currentUser);
+  // const currentUserId = currentUser?.uid;
   const roleObj = currentUser?.reloadUserInfo.customAttributes;
   let role: Record<'role', string> | null = null;
 
@@ -37,7 +37,7 @@ export const ChatsComponent = () => {
     const chatsRef = collection(firestore, 'chats');
     const q = query(
       chatsRef,
-      where('participants', 'array-contains', currentUserId)
+      where('participants', 'array-contains', currentUser.uid)
     );
 
     const querySnapshot = await getDocs(q);
@@ -50,15 +50,15 @@ export const ChatsComponent = () => {
       id: doc.id,
       ...doc.data() as Omit<IChat, 'id'>,
     }));
-
+    console.log('chats', chats);
     setAllUserChats(chats);
   };
 
   useEffect(() => {
-    if (currentUserId) {
+    if (currentUser) {
       getUserChats();
     }
-  }, [currentUserId]);
+  }, [currentUser]);
 
   const handleOpenDropDown = (id: string) => {
     if (id === activeChatPlusId) {
@@ -69,7 +69,7 @@ export const ChatsComponent = () => {
   };
 
   const handleCreateChat = async () => {
-    const owner = {id: currentUserId, label: currentUser.email, value: 0};
+    const owner = {id: currentUser.uid, label: currentUser.email, value: 0};
     await createChat(chatName, owner);
     getUserChats();
     setChatName('');
@@ -97,8 +97,7 @@ export const ChatsComponent = () => {
 
   return (
     <section className="flex gap-6 h-full">
-      <div className={`bg-background-second w-full p-[15px] rounded-xl h-full ${ role?.role === 'coach' ? 'max-w-[370px]' : 'max-w-[256px]' }`}>
-        
+      <div className={`bg-background-second w-full p-[15px] rounded-xl h-full ${ role?.role === 'coach' || role?.role === 'moderator' ? 'max-w-[370px]' : 'max-w-[256px]' }`}>
 
         <div className="flex justify-between items-center gap-6 mb-[15px]">
           <p className="font-bold text-[24px] text-themetext">Chats</p>
@@ -112,7 +111,7 @@ export const ChatsComponent = () => {
           </div>
         </div>
 
-        {role?.role === 'coach' && (
+        {role?.role === 'coach' || role?.role === 'moderator' && (
           <div className="flex items-center mb-5">
             <input
               type="text"
@@ -149,13 +148,13 @@ export const ChatsComponent = () => {
                   {activeChatPlusId === chat.id ? '-' : '+'}
                 </button>}
                 {chat.id === activeChatId && (<div className='bg-primary w-5 h-5 rounded-full p-2'/>)}
-                {activeChatPlusId === chat.id && role?.role === 'coach' && (
+                {activeChatPlusId === chat.id && role?.role === 'coach' || role?.role === 'moderator' && (
                   <AddUsersToChat chatId={activeChatPlusId} />
                 )}
               </li>
             ))
           ) : (
-            <li className="ml-8">No chats found. Create a new one!</li>
+            <li className="ml-8 ">No chats found. Create a new one!</li>
           )}
         </ul>
       </div>

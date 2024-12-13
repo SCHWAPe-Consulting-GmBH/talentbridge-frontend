@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect, useState } from 'react';
 import { getStudentProgress, getStudentsForCoach } from '@/api/coachOperations';
 import Image from 'next/image';

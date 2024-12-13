@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect, useState } from 'react';
 import { getMeetingByForCoach } from '@/api/coachOperations';
 import plus from '@/assets/icons/plus.svg';

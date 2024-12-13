@@ -8,10 +8,17 @@ const instance = axios.create({
 
 
 http: instance.interceptors.request.use((config) => {
-  const { accessToken } = auth.currentUser;
+  const currentUser = auth.currentUser;
 
-  if (accessToken) {
-    config.headers.authorization = `Bearer ${accessToken}`;
+  if (currentUser) {
+    const { accessToken } = currentUser;
+
+    if (accessToken) {
+      config.headers.authorization = `Bearer ${accessToken}`;
+    }
+  } else {
+    // Якщо немає користувача, видаляємо токен із заголовків
+    delete config.headers.authorization;
   }
 
   return config;
