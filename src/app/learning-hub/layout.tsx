@@ -50,7 +50,7 @@ export default function LearningHubLayout({
   const { email, displayName } = currentUser;
 
   return (
-    <main className="background-style bg-background bg-learning-hub h-full w-full pt-[10px] pb-[100px]">
+    <main className="background-style bg-background bg-learning-hub h-full w-full pt-[10px] pb-[231px]">
       <div className="max-w-[1350px] mx-auto relative">
         <HeaderDashboard />
       </div>

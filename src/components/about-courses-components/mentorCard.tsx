@@ -12,7 +12,7 @@ export const MentorCard: React.FC<Props> = ({ mentor }) => {
   const { name, specialty, rating, img } = mentor;
 
   return (
-    <div className="bg-background-second rounded-3xl px-[12px] py-[15px] w-[292px]">
+    <div className="bg-background-second rounded-3xl px-[12px] py-[15px] w-[292px] truncate">
       <Image
         src={img}
         width={268}
@@ -20,11 +20,11 @@ export const MentorCard: React.FC<Props> = ({ mentor }) => {
         alt="mentor`s avatar"
         className="rounded-xl h-[274px] object-cover mb-[12px]"
       />
-      <p className="text-themetext font-extrabold text-[32px] leading-[44px]">
+      <p className="text-themetext font-extrabold text-[32px] leading-[44px] truncate">
         {name}
       </p>
       <div className="flex justify-between mb-2">
-        <p className="text-themetext font-medium text-[16px]">{specialty}</p>
+        <p className="text-themetext font-medium text-[16px] truncate">{specialty}</p>
         <div className="flex space-x-[5px] items-center">
           <Image src={star} alt="star" width={24} />
           <p className="text-themetext font-medium text-[16px]">{rating}</p>

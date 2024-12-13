@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Language Support",
+    "isPremium": false
+  },
+  {
+    "title": "Job Search and Career Guidance",
+    "isPremium": false
+  },
+  {
+    "title": "Personal Development",
+    "isPremium": false
+  },
+  {
+    "title": "Job Search and Career Guidance",
+    "isPremium": false
+  },
+  {
+    "title": "Industry-Specific Resources",
+    "isPremium": true
+  },
+  {
+    "title": "AVGS-Specific Guidance",
+    "isPremium": true
+  }
+]

@@ -1,0 +1,54 @@
+[
+  {
+    "biggest": "Top 10 Tips for Successful Interviewing",
+    "small": [
+      {
+        "time": 5,
+        "date": "11.29.2024",
+        "premium": false,
+        "title": "How to confidently",
+        "description": "Learn how to confidently answer questions and make a lasting impression."
+      },
+      {
+        "time": 5,
+        "date": "11.29.2024",
+        "premium": true,
+        "title": "How to confidently",
+        "description": "Learn how to confidently answer questions and make a lasting impression."
+      },
+      {
+        "time": 5,
+        "date": "11.29.2024",
+        "premium": false,
+        "title": "How to confidently",
+        "description": "Learn how to confidently answer questions and make a lasting impression."
+      }
+    ]
+  },
+  {
+    "biggest": "Top 20 Tips for Successful Interviewing",
+    "small": [
+      {
+        "time": 5,
+        "date": "11.29.2024",
+        "premium": false,
+        "title": "How to confidently",
+        "description": "Learn how to confidently answer questions and make a lasting impression."
+      },
+      {
+        "time": 5,
+        "date": "11.29.2024",
+        "premium": true,
+        "title": "How to confidently",
+        "description": "Learn how to confidently answer questions and make a lasting impression."
+      },
+      {
+        "time": 5,
+        "date": "11.29.2024",
+        "premium": false,
+        "title": "How to confidently",
+        "description": "Learn how to confidently answer questions and make a lasting impression."
+      }
+    ]
+  }
+]
