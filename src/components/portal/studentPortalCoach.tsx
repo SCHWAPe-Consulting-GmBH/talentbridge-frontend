@@ -8,10 +8,12 @@ import { v4 as uuidv4 } from 'uuid';
 import progress from '@/assets/icons/progress.svg';
 import document from '@/assets/icons/document.svg';
 import { Pagination } from './Pagination';
-
+import { useAuth } from '@/firebase/context/authContext';
+import { getStudentsForMod } from '@/api/modOperations';
 
 export const StudentPortalCoach = () => {
-  // const [students, setStudents] = useState([]);
+  const { attributes } = useAuth();
+  const [student, setStudents] = useState([]);
   // const [studentsProgress, setStudentsProgress] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
@@ -22,26 +24,32 @@ export const StudentPortalCoach = () => {
     'Documents',
     'Progress Coachings',
   ];
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const studentData = await getStudentsForCoach();
-  //       // const studentProgress = await getStudentProgress();
-  //       setStudents(studentData);
-  //       // setStudentsProgress(studentProgress);
-  //     } catch (error) {
-  //       console.error('Failed to fetch homework data:', error);
-  //     }
-  //   };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        if (attributes.role === 'moderator') {
+          const studentData = await getStudentsForMod();
+          setStudents(studentData);
+        } else {
+          const studentData = await getStudentsForCoach();
+          setStudents(studentData);
+        }
+        // const studentProgress = await getStudentProgress();
+        // setStudentsProgress(studentProgress);
+      } catch (error) {
+        console.error('Failed to fetch homework data:', error);
+      }
+    };
 
-  //   fetchData();
-  // }, []);
+    fetchData();
+  }, []);
 
-  // console.log('students', students);
+  console.log('students', student);
   // console.log('studentsProgress', studentsProgress);
 
   const students = [
-    1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39
+    1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+    23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39,
   ];
   // Calculate the index range for the current page
   const startIndex = (currentPage - 1) * itemsPerPage;
