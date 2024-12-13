@@ -8,16 +8,15 @@ import { logOut } from '@/firebase/auth';
 export const AsideMenu = () => {
   const router = useRouter();
   const pathname = usePathname();
-  const currentPage = pathname.split('/').at(-1) ? pathname.split('/').at(-1) : 'dashboard';
+  // const currentPage = pathname.split('/').at(-1) ? pathname.split('/').at(-1) : 'dashboard';
+  const currentPage =
+    pathname === '/portal' || pathname === '/'
+      ? 'dashboard'
+      : pathname.split('/').at(-1);
+
   const { resolvedTheme } = useTheme();
 
-  const upperButtons = [
-    '',
-    'homework',
-    'meetings',
-    'documents',
-    'chat',
-  ];
+  const upperButtons = ['', 'homework', 'meetings', 'documents', 'chat'];
 
   const bottomButtons = ['support', 'settings'];
 
@@ -37,7 +36,9 @@ export const AsideMenu = () => {
                     aside_menu_active: currBtn === currentPage,
                   }
                 )}
-                href={`/portal/${currBtn}`}
+                href={
+                  currBtn === 'dashboard' ? '/portal' : `/portal/${currBtn}`
+                }
               >
                 <img
                   src={`/icons/menu_portal_${currBtn}.svg`}
@@ -48,7 +49,7 @@ export const AsideMenu = () => {
                   })}
                 />
                 <p className="font-semibold text-[14px] text-themetext upper_first_letter">
-                  {currBtn }
+                  {currBtn}
                 </p>
               </Link>
             );
@@ -66,7 +67,9 @@ export const AsideMenu = () => {
                     aside_menu_active: btn === currentPage,
                   }
                 )}
-                onClick={() => router.push(`/portal/${btn}`)}
+                onClick={() =>
+                  router.push(btn === '' ? '/portal' : `/portal/${btn}`)
+                }
               >
                 <img
                   src={`/icons/menu_portal_${btn}.svg`}
@@ -87,7 +90,7 @@ export const AsideMenu = () => {
             className={cn(
               'h-12 flex items-center aside_menu w-[192px] px-[14px] pl-[16px] rounded-xl box-border'
             )}
-            onClick={async() => {
+            onClick={async () => {
               await logOut();
               router.push('/login');
             }}
