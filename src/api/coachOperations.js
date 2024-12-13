@@ -9,7 +9,7 @@ export const getHomeworkForCoach = async () => {
   }
 };
 
-export const getMeetingByForCoach = async () => {
+export const getMeetingForCoach = async () => {
   try {
     const data = await useHttp.get(`/coach/meeting`);
     return data;
@@ -42,22 +42,34 @@ export const getStudentProgress = async () => {
     console.error('Error fetching users:', error);
   }
 };
-export const getStudentDocument = async (studentId) => {
+export const assignHomework = async (homework) => {
   try {
-    const data = await useHttp.get(`/student/document/${studentId}`);
-    console.log('запит відправлено', data);
+    const data = await useHttp.post(`/coach/assign_homework`, homework);
     return data;
   } catch (error) {
     console.error('Error fetching users:', error);
   }
 };
+// {
+//   "student_id": 0,
+//   "homework_id": 0
+// }
+// export const getStudentDocument = async (studentId) => {
+//   try {
+//     const data = await useHttp.get(`/student/document/${studentId}`);
+//     console.log('запит відправлено', data);
+//     return data;
+//   } catch (error) {
+//     console.error('Error fetching users:', error);
+//   }
+// };
 
-export const getStudentHomework = async (studentId) => {
-  try {
-    const data = await useHttp.get(`/student/homework/${studentId}`);
-    console.log('запит відправлено', data);
-    return data;
-  } catch (error) {
-    console.error('Error fetching users:', error);
-  }
-};
+// export const getStudentHomework = async (studentId) => {
+//   try {
+//     const data = await useHttp.get(`/student/homework/${studentId}`);
+//     console.log('запит відправлено', data);
+//     return data;
+//   } catch (error) {
+//     console.error('Error fetching users:', error);
+//   }
+// };

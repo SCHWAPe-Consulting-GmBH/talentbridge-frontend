@@ -48,7 +48,7 @@ export default function DashboardLayout({
   return (
     <main className="bg-background">
       <AsideMenu />
-      <div className="pt-[30px] pb-[50px] ml-[250px] flex flex-col">
+      <div className="pt-[30px] pb-[50px] ml-[236px] flex flex-col">
         <HeaderPortal />
         {children}
       </div>
