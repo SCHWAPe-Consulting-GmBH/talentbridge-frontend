@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect, useState } from 'react';
 import { getCourseForCoach } from '@/api/coachOperations';
 import { v4 as uuidv4 } from 'uuid';

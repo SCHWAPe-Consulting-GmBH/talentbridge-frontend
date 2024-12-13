@@ -28,7 +28,7 @@ export function AuthProvider({ children }) {
       setUserLoggedIn(true);
       setUserInfo(getUserData(user.uid));
       setAttributes(JSON.parse(user.reloadUserInfo?.customAttributes));
-      setPaymentData(await getUserPayment(user.uid) || undefined)
+      setPaymentData(await getUserPayment(user.uid) ?? undefined)
     } else {
       setUserLoggedIn(false);
       setCurrentUser(null);

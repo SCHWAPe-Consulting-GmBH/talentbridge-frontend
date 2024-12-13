@@ -91,7 +91,7 @@ export const PaymentForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={(e) => handleSubmit(e)}>
       <label
         className="mb-1 leading-[19px] text-neutral2"
         htmlFor="email"
@@ -115,7 +115,7 @@ export const PaymentForm = () => {
         <input
           id="cardInfo"
           type="text"
-          maxLength="19"
+          maxLength={19}
           placeholder="XXXX XXXX XXXX XXXX"
           value={formatCardNumber(formInfo.cardNumber)}
           onChange={e => onChangeFormInfo('cardNumber', e.target.value)}

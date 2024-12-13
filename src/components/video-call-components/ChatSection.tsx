@@ -99,7 +99,7 @@ const ChatSection = ({ chatId, isCalling }) => {
           ))}
       </div>
       <form
-        onSubmit={sendMessage}
+        onSubmit={(e) => sendMessage(e)}
         className="flex items-center space-x-2 relative w-full mt-3"
       >
         <button

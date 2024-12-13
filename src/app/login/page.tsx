@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import imgGirl from '@/assets/images/imgGirl.png';
@@ -30,7 +30,6 @@ const Login = () => {
   const [signInWithGoogle, , , googleError] = useSignInWithGoogle(auth);
   const router = useRouter();
   const queryClient = useQueryClient();
-  // console.log('Login Page', currentUser);
 
   if (currentUser) {
     try {
@@ -41,9 +40,16 @@ const Login = () => {
 
         if (attributes.role === 'moderator' || attributes.role === 'coach') {
           router.push('/portal');
-        } else if (attributes.role === 'student' && (typeof paymentData === 'undefined' || paymentData.done)) {
+        } else if (
+          attributes.role === 'student' &&
+          (typeof paymentData === 'undefined' || paymentData.done)
+        ) {
           router.push('/dashboard');
-        } else if (attributes.role === 'student' && paymentData && !paymentData.done) {
+        } else if (
+          attributes.role === 'student' &&
+          paymentData &&
+          !paymentData.done
+        ) {
           router.push('/dashboard/financial-aid');
         } else {
           router.push('/onboarding');
@@ -52,7 +58,7 @@ const Login = () => {
         router.push('/onboarding');
       }
     } catch (error) {
-      console.error('Error parsing customAttributes:', error);
+      // console.error('Error parsing customAttributes:', error);
       router.push('/onboarding');
     }
   }
@@ -73,7 +79,9 @@ const Login = () => {
     },
   });
 
-  const handleSignIn = async () => {
+  const handleSignIn = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    
     try {
       const resp = await loginMutationSignIn.mutateAsync({ email, password });
 
@@ -160,41 +168,41 @@ const Login = () => {
   };
 
   return (
-    <main className="bg-background-fourth">
-      <div className="max-w-[1650px] flex mx-auto px-[105px] justify-start relative overflow-hidden h-screen">
-        <div className="flex flex-col items-center max-w-[500px] mt-[200px]">
+    <main className="bg-background-fourth bg-login">
+      <div className="max-w-[1650px] flex mx-auto px-[105px] justify-start relative overflow-auto h-screen">
+        <div className="flex flex-col items-center max-w-[500px] mt-[150px]">
           <h1 className="font-extrabold text-[56px] leading-[76px] text-shadow-custom text-themetext">
             Welcome Back !
           </h1>
           <p className="text-[18px] text-center px-[50px] mb-[42px] text-themetext">
             Empowering You to Unlock the Full Potential of Learning and Coaching
           </p>
+          <form onSubmit={(e) => handleSignIn(e)} className='w-full flex flex-col'>
+            <input
+              placeholder="Email"
+              className="input_text text-secondary mb-[32px] w-full bg-white border border-light-gray"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
 
-          <input
-            placeholder="Email"
-            className="input_text text-secondary mb-[32px] w-full bg-white border border-light-gray"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+            <PasswordInput password={password} onChangePassword={setPassword} />
 
-          <PasswordInput password={password} onChangePassword={setPassword} />
-
-          <p className="self-end text-themetext mb-[25px] cursor-pointer btn_scale">
-            Forgot your password?
-          </p>
-          <button
-            type="button"
-            onClick={handleSignIn}
-            className="bg-primary w-full py-[17px] font-semibold mb-[20px] rounded-lg btn_green_hover"
-          >
-            See All
-          </button>
+            <p className="self-end text-themetext mb-[25px] cursor-pointer btn_scale">
+              Forgot your password?
+            </p>
+            <button
+              type="submit"
+              className="bg-primary w-full py-[17px] font-semibold mb-[20px] rounded-lg btn_green_hover"
+            >
+              See All
+            </button>
+          </form>
 
           <p className="ext-themetext mb-[14px] leading-[19px]">
             or continue with
           </p>
 
-          <div className="flex space-x-[25px] mb-[138px]">
+          <div className="flex space-x-[25px] mb-[80px]">
             <button onClick={handleGoogleSignIn} className="">
               <Image
                 src={google}
@@ -229,15 +237,6 @@ const Login = () => {
               Register now
             </Link>
           </div>
-        </div>
-
-        <div>
-          <Image
-            src={imgGirl}
-            alt="Picture of the author"
-            width={1024}
-            className="absolute object-cover"
-          />
         </div>
       </div>
     </main>

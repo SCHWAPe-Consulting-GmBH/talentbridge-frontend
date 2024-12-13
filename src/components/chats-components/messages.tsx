@@ -13,11 +13,8 @@ import {
 } from 'firebase/firestore';
 import { firestore } from '@/firebase/config';
 import { v4 as uuidv4 } from 'uuid';
-import { useCollectionData } from 'react-firebase-hooks/firestore';
 import ChatMessage from '../video-call-components/ChatMessage';
 import { FormEvent, useEffect, useRef, useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { currentUserQuery } from '@/reaсtQuery/userQuery';
 import { IMessage } from '@/types/messages';
 import text_under from '@/assets/icons/text_format_underline.svg';
 import text_add_photo from '@/assets/icons/text_photo-plus.svg';

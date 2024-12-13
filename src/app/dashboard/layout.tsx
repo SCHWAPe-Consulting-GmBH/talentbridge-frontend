@@ -25,7 +25,7 @@ export default function DashboardLayout({
   const router = useRouter();
   const roleObj = currentUser?.reloadUserInfo.customAttributes;
   let role: Record<'role', string> | null = null;
-  const isNotHavePayment = currentUser && (paymentData === 'undefined' || (paymentData && paymentData.done));
+  // const isNotHavePayment = currentUser && (paymentData === 'undefined' || (paymentData && paymentData.done));
 
   if (roleObj) {
     role = JSON.parse(roleObj);
@@ -84,19 +84,19 @@ export default function DashboardLayout({
 
   if (!currentUser && !isTimeout && isLoading) {
     return (
-      <div className="flex justify-center items-center min-h-screen">
+      <div className="flex justify-center items-center h-[100vh]">
         <Loader width={150} height={150} border={20} />
       </div>
     );
   }
 
-  if (currentUser && paymentData != 'undefined' && !paymentData) {
-    return (
-      <div className="flex justify-center items-center min-h-screen">
-        <Loader width={150} height={150} border={20} />
-      </div>
-    );
-  }
+  // if (currentUser && paymentData != 'undefined' && !paymentData) {
+  //   return (
+  //     <div className="flex justify-center items-center h-[100vh]">
+  //       <Loader width={150} height={150} border={20} />
+  //     </div>
+  //   );
+  // }
 
   return (
     <main
@@ -104,7 +104,7 @@ export default function DashboardLayout({
     >
       <div className="max-w-[1350px] mx-auto relative">
         <HeaderDashboard />
-        {isNotHavePayment && (
+        {!paymentData && (
           <>
             <div className="flex px-20 justify-between mt-[105px] relative z-10 min-h-[455px]">
               <div>

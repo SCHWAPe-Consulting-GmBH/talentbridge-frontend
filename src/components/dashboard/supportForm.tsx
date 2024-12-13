@@ -46,7 +46,10 @@ export const SupportForm = () => {
           </div>
         </div>
         <div className="self-end">
-          <button className="py-[11px] px-[30px] bg-dark-gray text-white rounded-lg btn_scale">
+          <button
+            type="submit"
+            className="py-[11px] px-[30px] bg-dark-gray text-white rounded-lg btn_scale"
+          >
             Send
           </button>
         </div>
