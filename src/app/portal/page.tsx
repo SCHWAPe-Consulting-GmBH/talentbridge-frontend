@@ -11,14 +11,8 @@ import GeneralDataPortalMod from '@/components/portal/generalDataPortalMod';
 
 const Portal = () => {
   const { attributes } = useAuth();
-
   return (
-    <div
-      className={cn(
-        'mt-[20px] max-w-[1200px] pr-[24px] mx-auto ',
-        'flex flex-col space-y-4'
-      )}
-    >
+    <div className="mt-[20px] max-w-[1300px] pb-[50px] mx-auto pr-[24px] flex flex-col space-y-4">
       <div className="flex justify-between  w-full ">
         {attributes.role === 'moderator' ? (
           <CoachPortalMod />

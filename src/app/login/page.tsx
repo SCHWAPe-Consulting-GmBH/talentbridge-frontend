@@ -3,7 +3,6 @@
 import { FormEvent, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import imgGirl from '@/assets/images/imgGirl.png';
 import apple from '@/assets/icons/apple.svg';
 import facebook from '@/assets/icons/facebook.svg';
 import google from '@/assets/icons/google.svg';
@@ -20,6 +19,7 @@ import { queryKeys } from '@/reaсtQuery/queryKeys';
 import { onAuthStateChanged } from 'firebase/auth';
 import { useAuth } from '@/firebase/context/authContext';
 import toast from 'react-hot-toast';
+import { registerStudent } from '@/api/auth';
 
 const Login = () => {
   const { currentUser, paymentData } = useAuth();
@@ -166,6 +166,64 @@ const Login = () => {
       console.error(e);
     }
   };
+  const handleRegister = async () => {
+    const loginObj = {
+      username: email,
+      email: email,
+      password: password,
+    };
+    try {
+      const data = await registerStudent(loginObj);
+
+      if (data) {
+        try {
+          const resp = await loginMutationSignIn.mutateAsync({
+            email,
+            password,
+          });
+
+          if (resp) {
+            setEmail('');
+            setPassword('');
+            toast.success('Register successfully.');
+          }
+          onAuthStateChanged(auth, async (user) => {
+            if (user) {
+              try {
+                const customAttributes = user.reloadUserInfo?.customAttributes;
+
+                if (customAttributes) {
+                  const attributes = JSON.parse(customAttributes);
+
+                  if (
+                    attributes.role === 'moderator' ||
+                    attributes.role === 'coach'
+                  ) {
+                    router.push('/portal');
+                  } else if (attributes.role === 'student') {
+                    router.push('/dashboard');
+                  } else {
+                    router.push('/onboarding');
+                  }
+                } else {
+                  router.push('/onboarding');
+                }
+              } catch (error) {
+                console.error('Error parsing customAttributes:', error);
+                router.push('/onboarding');
+              }
+            } else {
+              router.push('/login');
+            }
+          });
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    } catch (error) {
+      console.error('Registration or login failed:', error);
+    }
+  };
 
   return (
     <main className="bg-background-fourth bg-login">
@@ -236,9 +294,12 @@ const Login = () => {
             <p className="text-[18px] text-themetext mr-2">
               Don't have an account?
             </p>
-            <Link href="/" className="text-primary font-bold btn_scale">
+            <button
+              onClick={handleRegister}
+              className="text-primary font-bold btn_scale"
+            >
               Register now
-            </Link>
+            </button>
           </div>
         </div>
       </div>
