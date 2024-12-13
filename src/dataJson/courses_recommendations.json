@@ -1,44 +1,56 @@
 [
   {
-    "id": 1,
-    "title": "AVGS Preparation Course",
-    "status": "Top Recommendation",
-    "description": "Get ready for your AVGS application with our expert-led course",
-    "color": "green"
+    "id": 12,
+    "name": "Orientieren-Aufstellen-Loslegen",
+    "description": "Ein Kurs zur Orientierung und Zielsetzung für den beruflichen Einstieg oder Umstieg.",
+    "create_date": "2024-12-13"
   },
   {
-    "id": 2,
-    "title": "Skills Enhancement Workshop",
-    "status": "Top Recommendation",
-    "description": "Upskill with practical workshops tailored to your career goals.",
-    "color": "green"
+    "id": 13,
+    "name": "OAL_UK",
+    "description": "The UK-specific version of the Orientieren-Aufstellen-Loslegen course, tailored to local needs.",
+    "create_date": "2024-12-13"
   },
   {
-    "id": 3,
-    "title": "CV Coaching Program",
-    "status": "Best Seller",
-    "description": "Learn how to create a standout CV with personalized coaching",
-    "color": "orange"
+    "id": 14,
+    "name": "Richtungsweiser",
+    "description": "Ein Kurs zur Unterstützung bei der Entscheidungsfindung und beruflichen Orientierung.",
+    "create_date": "2024-12-13"
   },
   {
-    "id": 4,
-    "title": "Job Application Mastery",
-    "status": "Best Seller",
-    "description": "Navigate the job application process with our comprehensive guide.",
-    "color": "orange"
+    "id": 15,
+    "name": "Mindset und Behavior",
+    "description": "Ein Kurs zur Entwicklung eines positiven Mindsets und effektiver Verhaltensweisen für den beruflichen Erfolg.",
+    "create_date": "2024-12-13"
   },
   {
-    "id": 5,
-    "title": "CV Coaching Program",
-    "status": "Best seller",
-    "description": "Learn how to create a standout CV with personalized coaching",
-    "color": "orange"
+    "id": 16,
+    "name": "Jobjumper",
+    "description": "Ein Kurs zur Vorbereitung auf schnelle berufliche Veränderungen und Anpassungen.",
+    "create_date": "2024-12-13"
   },
   {
-    "id": 6,
-    "title": "CV Coaching Program",
-    "status": "Last Chance",
-    "description": "Learn how to create a standout CV with personalized coaching",
-    "color": "blue"
+    "id": 17,
+    "name": "Start Smart I",
+    "description": "Ein Einstiegskurs für den smarten Start in die berufliche Zukunft.",
+    "create_date": "2024-12-13"
+  },
+  {
+    "id": 18,
+    "name": "Start Smart II",
+    "description": "Ein Aufbaukurs für weitere berufliche Schritte nach Start Smart I.",
+    "create_date": "2024-12-13"
+  },
+  {
+    "id": 19,
+    "name": "Kernstabil (Variante 1: Start vor Anstellung)",
+    "description": "Ein Kurs zur Stärkung der Kernkompetenzen vor dem Beginn einer neuen Anstellung.",
+    "create_date": "2024-12-13"
+  },
+  {
+    "id": 20,
+    "name": "Einzelkämpfer(in)",
+    "description": "Ein Kurs für Selbstständige und Freelancer, die ihre Fähigkeiten und Strategien verbessern möchten.",
+    "create_date": "2024-12-13"
   }
 ]

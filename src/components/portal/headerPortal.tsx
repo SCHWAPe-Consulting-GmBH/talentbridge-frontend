@@ -25,7 +25,7 @@ export const HeaderPortal = () => {
   const attributes = JSON.parse(customAttributes);
 
   return (
-    <div className="mr-6 flex justify-between items-center">
+    <div className="mx-auto max-w-[1200px] w-full flex justify-between items-center">
       <h1 className="text-[30px] text-themetext font-extrabold">
         Welcome, {displayName ? displayName : email.split('@')[0]}
       </h1>
