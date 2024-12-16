@@ -22,9 +22,13 @@
 
 .bg5 {
   background-image: url('../assets/bg/dashboard_bg.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100vw;
+  height: 100vh;
 }
 
-.bg-portal-aid {
+.bg-portal-aid {  
   background-image: url('../assets/bg/student-aid.png');
 }
 
@@ -34,7 +38,7 @@
 
 .bg-login {
   background-image: url('../assets/images/imgGirl.png');
-  background-position: 600px center;;
+  background-position: 700px center;
   background-size: contain;
   background-repeat: no-repeat;
 }

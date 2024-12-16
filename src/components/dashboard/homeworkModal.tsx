@@ -3,15 +3,18 @@ import cn from 'classnames';
 import Image from 'next/image';
 import theory from '@/assets/icons/homework-theory.svg';
 import play from '@/assets/icons/homework-video.svg';
+import { homeworkData } from '@/types/homeworkData';
 
 interface Props {
   isHomeworkShown: boolean;
   onChangeHomeworkShown: (value: boolean) => void;
+  activeHomework: homeworkData;
 }
 
 export const HomeworkModal: React.FC<Props> = ({
   isHomeworkShown,
   onChangeHomeworkShown,
+  activeHomework
 }) => {
   return (
     <div
@@ -30,7 +33,7 @@ export const HomeworkModal: React.FC<Props> = ({
           &times;
         </button>
         <div className="flex justify-between mt-6 items-center mb-4">
-          <p className="text-[24px] font-bold text-themetext">Homework 1</p>
+          <p className="text-[24px] font-bold text-themetext">{activeHomework.description}</p>
           <div className="w-[72px] h-[72px] border-[5px] border-light-gray border-r-primary rounded-full flex flex-col items-center justify-center">
             <p className="text-themetext font-semibold text-[8px] leading-[11px]">
               Completed:

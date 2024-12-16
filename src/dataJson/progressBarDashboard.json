@@ -1,22 +1,13 @@
 {
-  "title": "Job Matching Process",
-  "images": true,
   "labels": [
-    "First-Talk",
-    "Coaching Match",
-    "AVGS-Redceived",
-    "OAL Coaching",
-    "Richtungsweisser",
-    "Job Matching",
-    "Back To Work"
+    "Registered",
+    "Onboarding",
+    "Course Selection",
+    "Enrolled",
+    "AVGS Process (If Assistance) ",
+    "Course Start",
+    "Course Completion",
+    "Job Search"
   ],
-  "colors": ["#81DD5F", "#8BE769", "#90ED6E", "#9BF779", "#ADFF8B", "none"],
-  "bgColors": [
-    "rgba(82, 169, 130, 0.15)",
-    "rgba(82, 112, 255, 0.15)",
-    "rgba(197, 13, 149, 0.15)",
-    "rgba(248, 88, 54, 0.15)"
-  ],
-  "subtitles": ["Self-Awareness", "Implementation", "Mastery", "Mastery"],
-  "times": ["Apr 12, 2024", "Apr 12, 2024", "Apr 12, 2024", "Apr 12, 2024"]
+  "colors": ["#81DD5F", "#8BE769", "#90ED6E", "#9BF779", "#ADFF8B", "#C4F7AE", "#D6F5CA"]
 }
