@@ -61,7 +61,7 @@ export const CoursePortalMod = () => {
                 key={uuidv4()}
                 className="p-[15px] max-w-[261px] h-[97px] bg-background-second rounded-[20px]"
               >
-                <div className='flex flex-col gap-1'>
+                <div className="flex flex-col gap-1">
                   <p className="text-themetext text-[16px] leading-[20px] font-bold mb-[2px] truncate">
                     Name of course
                   </p>
@@ -69,7 +69,7 @@ export const CoursePortalMod = () => {
                     Lorem ipsum dolor sit amet consectetur. Ut tincidunt nunc
                     vestibulum diam senectus
                   </p>
-                  <div className='flex gap-2'>
+                  <div className="flex gap-2">
                     <Image
                       src={edit}
                       alt="add homework"
