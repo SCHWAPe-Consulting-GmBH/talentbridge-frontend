@@ -8,6 +8,7 @@ import { MeetingPortalCoach } from '@/components/portal/meetingPortalCoach';
 import { CoachPortalMod } from '@/components/portal/coachPortalMod';
 import { useAuth } from '@/firebase/context/authContext';
 import GeneralDataPortalMod from '@/components/portal/generalDataPortalMod';
+import { CoursePortalMod } from '@/components/portal/CoursePortalMod';
 
 const Portal = () => {
   const { attributes } = useAuth();
@@ -19,7 +20,11 @@ const Portal = () => {
         ) : (
           <HomeworkPortalCoach />
         )}
-        <CoursePortalCoach />
+        {attributes.role === 'moderator' ? (
+          <CoursePortalMod />
+        ) : (
+          <CoursePortalCoach />
+        )}
         {attributes.role === 'coach' && <MeetingPortalCoach />}
       </div>
 
