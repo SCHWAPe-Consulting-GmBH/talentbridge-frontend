@@ -16,6 +16,7 @@ import { MultiSelection } from './multiSelect';
 import { IOptions } from '@/types/multiSelectTypes';
 import { searchUsers } from '@/api/operations';
 import { useAuth } from '@/firebase/context/authContext';
+import { getStudentsForCoach } from '@/api/coachOperations';
 
 interface Props {
   chatId: string;
@@ -26,29 +27,48 @@ export const AddUsersToChat: React.FC<Props> = ({ chatId }) => {
   const [visibleUsers, setVisibleUsers] = useState<IOptions[]>([]);
   const [selectedPeople, setSelectedPeople] = useState<IOptions[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
-  const { currentUser } = useAuth();
+  const { currentUser, attributes } = useAuth();
+  const [students, setStudents] = useState([]);
   const currentUserId = currentUser?.uid;
+  console.log(students);
+
+  console.log(searchQuery);
+  useEffect(() => {
+    const handleStudents = async () => {
+      const students = await getStudentsForCoach();
+      setStudents(students);
+    };
+    if (attributes.role === 'coach') {
+      handleStudents();
+    }
+  }, []);
 
   const fetchUsers = async () => {
     const usersRef = collection(firestore, 'users');
     let q;
+    if (attributes.role === 'coach') {
+      const users = students.filter((student) =>
+        student.name.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+      console.log(users);
 
-    if (searchQuery) {
+      return users;
+    } else if (searchQuery) {
       const users = await searchUsers(searchQuery);
       return users;
-    } else {
-      q = query(
-        usersRef,
-        orderBy('email'),
-        where('id', '!=', currentUserId),
-        limit(20)
-      );
-      const snapshot = await getDocs(q);
+      // } else {
+      //   q = query(
+      //     usersRef,
+      //     orderBy('email'),
+      //     where('id', '!=', currentUserId),
+      //     limit(20)
+      //   );
+      //   const snapshot = await getDocs(q);
 
-      return snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
+      //   return snapshot.docs.map((doc) => ({
+      //     id: doc.id,
+      //     ...doc.data(),
+      //   }));
     }
   };
 
@@ -95,8 +115,9 @@ export const AddUsersToChat: React.FC<Props> = ({ chatId }) => {
   useEffect(() => {
     fetchUsers()
       .then((resp) => {
+        const users = resp || [];
         setVisibleUsers(
-          resp?.map((res) => ({ value: res.id, label: res.email }))
+          users.map((res) => ({ value: res.id, label: res.name }))
         );
       })
       .finally(() => setLoading(false));
@@ -129,7 +150,7 @@ export const AddUsersToChat: React.FC<Props> = ({ chatId }) => {
                   <p>{people.label}</p>
                   <button
                     onClick={() => handleChangeSelectedPeople(people)}
-                    className='cursor-pointer'
+                    className="cursor-pointer"
                     // className="absolute top-4 right-4 text-2xl text-gray-500 hover:text-gray-800"
                   >
                     &times;

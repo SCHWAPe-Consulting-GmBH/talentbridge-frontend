@@ -27,7 +27,7 @@ export const MultiSelection: React.FC<Props> = ({
   console.log('selected', selected);
   console.log('options', options);
   // let rect: DOMRect | null = null;
-  const [rect, setRect] = useState< DOMRect | null>(null)
+  const [rect, setRect] = useState<DOMRect | null>(null);
   const onClose = () => {
     setIsListShown(false);
   };
@@ -38,7 +38,8 @@ export const MultiSelection: React.FC<Props> = ({
       setRect(inputRef.current.getBoundingClientRect());
     }
   }, []);
-  console.log('rect3', rect)
+  console.log('rect3', rect);
+
   return (
     <div className="">
       <input
@@ -47,14 +48,20 @@ export const MultiSelection: React.FC<Props> = ({
         ref={inputRef}
         className="input_text border-light-gray h-[42px]"
         placeholder={placeholder}
-        onChange={(e) => onSearch(e.target.value)}
+        onChange={(e) => {
+          onSearch(e.target.value);
+        }}
         onClick={() => setIsListShown((prev) => !prev)}
       />
 
-      <ClickOutside onClick={onClose} exceptionRef={inputRef} top={rect ? rect?.top - 30 : 200}>
+      <ClickOutside
+        onClick={onClose}
+        exceptionRef={inputRef}
+        top={rect ? rect?.top - 30 : 200}
+      >
         <div
           className={cn(
-            'p-[10px] bg-background-second rounded-2xl border border-shadow-revert ',
+            'p-[10px] mt-[75px] bg-background-second rounded-2xl border border-shadow-revert ',
             {
               hidden: !isListShown,
             }

@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { useEffect, useState } from 'react';
 import { getStudentProgress, getStudentsForCoach } from '@/api/coachOperations';
@@ -9,6 +9,8 @@ import progress from '@/assets/icons/progress.svg';
 import document from '@/assets/icons/document.svg';
 import { Pagination } from './Pagination';
 import { useAuth } from '@/firebase/context/authContext';
+import { TiArrowSortedUp } from 'react-icons/ti';
+
 import { getStudentsForMod } from '@/api/modOperations';
 
 export const StudentPortalCoach = () => {
@@ -16,14 +18,23 @@ export const StudentPortalCoach = () => {
   const [student, setStudents] = useState([]);
   // const [studentsProgress, setStudentsProgress] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 6;
-  const studentInformation = [
-    'Student Information',
-    'Current Stage',
-    'Tasks',
-    'Documents',
-    'Progress Coachings',
-  ];
+  const itemsPerPage = 5;
+  const studentInformation =
+    attributes.role === 'moderator'
+      ? [
+          'Student Information',
+          'Rank',
+          'Homework progress',
+          'Attendance',
+          'Point',
+        ]
+      : [
+          'Student Information',
+          'Current Stage',
+          'Tasks',
+          'Documents',
+          'Progress Coachings',
+        ];
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -60,10 +71,76 @@ export const StudentPortalCoach = () => {
 
   // Calculate the total number of pages
   const totalPages = Math.ceil(students.length / itemsPerPage);
+  const studentRowForCoach = (
+    <div className="grid grid-cols-5 place-items-center  h-[61px] pl-[15px]">
+      <div className="flex gap-[10px]">
+        <Image
+          src={avatar}
+          alt="people"
+          width={34}
+          height={34}
+          className="rounded-full object-cover"
+        />
 
+        <div>
+          <p className="font-semibold text-sm">Jordan Seler</p>
+          <p className="font-normal text-xs">Lorem ipsum dolor sit amet</p>
+        </div>
+      </div>
+      <div className="flex items-center gap-2">
+        <Image src={progress} alt="progress" />
+        <span className="text-gray-600 text-sm font-normal">100%</span>
+      </div>
+      <div className="flex gap-3">
+        <p>Complete (3)</p>
+        <p>Incomplete (5)</p>
+      </div>
+      <p>Documents (5)</p>
+      <div className="flex gap-3">
+        <p>Done (3)</p>
+        <p>Pending (5)</p>
+      </div>
+    </div>
+  );
+  const studentRowForMod = (
+    <div className="grid grid-cols-5 place-items-center  h-[61px] pl-[15px]">
+      <div className="flex gap-[10px]">
+        <Image
+          src={avatar}
+          alt="people"
+          width={34}
+          height={34}
+          className="rounded-full object-cover"
+        />
+
+        <div>
+          <p className="font-semibold text-sm">Jordan Seler</p>
+          <p className="font-normal text-xs">Lorem ipsum dolor sit amet</p>
+        </div>
+      </div>
+
+      <div className="flex gap-3">
+        <p className='flex items-center'>
+          1 <TiArrowSortedUp className='color-green'/>
+        </p>
+      </div>
+      <div className="flex items-center gap-2">
+        <Image src={progress} alt="progress" />
+        <span className="text-gray-600 text-sm font-normal">100%</span>
+      </div>
+      <p>98%</p>
+      <div className="flex gap-3">
+        <p>13,549</p>
+      </div>
+    </div>
+  );
+  const studentRow =
+    attributes.role === 'moderator' ? studentRowForMod : studentRowForCoach;
   return (
     <section>
-      <h2 className=" text-themetext font-bold text-[20px]">Students</h2>
+      <h2 className=" text-themetext font-bold text-[20px] mb-2">
+        {attributes.role === 'moderator' ? 'Student progress' : 'Students'}
+      </h2>
       <div className="grid grid-cols-5 text-center items-center font-semibold text-sm bg-background-second rounded-[20px] h-[43px] pl-[15px] pr-[88px] mb-1">
         {studentInformation.map((student) => {
           return <p>{student}</p>;
@@ -77,39 +154,7 @@ export const StudentPortalCoach = () => {
                 key={uuidv4()}
                 className="flex  items-center gap-[37px] bg-background-second rounded-[20px] pr-[15px]"
               >
-                <div className="grid grid-cols-5 place-items-center  h-[61px] pl-[15px]">
-                  <div className="flex gap-[10px]">
-                    <Image
-                      src={avatar}
-                      alt="people"
-                      width={34}
-                      height={34}
-                      className="rounded-full object-cover"
-                    />
-
-                    <div>
-                      <p className="font-semibold text-sm">Jordan Seler</p>
-                      <p className="font-normal text-xs">
-                        Lorem ipsum dolor sit amet{' '}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Image src={progress} alt="progress" />
-                    <span className="text-gray-600 text-sm font-normal">
-                      100%
-                    </span>
-                  </div>
-                  <div className="flex gap-3">
-                    <p>Complete (3)</p>
-                    <p>Incomplete (5)</p>
-                  </div>
-                  <p>Documents (5)</p>
-                  <div className="flex gap-3">
-                    <p>Done (3)</p>
-                    <p>Pending (5)</p>
-                  </div>
-                </div>
+                {studentRow}
                 <button className="flex justify-center items-center w-[30px] h-[30px] rounded-full object-cover bg-[#f1f1f1]">
                   <Image src={document} alt="progress" width={18} height={18} />
                 </button>
