@@ -35,12 +35,12 @@ export const CoursePortalMod = () => {
   console.log('courses', courses);
 
   const handleCreateCourse = async (courseData: newCourse) => {
-    // try {
-    //   await createCourseForMod(courseData);
-    //   toast.success('Successfully created course');
-    // } catch (error) {
-    //   console.error('Failed to create course:', error);
-    // }
+    try {
+      await createCourseForMod(courseData);
+      toast.success('Successfully created course');
+    } catch (error) {
+      console.error('Failed to create course:', error);
+    }
     toast.success('Successfully created course');
   };
 
