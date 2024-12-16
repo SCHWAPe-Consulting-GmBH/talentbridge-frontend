@@ -26,7 +26,7 @@ const PaymentOptions = () => {
                 <Image
                   src={design}
                   alt="background image"
-                  className="ml-[80px]"
+                  className="ml-[80px] h-auto"
                 />
               </div>
             }
@@ -58,6 +58,7 @@ const PaymentOptions = () => {
               src={apple}
               alt=""
               width={15}
+              className='h-auto'
             />
             Pay
           </button>

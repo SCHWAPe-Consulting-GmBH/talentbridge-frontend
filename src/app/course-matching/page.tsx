@@ -17,7 +17,7 @@ const CourseMatching = () => {
           eiusmod tempor incididunt ut labore et dolore magna.
         </p>
         <div className="flex mb-[48px]">
-          <Image src={people} alt="people" width={120} className="mr-[8px]" />
+          <Image src={people} alt="people" width={120} className="mr-[8px] h-auto" />
           <p className="text-neutral2 text-[16px] font-medium">
             Join over
             <span className="text-primary font-bold text-[20px]">+10K</span>{' '}

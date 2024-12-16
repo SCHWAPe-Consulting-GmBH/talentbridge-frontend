@@ -13,7 +13,7 @@ export const RoundLinkButton = () => {
         src={arrow}
         alt="move to course"
         width={21.27}
-        className={cn({
+        className={cn('h-auto', {
           graphic_gray_answer: resolvedTheme === 'dark',
         })}
       />

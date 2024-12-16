@@ -48,7 +48,7 @@ export const HomeworkModal: React.FC<Props> = ({
           <div>
             <div className="border border-neutral3 rounded-xl p-2 flex space-x-2 mb-4">
               <div className="rounded-full h-[44px] w-[44px] bg-neutral3 flex items-center justify-center">
-                <Image src={theory} alt="theory icon" width={18} />
+                <Image src={theory} alt="theory icon" width={18} className='h-auto'/>
               </div>
 
               <div>
@@ -107,7 +107,7 @@ export const HomeworkModal: React.FC<Props> = ({
           <div>
             <div className="border border-neutral3 rounded-xl p-2 flex space-x-2 mb-6 relative">
               <div className="rounded-full h-[44px] w-[44px] bg-neutral3 flex items-center justify-center">
-                <Image src={play} alt="video icon" width={15} />
+                <Image src={play} alt="video icon" width={15} className='h-auto'/>
               </div>
 
               <div>

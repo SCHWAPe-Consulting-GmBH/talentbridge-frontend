@@ -52,7 +52,7 @@ export const MatchingCourses: React.FC = () => {
         const text_style = {
           color: course.color,
           border: `1px solid ${course.color}`,
-          'background-color': course.bgColor,
+          backgroundColor: course.bgColor,
         };
 
         return (
@@ -67,7 +67,7 @@ export const MatchingCourses: React.FC = () => {
                 <Image
                   src={course.image}
                   alt="background image"
-                  className='ml-[80px]'
+                  className='ml-[80px] h-auto'
                 />
               </div>
             }

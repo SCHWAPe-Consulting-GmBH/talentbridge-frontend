@@ -1,8 +1,10 @@
 'use client';
 
+import { SupportForm } from "@/components/dashboard/supportForm";
+
 const PortalSupport = () => {
   return <div className="mb-30px">
-    <p>Support</p>
+    <SupportForm isPortal={true}/>
   </div>;
 };
 

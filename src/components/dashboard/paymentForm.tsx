@@ -127,7 +127,7 @@ export const PaymentForm = () => {
               key={uuidv4()}
               className="h-[24px] w-[39px] border border-light-gray rounded-sm flex items-center justify-center"
             >
-              <Image src={option.src} alt={option.alt} width={option.size} />
+              <Image src={option.src} alt={option.alt} width={option.size} className='h-auto'/>
             </div>
           ))}
         </div>
@@ -145,7 +145,7 @@ export const PaymentForm = () => {
             id="expireDate"
             type="text"
             placeholder='MM/YY'
-            maxLength="5"
+            maxLength={5}
             value={formatExpire(formInfo.expire)}
             onChange={e => onChangeFormInfo('expire', e.target.value)}
             className="input_text border border-light-gray w-full mb-3"
@@ -161,7 +161,7 @@ export const PaymentForm = () => {
           </label>
           <input
             id="cvv"
-            maxLength="3"
+            maxLength={3}
             type="text"
             value={formInfo.cvv}
             onChange={e => onChangeFormInfo('cvv', e.target.value)}

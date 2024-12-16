@@ -24,7 +24,6 @@ export default function DashboardLayout({
   const router = useRouter();
   const roleObj = currentUser?.reloadUserInfo.customAttributes;
   let role: Record<'role', string> | null = null;
-  // const isNotHavePayment = currentUser && (paymentData === 'undefined' || (paymentData && paymentData.done));
 
   if (roleObj) {
     role = JSON.parse(roleObj);
@@ -116,7 +115,7 @@ export default function DashboardLayout({
           </>
         )}
         {children}
-        <SupportForm />
+        <SupportForm isPortal={false}/>
       </div>
     </main>
   );

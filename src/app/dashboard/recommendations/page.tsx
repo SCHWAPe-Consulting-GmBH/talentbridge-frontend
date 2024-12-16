@@ -20,7 +20,6 @@ import { useAuth } from '@/firebase/context/authContext';
 
 const Recommendations = () => {
   const [isCourseDetailShown, setIsCourseDetailShown] = useState(false);
-  // const [selectedCourse, setSelectedCourse] = useState<null | ICourse>(null);
   const { setSelectedCourse, selectedCourse } = useAuth();
 
   const picturesForCourse = [
@@ -59,7 +58,7 @@ const Recommendations = () => {
               src={picturesForCourse[index]}
               alt="pictures for course"
               width={353}
-              className="mb-4 w-full rounded-3xl"
+              className="mb-4 w-full rounded-3xl h-auto"
             />
             <div
               className={cn(
@@ -75,7 +74,7 @@ const Recommendations = () => {
               )}
             >
               {random[index] && random[index] === 'Top Recommendation' && (
-                <Image src={fire} alt="" width={12} className="mr-[10px]" />
+                <Image src={fire} alt="" width={12} className="mr-[10px] h-auto" />
               )}
               <p
                 className={cn('font-medium text-[12px]', {

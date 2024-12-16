@@ -1,8 +1,13 @@
 'use client';
 import { useAuth } from '@/firebase/context/authContext';
 import { Loader } from '../loader';
+import { SupportHeader } from './supportHeader';
 
-export const SupportForm = () => {
+interface Props {
+  isPortal: boolean;
+}
+
+export const SupportForm: React.FC<Props> = ({ isPortal }) => {
   const { currentUser } = useAuth();
   if (!currentUser) {
     return (
@@ -11,17 +16,13 @@ export const SupportForm = () => {
       </div>
     );
   }
-  const { email, displayName, photoURL } = currentUser;
+
   return (
-    <section>
-      <p className="text-themetext font-bold text-[24px] mb-2 leading-[20px] mt-[90px]">
-        Support
-      </p>
-      <p className="text-themetext font-bold text-[14px] mb-[15px]">
-        Hi {displayName ? displayName : email.split('@')[0]}! How can we help
-        you today?
-      </p>
+    <section className={`${isPortal && 'mt-[30px] mr-6'}`}>
+      {!isPortal && <SupportHeader isPortal={isPortal} />}
+
       <form className="p-[15px] rounded-2xl bg-background-second flex flex-col">
+        {isPortal && <SupportHeader isPortal={isPortal} />}
         <div className="grid grid-cols-2 gap-[40px]">
           <div>
             <p className="mb-2">Name</p>
