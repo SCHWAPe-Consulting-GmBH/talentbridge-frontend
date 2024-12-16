@@ -2,64 +2,313 @@
   { 
     "id": 1,
     "title": "Homework 1",
-    "description": "Lorem ipsum dolor sit amet consectetur.",
+    "description": "Sich selbst besser kennenlernen mit Hilfe der Potenzialanalyse.",
     "date": "02.09.2024",
-    "status": "Complete"
+    "status": "Complete",
+    "courseId": 12
   },
   { 
     "id": 2,
-    "title": "Homework 1",
-    "description": "Lorem ipsum dolor sit amet consectetur.",
+    "title": "Homework 2",
+    "description": "Was genau ist eine Potenzialanalyse.",
     "date": "02.09.2024",
-    "status": "Pending"
+    "status": "Pending",
+    "courseId": 12
   },
   { 
     "id": 3,
-    "title": "Homework 1",
-    "description": "Lorem ipsum dolor sit amet consectetur.",
+    "title": "Homework 3",
+    "description": "Über die eigenen Schwächen sprechen.",
     "date": "02.09.2024",
-    "status": "Complete"
+    "status": "Complete",
+    "courseId": 12
   },
   { 
     "id": 4,
-    "title": "Homework 1",
-    "description": "Lorem ipsum dolor sit amet consectetur.",
+    "title": "Homework 4",
+    "description": "Potenzialanalyse.",
     "date": "02.09.2024",
-    "status": "Complete"
+    "status": "Complete",
+    "courseId": 12
   },
-  { 
+  {
     "id": 5,
-    "title": "Homework 1",
-    "description": "Lorem ipsum dolor sit amet consectetur.",
+    "title": "Homework 5",
+    "description": "Stärken-Schwächen-Profil.",
     "date": "02.09.2024",
-    "status": "Pending"
+    "status": "Pending",
+    "courseId": 12
   },
   { 
     "id": 6,
     "title": "Homework 1",
-    "description": "Lorem ipsum dolor sit amet consectetur.",
+    "description": "Sich selbst besser kennenlernen mit Hilfe der Potenzialanalyse.",
     "date": "02.09.2024",
-    "status": "Pending"
+    "status": "Pending",
+    "courseId": 13
   },
   { 
     "id": 7,
-    "title": "Homework 1",
-    "description": "Lorem ipsum dolor sit amet consectetur.",
+    "title": "Homework 2",
+    "description": "Was genau ist eine Potenzialanalyse.",
     "date": "02.09.2024",
-    "status": "Pending"
+    "status": "Pending",
+    "courseId": 13
   },
   { 
     "id": 8,
-    "title": "Homework 1",
-    "description": "Lorem ipsum dolor sit amet consectetur.",
+    "title": "Homework 3",
+    "description": "Über die eigenen Schwächen sprechen.",
     "date": "02.09.2024",
-    "status": "Pending"
+    "status": "Pending",
+    "courseId": 13
   },
   { 
     "id": 9,
-    "title": "Homework 1",
-    "description": "Lorem ipsum dolor sit amet consectetur.",
+    "title": "Homework 4",
+    "description": "Potenzialanalyse.",
     "date": "02.09.2024",
-    "status": "Pending"
+    "status": "Pending",
+    "courseId": 13
+  },
+  { 
+    "id": 10,
+    "title": "Homework 5",
+    "description": "Stärken-Schwächen.",
+    "date": "02.09.2024",
+    "status": "Pending",
+    "courseId": 13
+  },
+  { 
+    "id": 11,
+    "title": "Homework 1",
+    "description": "Sich selbst besser kennenlernen mit Hilfe der Potenzialanalyse.",
+    "date": "02.09.2024",
+    "status": "Pending",
+    "courseId": 14
+  },
+  { 
+    "id": 12,
+    "title": "Homework 2",
+    "description": "Was genau ist eine Potenzialanalyse.",
+    "date": "02.09.2024",
+    "status": "Pending",
+    "courseId": 14
+  },
+  { 
+    "id": 13,
+    "title": "Homework 3",
+    "description": "Über die eigenen Schwächen sprechen.",
+    "date": "02.09.2024",
+    "status": "Pending",
+    "courseId": 14
+  },
+  { 
+    "id": 14,
+    "title": "Homework 4",
+    "description": "Potenzialanalyse.",
+    "date": "02.09.2024",
+    "status": "Pending",
+    "courseId": 14
+  },
+  { 
+    "id": 15,
+    "title": "Homework 5",
+    "description": "Stärken-Schwächen.",
+    "date": "02.09.2024",
+    "status": "Pending",
+    "courseId": 14
+  },
+  { 
+    "id": 16,
+    "title": "Homework 1",
+    "description": "Sich selbst besser kennenlernen mit Hilfe der Potenzialanalyse.",
+    "date": "02.09.2024",
+    "status": "Pending",
+    "courseId": 15
+  },
+  { 
+    "id": 17,
+    "title": "Homework 2",
+    "description": "Was genau ist eine Potenzialanalyse.",
+    "date": "02.09.2024",
+    "status": "Pending",
+    "courseId": 15
+  },
+  { 
+    "id": 18,
+    "title": "Homework 3",
+    "description": "Über die eigenen Schwächen sprechen.",
+    "date": "02.09.2024",
+    "status": "Pending",
+    "courseId": 15
+  },
+  { 
+    "id": 19,
+    "title": "Homework 4",
+    "description": "Potenzialanalyse.",
+    "date": "02.09.2024",
+    "status": "Pending",
+    "courseId": 15
+  },
+  { 
+    "id": 20,
+    "title": "Homework 5",
+    "description": "Stärken-Schwächen.",
+    "date": "02.09.2024",
+    "status": "Pending",
+    "courseId": 15
+  },
+  { 
+    "id": 21,
+    "title": "Homework 1",
+    "description": "Sich selbst besser kennenlernen mit Hilfe der Potenzialanalyse.",
+    "date": "02.09.2024",
+    "status": "Pending",
+    "courseId": 16
+  },
+  { 
+    "id": 22,
+    "title": "Homework 2",
+    "description": "Was genau ist eine Potenzialanalyse.",
+    "date": "02.09.2024",
+    "status": "Pending",
+    "courseId": 16
+  },
+  { 
+    "id": 23,
+    "title": "Homework 3",
+    "description": "Über die eigenen Schwächen sprechen.",
+    "date": "02.09.2024",
+    "status": "Pending",
+    "courseId": 16
+  },
+  { 
+    "id": 24,
+    "title": "Homework 4",
+    "description": "Potenzialanalyse.",
+    "date": "02.09.2024",
+    "status": "Pending",
+    "courseId": 16
+  },
+  { 
+    "id": 25,
+    "title": "Homework 5",
+    "description": "Stärken-Schwächen.",
+    "date": "02.09.2024",
+    "status": "Pending",
+    "courseId": 16
+  },
+  { 
+    "id": 26,
+    "title": "Homework 1",
+    "description": "Sich selbst besser kennenlernen mit Hilfe der Potenzialanalyse.",
+    "date": "02.09.2024",
+    "status": "Pending",
+    "courseId": 17
+  },
+  { 
+    "id": 27,
+    "title": "Homework 2",
+    "description": "Was genau ist eine Potenzialanalyse.",
+    "date": "02.09.2024",
+    "status": "Pending",
+    "courseId": 17
+  },
+  { 
+    "id": 28,
+    "title": "Homework 3",
+    "description": "Über die eigenen Schwächen sprechen.",
+    "date": "02.09.2024",
+    "status": "Pending",
+    "courseId": 17
+  },
+  { 
+    "id": 29,
+    "title": "Homework 4",
+    "description": "Potenzialanalyse.",
+    "date": "02.09.2024",
+    "status": "Pending",
+    "courseId": 17
+  },
+  { 
+    "id": 30,
+    "title": "Homework 5",
+    "description": "Stärken-Schwäche.",
+    "date": "02.09.2024",
+    "status": "Pending",
+    "courseId": 17
+  },
+  { 
+    "id": 31,
+    "title": "Homework 1",
+    "description": "Vorteile eines Mindset.",
+    "date": "02.09.2024",
+    "status": "Pending",
+    "courseId": 18
+  },
+  { 
+    "id": 32,
+    "title": "Homework 2",
+    "description": "Definition Mindset.",
+    "date": "02.09.2024",
+    "status": "Pending",
+    "courseId": 18
+  },
+  { 
+    "id": 33,
+    "title": "Homework 3",
+    "description": "Übungen Mindset.",
+    "date": "02.09.2024",
+    "status": "Pending",
+    "courseId": 18
+  },
+  { 
+    "id": 34,
+    "title": "Homework 1",
+    "description": "Definition Konfliktmanagement.",
+    "date": "02.09.2024",
+    "status": "Pending",
+    "courseId":19
+  },
+  { 
+    "id": 35,
+    "title": "Homework 2",
+    "description": "Konflikt-Persönlichkeiten.",
+    "date": "02.09.2024",
+    "status": "Pending",
+    "courseId": 19
+  },
+  { 
+    "id": 36,
+    "title": "Homework 3",
+    "description": "Konflikttypen.",
+    "date": "02.09.2024",
+    "status": "Pending",
+    "courseId": 19
+  },
+  { 
+    "id": 37,
+    "title": "Homework 1",
+    "description": "Definition Konfliktmanagement.",
+    "date": "02.09.2024",
+    "status": "Pending",
+    "courseId": 20
+  },
+  { 
+    "id": 38,
+    "title": "Homework 2",
+    "description": "Konflikt-Persönlichkeiten.",
+    "date": "02.09.2024",
+    "status": "Pending",
+    "courseId": 20
+  },
+  { 
+    "id": 39,
+    "title": "Homework 3",
+    "description": "Konflikttypen.",
+    "date": "02.09.2024",
+    "status": "Pending",
+    "courseId": 20
   }
 ]

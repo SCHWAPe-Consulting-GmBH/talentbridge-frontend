@@ -1,26 +1,45 @@
-'use client'
+'use client';
 
-import Image from 'next/image';
 import cn from 'classnames';
 import { v4 as uuidv4 } from 'uuid';
-import green_icon from '@/assets/icons/green_picture.svg';
-import pink_icon from '@/assets/icons/pink_picture.svg';
-import orange_icon from '@/assets/icons/orange_picture.svg';
-import blue_icon from '@/assets/icons/blue_picture.svg';
-import { DataForProgressBar } from '@/types/dataForProgressBar';
+import data from '@/dataJson/progressBarDashboard.json';
+import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
-interface Props {
-  data: DataForProgressBar;
-}
+export const ProgressBar = () => {
+  const { colors, labels } = data;
+  const pathname = usePathname();
+  const [activeElement, setActiveElement] = useState('');
+  const endElement = labels.indexOf(activeElement);
 
-export const ProgressBar: React.FC<Props> = ({ data }) => {
-  const { title, colors, bgColors, times, labels, subtitles, images } = data;
 
-  const imagesForBar = [green_icon, blue_icon, pink_icon, orange_icon];
+  useEffect(() => {
+    const currentUrl = pathname.split('/').at(-1);
+
+    switch (currentUrl) {
+      case 'recommendations':
+        setActiveElement('Course Selection');
+        break;
+
+      case 'dashboard':
+        setActiveElement('Course Start');
+        break;
+
+      case 'financial-aid':
+        setActiveElement('AVGS Process (If Assistance)');
+        break;
+
+      case 'payment-options':
+        setActiveElement('Enrolled');
+        break;
+    }
+  }, [pathname]);
 
   return (
     <div className="bg-background-second rounded-2xl w-full px-[21px] py-[25px]">
-      <p className="text-themetext font-bold text-[16px] mb-[17px]">{title}</p>
+      <p className="text-themetext font-bold text-[16px] mb-[17px]">
+        {labels[endElement]}
+      </p>
       <div className="h-5 rounded-full bg-background-third flex items-center px-[2px] mb-1">
         {colors.map((color, index) => {
           const lastElement = colors.length - 1;
@@ -32,10 +51,10 @@ export const ProgressBar: React.FC<Props> = ({ data }) => {
                 'mr-[1px]': index != lastElement,
                 'rounded-l-full': index === 0,
                 'rounded-r-full': index === lastElement,
-                'bg-background-third': color === 'none',
+                'bg-background-third': index >= endElement,
               })}
-              style={{ backgroundColor: `${color != 'none' ? color : ''}` }}
-            ></div>
+              style={{ backgroundColor: `${index < endElement ? color : ''}` }}
+            />
           );
         })}
       </div>
@@ -45,36 +64,6 @@ export const ProgressBar: React.FC<Props> = ({ data }) => {
             {label}
           </p>
         ))}
-      </div>
-      <div className="flex justify-around">
-        {subtitles.map((subtitle, index) => {
-          return (
-            <div key={uuidv4()} className="flex space-x-[15px]">
-              {images ? (
-                <div
-                  className="rounded-2xl p-[14px]"
-                  style={{ backgroundColor: `${bgColors[index]}` }}
-                >
-                  <Image src={imagesForBar[index]} alt="" width={20} />
-                </div>
-              ) : (
-                <div
-                  className="w-[30px] h-1 rounded-full mt-[7px]"
-                  style={{ backgroundColor: `${bgColors[index]}` }}
-                ></div>
-              )}
-
-              <div className="flex flex-col">
-                <p className="text-themetext font-bold text-[18px]">
-                  {subtitle}
-                </p>
-                <p className="font-bold text-neutral2 text-[14px]">
-                  {times[index]}
-                </p>
-              </div>
-            </div>
-          );
-        })}
       </div>
     </div>
   );

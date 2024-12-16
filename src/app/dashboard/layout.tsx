@@ -2,7 +2,6 @@
 import { ChartDashboard } from '@/components/dashboard/chartDashboard';
 import { HeaderDashboard } from '@/components/dashboard/headerDashboard';
 import { CoachingProgress } from '@/components/dashboard/coachingProgress';
-import data from '@/dataJson/progressBarDashboard.json';
 import { SupportForm } from '@/components/dashboard/supportForm';
 import { useAuth } from '@/firebase/context/authContext';
 import { Loader } from '@/components/loader';
@@ -90,23 +89,15 @@ export default function DashboardLayout({
     );
   }
 
-  // if (currentUser && paymentData != 'undefined' && !paymentData) {
-  //   return (
-  //     <div className="flex justify-center items-center h-[100vh]">
-  //       <Loader width={150} height={150} border={20} />
-  //     </div>
-  //   );
-  // }
-
   return (
     <main
-      className={`background-style bg-background h-full w-full pt-[10px] px-10 pb-[100px] ${paymentData?.method === 'aid' && currentUser ? 'bg-portal-aid' : 'bg5'}`}
+      className={` bg-background h-full w-full pt-[10px] px-10 pb-[100px] ${paymentData?.method === 'aid' && currentUser ? 'bg-portal-aid' : 'bg5'}`}
     >
       <div className="max-w-[1350px] mx-auto relative">
         <HeaderDashboard />
         {!paymentData && (
           <>
-            <div className="flex px-20 justify-between mt-[105px] relative z-10 min-h-[455px]">
+            <div className="flex px-20 justify-between mt-[125px] relative z-10 min-h-[455px]">
               <div>
                 <h1 className="font-extrabold text-[60px] text-white">
                   Welcome,
@@ -121,7 +112,7 @@ export default function DashboardLayout({
               </div>
               {role?.role === 'student' && <ChartDashboard />}
             </div>
-            <CoachingProgress data={data} />
+            <CoachingProgress />
           </>
         )}
         {children}

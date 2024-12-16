@@ -1,7 +1,8 @@
 interface ICourse {
+  id: number,
   name: string;
   description: string;
-  created_date: string;
+  create_date: string;
 }
 
 interface ICourseDetailedData {

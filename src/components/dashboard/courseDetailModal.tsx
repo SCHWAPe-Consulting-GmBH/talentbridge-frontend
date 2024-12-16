@@ -7,22 +7,30 @@ import { RegisterForCourseButton } from '../registerForCourseButton';
 interface Props {
   isCourseDetailShown: boolean;
   onChangeCourseDetailShown: (value: boolean) => void;
+  course: ICourse,
+  onChangeSelectedCourse: (value: null | ICourse) => void;
 }
 
 export const CourseDetailModal: React.FC<Props> = ({
   isCourseDetailShown,
   onChangeCourseDetailShown,
+  course,
+  onChangeSelectedCourse
 }) => {
   const data = {
-    name: 'Orientieren-Aufstellen-Loslegen',
+    name: course.name,
     level: 'KIP GmbH',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    description: course.description,
     experience: 'basic web design skills, ability to work in Figma',
     start: 'October 22, 2024',
     group: '20 students',
     duration: '3 months',
   };
+
+  const handleClose = () => {
+    onChangeSelectedCourse(null);
+    onChangeCourseDetailShown(false);
+  }
 
   return (
     <div
@@ -35,7 +43,7 @@ export const CourseDetailModal: React.FC<Props> = ({
     >
       <div className="bg-background bg6 rounded-lg shadow-xl relative px-[50px] pt-[126px] flex flex-col max-w-[1340px]">
         <button
-          onClick={() => onChangeCourseDetailShown(false)}
+          onClick={handleClose}
           className="absolute top-4 right-8 text-5xl text-gray-500 hover:text-gray-800 btn_scale"
         >
           &times;

@@ -1,6 +1,7 @@
 export interface homeworkData {
+  id: number;
   title: string;
   description: string;
-  submission_date: string;
-  course_id: number;
+  date: string;
+  courseId: number;
 }

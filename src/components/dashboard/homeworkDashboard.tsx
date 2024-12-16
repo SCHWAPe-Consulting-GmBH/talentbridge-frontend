@@ -16,33 +16,45 @@ import {
   getDocumentForStudent,
   getHomeworkForStudent,
 } from '@/api/studentOperations';
+import { useRouter } from 'next/navigation';
 import { useAuth } from '@/firebase/context/authContext';
+import data from '@/dataJson/dataHomework.json';
+import { homeworkData } from '@/types/homeworkData';
 
 export const HomeworkDashboard = () => {
-  const [activeHomeworkId, setActiveHomeworkId] = useState(0);
+  const [activeHomework, setActiveHomework] = useState<homeworkData | null>(null);
   const [isHomeworkModalShown, setIsHomeworkModalShown] = useState(false);
-  const [homeworks, setHomework] = useState([]);
-  const [documents, getDocuments] = useState([]);
-  const { attributes } = useAuth();
+  // const [selectedHomeworks, setSelectedHomework] = useState();
+  const router = useRouter();
+  // const [documents, getDocuments] = useState([]);
+  // const { attributes } = useAuth();
+  
+  const { selectedCourse } = useAuth();
+  const visibleHomework = data.filter(dataPiece => dataPiece.courseId === selectedCourse?.id)
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const homeworkData = await getHomeworkForStudent();
+  //       const documentsData = await getDocumentForStudent();
+  //       getDocuments(documentsData);
+  //       setHomework(homeworkData);
+  //     } catch (error) {
+  //       console.error('Failed to fetch homework data:', error);
+  //     }
+  //   };
+
+  //   if (attributes?.role === 'student') fetchData();
+  // }, []);
+
+  // function getRandomNumber() {
+  //   return Math.floor(Math.random() * 5);
+  // }
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const homeworkData = await getHomeworkForStudent();
-        const documentsData = await getDocumentForStudent();
-        getDocuments(documentsData);
-        setHomework(homeworkData);
-      } catch (error) {
-        console.error('Failed to fetch homework data:', error);
-      }
-    };
-
-    if (attributes?.role === 'student') fetchData();
-  }, []);
-
-  function getRandomNumber() {
-    return Math.floor(Math.random() * 5);
-  }
+    if (!selectedCourse) {
+      router.push('/dashboard/recommendations')
+    }
+  }, [selectedCourse])
 
   const randomPictures = [
     { src: pic1, style: 'rgba(115, 58, 145, 0.2)' },
@@ -50,10 +62,11 @@ export const HomeworkDashboard = () => {
     { src: pic3, style: 'rgba(204, 253, 68, 0.2)' },
     { src: pic4, style: 'rgba(255, 6, 0, 0.2)' },
     { src: pic5, style: 'rgb(0, 214, 118, 0.2)' },
+    { src: pic2, style: 'rgba(228, 47, 8, 0.2)' },
   ];
 
-  const handleHomeworkClick = (homeworkId: number) => {
-    setActiveHomeworkId(homeworkId);
+  const handleHomeworkClick = (homework: homeworkData) => {
+    setActiveHomework(homework);
     setIsHomeworkModalShown(true);
   };
 
@@ -66,19 +79,18 @@ export const HomeworkDashboard = () => {
       </p>
 
       <div className="grid grid-cols-3 gap-x-[16px] gap-y-[15px]">
-        {Array.isArray(homeworks) && homeworks.length > 0 ? (
-          homeworks.map((homework) => {
-            const picture = randomPictures[getRandomNumber()];
+        {visibleHomework.map((homework, index) => {
+            const picture = randomPictures[index];
 
             return (
               <div
-                key={homework.homework_title}
-                onClick={() => handleHomeworkClick(homework.homework_title)}
+                key={homework.title}
+                onClick={() => handleHomeworkClick(homework)}
                 className={cn(
                   'bg-background-second rounded-2xl p-[15px] flex space-x-[10px] green_border_hover course_shadow border-box border border-transparent cursor-pointer',
                   {
                     homework_active:
-                      activeHomeworkId === homework.homework_title,
+                      activeHomework?.id === homework.id,
                   }
                 )}
               >
@@ -92,10 +104,10 @@ export const HomeworkDashboard = () => {
                 <div className="flex justify-between w-[80%]">
                   <div className="truncate">
                     <p className="font-bold text-[16px] text-themetext mb-[2px]">
-                      {homework.homework_title}
+                      {homework.title}
                     </p>
                     <p className="font-bold text-[12px] text-themetext mb-1 truncate">
-                      {homework.homework_description}
+                      {homework.description}
                     </p>
                     <div className="flex items-center">
                       <Image
@@ -105,7 +117,7 @@ export const HomeworkDashboard = () => {
                         className="mr-[6px]"
                       />
                       <p className="font-bold text-[12px] text-neutral2 mt-[1px]">
-                        {homework.homework_submission_date}
+                        {homework.date}
                       </p>
                     </div>
                   </div>
@@ -115,13 +127,13 @@ export const HomeworkDashboard = () => {
                         'rounded-full text-[12px] font-bold px-3 py-1 leading-[20px]',
                         {
                           'bg-opacity-green text-primary':
-                            homework.homework_status === 'Complete',
+                            homework.status === 'Complete',
                           'bg-opacity-info text-info':
-                            homework.homework_status === 'Pending',
+                            homework.status === 'Pending',
                         }
                       )}
                     >
-                      {homework.homework_status}
+                      {homework.status}
                     </p>
                     <button className="ml-auto">
                       <Image src={message} alt="message icon" width={24} />
@@ -130,16 +142,14 @@ export const HomeworkDashboard = () => {
                 </div>
               </div>
             );
-          })
-        ) : (
-          <div>You don`t have homework!</div>
-        )}
+          })}
       </div>
 
-      <HomeworkModal
+      {isHomeworkModalShown && activeHomework && <HomeworkModal
         isHomeworkShown={isHomeworkModalShown}
         onChangeHomeworkShown={setIsHomeworkModalShown}
-      />
+        activeHomework={activeHomework}
+      />}
     </div>
   );
 };

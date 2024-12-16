@@ -11,11 +11,18 @@ import rec_img_3 from '@/assets/images/recommendations_image3.jpg';
 import rec_img_4 from '@/assets/images/recommendations_image4.jpg';
 import rec_img_5 from '@/assets/images/recommendations_image5.jpg';
 import rec_img_6 from '@/assets/images/recommendations_image6.jpg';
+import rec_img_7 from '@/assets/images/recommendations_image7.png';
+import rec_img_8 from '@/assets/images/recommendations_image8.png';
+import rec_img_9 from '@/assets/images/recommendations_image9.png';
 import { useState } from 'react';
 import { CourseDetailModal } from '@/components/dashboard/courseDetailModal';
+import { useAuth } from '@/firebase/context/authContext';
 
 const Recommendations = () => {
   const [isCourseDetailShown, setIsCourseDetailShown] = useState(false);
+  // const [selectedCourse, setSelectedCourse] = useState<null | ICourse>(null);
+  const { setSelectedCourse, selectedCourse } = useAuth();
+
   const picturesForCourse = [
     rec_img_1,
     rec_img_2,
@@ -23,6 +30,21 @@ const Recommendations = () => {
     rec_img_4,
     rec_img_5,
     rec_img_6,
+    rec_img_7,
+    rec_img_8,
+    rec_img_9,
+  ];
+
+  const handleSelectCourse = (data: ICourse) => {
+    setSelectedCourse(data);
+    setIsCourseDetailShown(true);
+  };
+
+  const random = [
+    'Few Seats Left',
+    'Few Seats Left',
+    'Top Recommendation',
+    'Sponsored',
   ];
 
   return (
@@ -31,7 +53,7 @@ const Recommendations = () => {
         {courses.map((course, index) => (
           <div
             key={uuidv4()}
-            className="bg-background-second rounded-2xl p-6 relative green_border_hover border-box border border-transparent course_shadow"
+            className="bg-background-second flex flex-col rounded-2xl p-6 relative green_border_hover border-box border border-transparent course_shadow"
           >
             <Image
               src={picturesForCourse[index]}
@@ -44,35 +66,39 @@ const Recommendations = () => {
                 'rounded-full py-[6px] px-4 inline-flex items-center absolute top-[40px] right-[35px]',
                 {
                   'border border-primary bg-light-green':
-                    course.color === 'green',
+                    random[index] && random[index] === 'Top Recommendation',
                   'border border-warning bg-light-orange':
-                    course.color === 'orange',
-                  'border border-info bg-light-blue': course.color === 'blue',
+                    random[index] && random[index] === 'Sponsored',
+                  'border border-info bg-light-blue':
+                    random[index] && random[index] === 'Few Seats Left',
                 }
               )}
             >
-              {course.color === 'green' && (
+              {random[index] && random[index] === 'Top Recommendation' && (
                 <Image src={fire} alt="" width={12} className="mr-[10px]" />
               )}
               <p
                 className={cn('font-medium text-[12px]', {
-                  'text-primary': course.color === 'green',
-                  'text-warning': course.color === 'orange',
-                  'text-info': course.color === 'blue',
+                  'text-primary':
+                    random[index] && random[index] === 'Top Recommendation',
+                  'text-warning':
+                    random[index] && random[index] === 'Sponsored',
+                  'text-info':
+                    random[index] && random[index] === 'Few Seats Left',
                 })}
               >
-                {course.status}
+                {random[index]}
               </p>
             </div>
             <p className="font-extrabold text-themetext text-[24px] mb-1">
-              {course.title}
+              {course.name}
             </p>
             <p className="font-medium text-[16px] text-neutral2 mb-6">
               {course.description}
             </p>
             <button
-              onClick={() => setIsCourseDetailShown(true)}
-              className="border-[1px] border-themetext text-themetext w-full py-[11px] hover:border-transparent transition-all duration-300 ease-in-out rounded-lg font-semibold text-[16px] btn_white_hover"
+              onClick={() => handleSelectCourse(course)}
+              className="border-[1px] mt-auto border-themetext text-themetext w-full py-[11px] hover:border-transparent transition-all duration-300 ease-in-out rounded-lg font-semibold text-[16px] btn_white_hover"
             >
               More details
             </button>
@@ -80,7 +106,14 @@ const Recommendations = () => {
         ))}
       </div>
 
-      {isCourseDetailShown && <CourseDetailModal isCourseDetailShown={isCourseDetailShown} onChangeCourseDetailShown={setIsCourseDetailShown}/>}
+      {selectedCourse && (
+        <CourseDetailModal
+          isCourseDetailShown={isCourseDetailShown}
+          onChangeCourseDetailShown={setIsCourseDetailShown}
+          course={selectedCourse}
+          onChangeSelectedCourse={setSelectedCourse}
+        />
+      )}
     </>
   );
 };

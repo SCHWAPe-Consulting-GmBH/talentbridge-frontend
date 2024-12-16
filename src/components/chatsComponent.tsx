@@ -24,7 +24,6 @@ export const ChatsComponent = () => {
   const [filteredChats, setFilteredChats] = useState([]); // це треба виводити замість allUsersChats
 
   const { currentUser } = useAuth();
-  console.log('curr user', currentUser);
   // const currentUserId = currentUser?.uid;
   const roleObj = currentUser?.reloadUserInfo.customAttributes;
   let role: Record<'role', string> | null = null;
