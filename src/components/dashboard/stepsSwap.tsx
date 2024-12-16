@@ -15,7 +15,7 @@ export const StepsSwap: React.FC<Props> = ({ activeStepId }) => {
       {activeStepId > 1 && (
         <>
           <div className="rounded-xl bg-next-step-gray flex items-center justify-center w-[38px] h-[38px] mb-2 mb-2 mt-[5px]">
-            <Image src={anotherStep} alt="" width={13} />
+            <Image src={anotherStep} alt="" width={13} className='h-auto'/>
           </div>
 
           <p className="font-bold text-[16px] text-next-step-gray">
@@ -32,7 +32,7 @@ export const StepsSwap: React.FC<Props> = ({ activeStepId }) => {
       {activeStepId <= 5 && (
         <>
           <div className="rounded-xl bg-primary flex items-center justify-center w-[48px] h-[48px] ">
-            <Image src={currentStep} alt="" width={13} />
+            <Image src={currentStep} alt="" width={13} className='h-auto'/>
           </div>
 
           <p className="text-lighter-green text-[30px] font-bold ">
@@ -54,7 +54,7 @@ export const StepsSwap: React.FC<Props> = ({ activeStepId }) => {
       {activeStepId < 5 && (
         <>
           <div className="rounded-xl bg-next-step-gray flex items-center justify-center w-[38px] h-[38px] mb-2 mt-[5px]">
-            <Image src={anotherStep} alt="" width={13} />
+            <Image src={anotherStep} alt="" width={13} className='h-auto'/>
           </div>
 
           <p className="font-bold text-[16px] text-next-step-gray">

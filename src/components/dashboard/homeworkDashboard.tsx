@@ -98,7 +98,7 @@ export const HomeworkDashboard = () => {
                   className="rounded-2xl p-[7px] w-[66px]"
                   style={{ backgroundColor: picture.style }}
                 >
-                  <Image src={picture.src} alt="abstraction" width={50} />
+                  <Image src={picture.src} alt="abstraction" width={50} className='h-auto'/>
                 </div>
 
                 <div className="flex justify-between w-[80%]">
@@ -114,7 +114,7 @@ export const HomeworkDashboard = () => {
                         src={time}
                         alt="time icon"
                         width={14}
-                        className="mr-[6px]"
+                        className="mr-[6px] h-auto"
                       />
                       <p className="font-bold text-[12px] text-neutral2 mt-[1px]">
                         {homework.date}
@@ -136,7 +136,7 @@ export const HomeworkDashboard = () => {
                       {homework.status}
                     </p>
                     <button className="ml-auto">
-                      <Image src={message} alt="message icon" width={24} />
+                      <Image src={message} alt="message icon" width={24} className='h-auto'/>
                     </button>
                   </div>
                 </div>

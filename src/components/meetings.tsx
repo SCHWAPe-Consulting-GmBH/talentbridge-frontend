@@ -60,7 +60,7 @@ export const Meetings: React.FC<Props> = ({ isShortVersion }) => {
                 <p className="font-bold text-[12px] leading-[20px] text-dark-gray mb-[2px] truncate">
                   Zoom call to discuss all for the day
                 </p>
-                <Image src={avatars} alt="people" width={78} />
+                <Image src={avatars} alt="people" width={78} className='h-auto'/>
               </div>
               <p className="ml-[10px] text-[12px] text-dark-gray">12:00</p>
             </div>
@@ -74,7 +74,7 @@ export const Meetings: React.FC<Props> = ({ isShortVersion }) => {
               </p>
               <div className="flex items-center mb-[9px]">
                 <div className="bg-opacity-warning rounded-lg p-1 inline-flex">
-                  <Image src={time} alt="time icon" width={14} />
+                  <Image src={time} alt="time icon" width={14} className='h-auto'/>
                 </div>
                 <p className="ml-[5px] font-bold text-[12px] text-dark-gray">
                   12:00 AM
@@ -82,7 +82,7 @@ export const Meetings: React.FC<Props> = ({ isShortVersion }) => {
               </div>
               <div className="flex items-center mb-[9px]">
                 <div className="bg-opacity-primary rounded-lg p-1 inline-flex">
-                  <Image src={people} alt="participants icon" width={14} />
+                  <Image src={people} alt="participants icon" width={14} className='h-auto'/>
                 </div>
                 <p className="ml-[5px] font-bold text-[12px] text-dark-gray">
                   12 students
@@ -90,13 +90,13 @@ export const Meetings: React.FC<Props> = ({ isShortVersion }) => {
               </div>
               <div className="flex items-center mb-[9px]">
                 <div className="bg-opacity-info rounded-lg p-1 inline-flex">
-                  <Image src={subject} alt="subject icon" width={14} />
+                  <Image src={subject} alt="subject icon" width={14} className='h-auto'/>
                 </div>
                 <p className="ml-[5px] font-bold text-[12px] text-dark-gray">
                   Meeting
                 </p>
               </div>
-              <Image src={avatars} alt="people avatars" width={78} />
+              <Image src={avatars} alt="people avatars" width={78} className='h-auto'/>
             </>
           )}
         </div>

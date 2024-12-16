@@ -44,7 +44,7 @@ export const AboutCoursesHeader: React.FC<Props> = ({ courseData, isNeedButtonRe
           src={icon}
           width={250}
           alt='background icon'
-          className="absolute bottom-0 right-0 z-[-1]"
+          className="absolute bottom-0 right-0 z-[-1] h-auto"
         />
       </div>
     </div>

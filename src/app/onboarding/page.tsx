@@ -134,7 +134,7 @@ const Onboarding = () => {
             <QuestionProgressBar questionNumber={questionNumber} />
 
             <h1 className="font-extrabold text-[48px] leading-[65px] text-center mb-9 text-themetext">
-              {currentQuestion?.title}
+              {currentQuestion.title}
             </h1>
 
             <div className="bg-background-second px-10 py-12 rounded-lg flex flex-col items-center ">
@@ -185,7 +185,7 @@ const Onboarding = () => {
                       src={arrowLeft}
                       alt="arrow back"
                       width={14}
-                      className={cn('')}
+                      className='h-auto'
                     />
                   </button>
                 )}
@@ -209,7 +209,7 @@ const Onboarding = () => {
               src={imageSrc}
               alt="abstraction"
               width={735}
-              className="absolute object-cover"
+              className="absolute object-cover h-auto"
             />
           </div>
         </div>

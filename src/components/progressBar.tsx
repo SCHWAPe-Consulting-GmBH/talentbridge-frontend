@@ -5,12 +5,14 @@ import { v4 as uuidv4 } from 'uuid';
 import data from '@/dataJson/progressBarDashboard.json';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { useAuth } from '@/firebase/context/authContext';
 
 export const ProgressBar = () => {
   const { colors, labels } = data;
   const pathname = usePathname();
   const [activeElement, setActiveElement] = useState('');
   const endElement = labels.indexOf(activeElement);
+  const { selectedCourse } = useAuth();
 
 
   useEffect(() => {
@@ -38,7 +40,7 @@ export const ProgressBar = () => {
   return (
     <div className="bg-background-second rounded-2xl w-full px-[21px] py-[25px]">
       <p className="text-themetext font-bold text-[16px] mb-[17px]">
-        {labels[endElement]}
+        {labels[endElement] === 'Course Start' && selectedCourse ? `Course Start: ${selectedCourse.name}` : labels[endElement]}
       </p>
       <div className="h-5 rounded-full bg-background-third flex items-center px-[2px] mb-1">
         {colors.map((color, index) => {
