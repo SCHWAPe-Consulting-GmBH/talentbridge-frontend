@@ -1,5 +1,3 @@
-'use client'
-
 import { useEffect, useState } from 'react';
 import { getCourseForCoach } from '@/api/coachOperations';
 import { v4 as uuidv4 } from 'uuid';
@@ -10,7 +8,7 @@ import { newCourse } from '@/types/newCourse';
 import toast from 'react-hot-toast';
 import { createCourseForMod, getCourseForMod } from '@/api/modOperations';
 
-export const CoursePortalCoach = () => {
+export const CoursePortalMod = () => {
   const [courses, setCourses] = useState([]);
   const { attributes } = useAuth();
   useEffect(() => {

@@ -56,3 +56,9 @@
   background-repeat: no-repeat;
 }
 
+ .loginBground { 
+  background-image: url('../assets/images/imgGirl.png'); 
+  background-position: 700px center; 
+  background-size: contain; 
+  background-repeat: no-repeat; 
+}
