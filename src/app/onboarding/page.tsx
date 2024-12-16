@@ -89,12 +89,14 @@ const Onboarding = () => {
           await saveUserData(userId, userData);
   
           router.push('/course-matching');
+          return;
         } catch (error) {
           console.error('Error saving answers:', error);
         }
       } else {
         console.error('No user logged in');
         router.push('/login');
+        return;
       }
     }
 
@@ -132,7 +134,7 @@ const Onboarding = () => {
             <QuestionProgressBar questionNumber={questionNumber} />
 
             <h1 className="font-extrabold text-[48px] leading-[65px] text-center mb-9 text-themetext">
-              {currentQuestion.title}
+              {currentQuestion?.title}
             </h1>
 
             <div className="bg-background-second px-10 py-12 rounded-lg flex flex-col items-center ">
