@@ -8,7 +8,6 @@ import { logOut } from '@/firebase/auth';
 export const AsideMenu = () => {
   const router = useRouter();
   const pathname = usePathname();
-  // const currentPage = pathname.split('/').at(-1) ? pathname.split('/').at(-1) : 'dashboard';
   const currentPage =
     pathname === '/portal' || pathname === '/'
       ? 'dashboard'
@@ -99,7 +98,7 @@ export const AsideMenu = () => {
               src={`/icons/menu_portal_logout.svg`}
               alt={`logout icon`}
               width={20}
-              className={cn('mr-[14px]', {
+              className={cn('mr-[14px] text-themetext', {
                 graphic_portal_menu: resolvedTheme === 'dark',
               })}
             />

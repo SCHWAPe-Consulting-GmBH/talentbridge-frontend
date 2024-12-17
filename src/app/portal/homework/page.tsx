@@ -39,7 +39,7 @@ const PortalHomework = () => {
       <div>
         <h2 className="mb-6 font-bold text-2xl">Homework</h2>
         <ul className="list-none p-0 m-0 flex flex-col gap-6">
-          {homeworks.map((homework, index) => {
+          {homeworks && homeworks.map((homework, index) => {
             return (
               <li
                 key={index}
@@ -67,7 +67,7 @@ const PortalHomework = () => {
                   {homework.homework_title}
                 </p>
                 <div className="flex justify-between">
-                  <p className="flex items-center gap-2 font-normal text-xs text-[#ffffff]">
+                  <p className="flex items-center gap-2 font-normal text-xs ">
                     <CiClock2 className="w-4 h-4" />
                     {homework.homework_submission_date}
                   </p>

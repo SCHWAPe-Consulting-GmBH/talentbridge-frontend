@@ -8,7 +8,7 @@ import { MeetingPortalCoach } from '@/components/portal/meetingPortalCoach';
 import { CoachPortalMod } from '@/components/portal/coachPortalMod';
 import { useAuth } from '@/firebase/context/authContext';
 import GeneralDataPortalMod from '@/components/portal/generalDataPortalMod';
-import { CoursePortalMod } from '@/components/portal/CoursePortalMod';
+import { CoursePortalMod } from '@/components/portal/coursePortalMod';
 
 const Portal = () => {
   const { attributes } = useAuth();

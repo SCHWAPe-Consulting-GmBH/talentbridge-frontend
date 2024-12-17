@@ -47,7 +47,7 @@ export const CoachPortalMod = () => {
           return (
             <li
               key={uuidv4()}
-              className="w-[276px] h-[160px] bg-background-second rounded-2xl p-[15px] truncate green_border_hover border-box border border-transparent cursor-pointer course_shadow"
+              className="max-w-[276px] h-[160px] bg-background-second rounded-2xl p-[15px] truncate green_border_hover border-box border border-transparent cursor-pointer course_shadow"
             >
               <div className="flex items-center gap-[10px] pb-[10px] border-b relative">
                 <Image

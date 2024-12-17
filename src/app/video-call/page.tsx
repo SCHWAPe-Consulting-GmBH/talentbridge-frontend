@@ -258,16 +258,16 @@ const VideoCall = () => {
     }
   };
 
-  // useEffect(() => {
-  //   let unsubscribe = () => {};
+  useEffect(() => {
+    let unsubscribe = () => {};
 
-  //   if (callId) {
-  //     const callDocRef = doc(firestore, 'calls', callId);
-  //     unsubscribe = onSnapshot(callDocRef, () => {});
-  //   }
+    if (callId) {
+      const callDocRef = doc(firestore, 'calls', callId);
+      unsubscribe = onSnapshot(callDocRef, () => {});
+    }
 
-  //   return unsubscribe;
-  // }, [callId]);
+    return unsubscribe;
+  }, [callId]);
 
   return (
     <main className="px-[100px] pt-[100px] bg4 background-style bg-background">
