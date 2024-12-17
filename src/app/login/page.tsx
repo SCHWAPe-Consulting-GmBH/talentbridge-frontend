@@ -2,7 +2,6 @@
 
 import { FormEvent, useState } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 import apple from '@/assets/icons/apple.svg';
 import facebook from '@/assets/icons/facebook.svg';
 import google from '@/assets/icons/google.svg';

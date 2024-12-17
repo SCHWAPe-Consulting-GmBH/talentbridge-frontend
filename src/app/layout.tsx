@@ -28,7 +28,7 @@ export default function RootLayout({
       <body className={`${nunito.className} antialiased`}>
         <Suspense
           fallback={
-            <div className='flex items-center justify-center w-full h-full'>
+            <div className='flex items-center justify-center w-full h-screen'>
               <Loader width={150} height={150} border={20} />
             </div>
           }

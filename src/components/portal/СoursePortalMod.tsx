@@ -41,14 +41,16 @@ export const CoursePortalMod = () => {
     } catch (error) {
       console.error('Failed to create course:', error);
     }
-    toast.success('Successfully created course');
   };
 
   return (
     <section className="max-w-[569px] w-[100%] mt-[15px]">
       <div className="flex justify-between mb-[10px]">
         <h2 className=" text-themetext font-bold text-[20px]">Courses</h2>
-        <button className="flex gap-1 items-center text-primary">
+        <button
+          onClick={() => toast.success('Successfully created course')}
+          className="flex gap-1 items-center text-primary"
+        >
           <Image src={plus} alt="add homework" width={11} />
           <p>Add Courses</p>
         </button>
@@ -59,7 +61,7 @@ export const CoursePortalMod = () => {
             return (
               <li
                 key={uuidv4()}
-                className="p-[15px] max-w-[261px] h-[97px] bg-background-second rounded-[20px]"
+                className="p-[15px] max-w-[280px] h-[97px] bg-background-second rounded-[20px]"
               >
                 <div className="flex flex-col gap-1">
                   <p className="text-themetext text-[16px] leading-[20px] font-bold mb-[2px] truncate">
